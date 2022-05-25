@@ -23,6 +23,8 @@
 		495B9B43283C21C60018DAB8 /* SuperheatedRegionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B42283C21C60018DAB8 /* SuperheatedRegionCalculator.swift */; };
 		495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift */; };
 		495B9B47283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B46283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift */; };
+		498B06E9283DB99700D33E52 /* H2OWagnerPruss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */; };
+		498B06EB283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		495B9B42283C21C60018DAB8 /* SuperheatedRegionCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculator.swift; sourceTree = "<group>"; };
 		495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculatorConstants.swift; sourceTree = "<group>"; };
 		495B9B46283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculatorTests.swift; sourceTree = "<group>"; };
+		498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPruss.swift; sourceTree = "<group>"; };
+		498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPrussConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,7 @@
 		495B9B32283AFDC40018DAB8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				498B06E7283DB96D00D33E52 /* H2OWagnerPruss */,
 				495B9B37283C156F0018DAB8 /* SaturatedRegionLine */,
 				495B9B41283C21A60018DAB8 /* SuperheatedRegionCalculator */,
 				495B9B3C283C18770018DAB8 /* Utilities */,
@@ -188,6 +193,15 @@
 				495B9B42283C21C60018DAB8 /* SuperheatedRegionCalculator.swift */,
 			);
 			path = SuperheatedRegionCalculator;
+			sourceTree = "<group>";
+		};
+		498B06E7283DB96D00D33E52 /* H2OWagnerPruss */ = {
+			isa = PBXGroup;
+			children = (
+				498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */,
+				498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */,
+			);
+			path = H2OWagnerPruss;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,6 +344,8 @@
 				495B9B36283B20900018DAB8 /* PlotPoint.swift in Sources */,
 				495B9B43283C21C60018DAB8 /* SuperheatedRegionCalculator.swift in Sources */,
 				495B9B39283C15880018DAB8 /* SaturatedRegionLineConstants.swift in Sources */,
+				498B06E9283DB99700D33E52 /* H2OWagnerPruss.swift in Sources */,
+				498B06EB283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
