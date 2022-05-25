@@ -8,37 +8,35 @@
 import XCTest
 @testable import ClausiusSwift
 
-let C_TO_K: Double = 273.15
-
 // The compared epsilon in many of these test cases is Float.ulpOfOne, rather than Double.ulpOfOne
 // The reason for this is that these tests were originally written with 32-bit floating point
 // values in Rust, and there's little utility to changed the calculated values to have higher precision.
 
 class H2OWagnerPrussTests: XCTestCase {
 
-    let SUPERHEATED_POINT_1_T: Double = 570.01 + C_TO_K
+    let SUPERHEATED_POINT_1_T: Double = 570.01 + ClausiusConstants.C_TO_K
     let SUPERHEATED_POINT_1_D: Double = 9.96015936255
 
-    let SUPERHEATED_POINT_2_T: Double = 420.38 + C_TO_K
+    let SUPERHEATED_POINT_2_T: Double = 420.38 + ClausiusConstants.C_TO_K
     let SUPERHEATED_POINT_2_D: Double = 270.27027027
 
-    let SUPERHEATED_POINT_3_T: Double = 393.16 + C_TO_K
+    let SUPERHEATED_POINT_3_T: Double = 393.16 + ClausiusConstants.C_TO_K
     let SUPERHEATED_POINT_3_D: Double = 0.82155767334
 
-    let SUPERHEATED_POINT_4_T: Double = 334.99 + C_TO_K
+    let SUPERHEATED_POINT_4_T: Double = 334.99 + ClausiusConstants.C_TO_K
     let SUPERHEATED_POINT_4_D: Double = 27.7777777778
 
-    let SUPERHEATED_POINT_5_T: Double = 245.84 + C_TO_K
+    let SUPERHEATED_POINT_5_T: Double = 245.84 + ClausiusConstants.C_TO_K
     let SUPERHEATED_POINT_5_D: Double = 0.07614812332
 
-    let SUPERHEATED_POINT_6_T: Double = 160.46 + C_TO_K
+    let SUPERHEATED_POINT_6_T: Double = 160.46 + ClausiusConstants.C_TO_K
     let SUPERHEATED_POINT_6_D: Double = 2.75406224181
 
-    let SUPERHEATED_POINT_7_T: Double = 260.68 + C_TO_K
+    let SUPERHEATED_POINT_7_T: Double = 260.68 + ClausiusConstants.C_TO_K
     let SUPERHEATED_POINT_7_D: Double = 19.9600798403
 
     // Above Critical Point
-    let SUPERHEATED_POINT_8_T: Double = 389.41 + C_TO_K
+    let SUPERHEATED_POINT_8_T: Double = 389.41 + ClausiusConstants.C_TO_K
     let SUPERHEATED_POINT_8_D: Double = 625.0
 
     override func setUpWithError() throws {
