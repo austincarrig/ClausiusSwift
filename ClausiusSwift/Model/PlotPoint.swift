@@ -9,12 +9,12 @@ import Foundation
 
 struct PlotPoint {
 
-    let t: Double
-    let p: Double
-    let v: Double
-    let h: Double
-    let u: Double
-    let s: Double
-    let x: Double
+    let t: Double // (C)
+    let p: Double // (kPa)
+    let v: Double // (m^3/kg)
+    let u: Double // (kJ/kg)
+    let h: Double // (kJ/kg)
+    let s: Double // (kJ/kg.K)
+    let x: Double // (%)
 
 }

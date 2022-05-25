@@ -57,8 +57,8 @@ class ThermodynamicCalculator {
                     t: clampedTemp,
                     p: -1.0,
                     v: -1.0,
-                    h: -1.0,
                     u: -1.0,
+                    h: -1.0,
                     s: entropy,
                     x: -1.0
                 )
@@ -97,8 +97,8 @@ class ThermodynamicCalculator {
             t: temperature,
             p: -1.0,
             v: -1.0,
-            h: -1.0,
             u: -1.0,
+            h: -1.0,
             s: entropy,
             x: -1.0
         )
@@ -112,27 +112,32 @@ class ThermodynamicCalculator {
             t: -1.0,
             p: -1.0,
             v: -1.0,
-            h: -1.0,
             u: -1.0,
+            h: -1.0,
             s: entropy,
             x: -1.0
         )
     }
 
-    private static func calculateSaturated(with saturatedRegionLine: Bool,
+    private static func calculateSaturated(with saturatedRegionLine: SaturatedRegionLine,
                                            and  entropy: Double) -> PlotPoint? {
-
         // pressure = satLine.p
         // interpolate quality, spec_volume, int_energy, enthalpy
 
+        let pressure = saturatedRegionLine.p
+        let quality = (entropy - saturatedRegionLine.s_f) / (saturatedRegionLine.s_g - saturatedRegionLine.s_f)
+        let specVolume = saturatedRegionLine.v_f + quality * (saturatedRegionLine.v_g - saturatedRegionLine.v_f)
+        let intEnergy = saturatedRegionLine.u_f + quality * (saturatedRegionLine.u_g - saturatedRegionLine.u_f)
+        let enthalpy = saturatedRegionLine.h_f + quality * (saturatedRegionLine.h_g - saturatedRegionLine.h_f)
+
         return PlotPoint(
-            t: -1.0,
-            p: -1.0,
-            v: -1.0,
-            h: -1.0,
-            u: -1.0,
+            t: saturatedRegionLine.t,
+            p: pressure,
+            v: specVolume,
+            u: intEnergy,
+            h: enthalpy,
             s: entropy,
-            x: -1.0
+            x: quality * 100.0
         )
     }
 
