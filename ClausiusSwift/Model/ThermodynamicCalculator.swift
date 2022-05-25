@@ -82,24 +82,46 @@ class ThermodynamicCalculator {
                                              and  entropy: Double) -> PlotPoint? {
 
         // calculate pressure (SuperheatedRegionCalculator)
+        let pressure = SuperheatedRegionCalculator.calculatePressure(
+            with: temperature,
+            and: entropy
+        )
 
         // calculate temperature K
+        let temperatureKelvin = temperature + ClausiusConstants.C_TO_K // temperature (C -> K)
+
         // calculate pressure MPa
+        let pressureMPa = pressure / 1000.0 // pressure (kPa -> MPA)
+
         // calculate density (WagnerPruss)
+        let density = H2OWagnerPruss.calculate_density(
+            temperature: temperatureKelvin,
+            pressure: pressureMPa
+        )
 
         // calculate specific volume (1/density)
+        let specificVolume = 1.0 / density
 
         // calculate internal energy (WagnerPruss)
+        let internalEnergy = H2OWagnerPruss.calculate_internal_energy(
+            temperature: temperatureKelvin,
+            density: density
+        )
+
         // calculate enthalpy (WagnerPruss)
+        let enthalpy = H2OWagnerPruss.calculate_enthalpy_with_u(
+            temperature: temperature,
+            density: density,
+            internal_energy: internalEnergy
+        )
 
         // return PlotPoint
-
         return PlotPoint(
             t: temperature,
-            p: -1.0,
-            v: -1.0,
-            u: -1.0,
-            h: -1.0,
+            p: pressure,
+            v: specificVolume,
+            u: internalEnergy,
+            h: enthalpy,
             s: entropy,
             x: -1.0
         )
@@ -107,8 +129,6 @@ class ThermodynamicCalculator {
 
     private static func calculateCompressed(with saturatedRegionLine: SaturatedRegionLine,
                                             and  entropy: Double) -> PlotPoint? {
-        // return PlotPoint (with v_f, u_f, h_f)
-
         return PlotPoint(
             t: saturatedRegionLine.t,
             p: saturatedRegionLine.p,
