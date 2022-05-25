@@ -67,7 +67,7 @@ class ThermodynamicCalculator {
                 let saturatedRegionLine = SaturatedRegionLine(with: clampedTemp)
 
                 if entropy < 1.0 { // if s < s_f ... calculate compressed
-                    return calculateCompressed(with: true, and: entropy)
+                    return calculateCompressed(with: saturatedRegionLine, and: entropy)
                 } else if entropy > 1.0 && entropy < 2.0 { // else if s >= s_f && entropy <= s_g ... calculate saturated
                     return calculateSaturated(with: saturatedRegionLine, and: entropy)
                 } else { // else ... calculate superheated
@@ -105,16 +105,16 @@ class ThermodynamicCalculator {
         )
     }
 
-    private static func calculateCompressed(with saturatedRegionLine: Bool,
+    private static func calculateCompressed(with saturatedRegionLine: SaturatedRegionLine,
                                             and  entropy: Double) -> PlotPoint? {
         // return PlotPoint (with v_f, u_f, h_f)
 
         return PlotPoint(
-            t: -1.0,
-            p: -1.0,
-            v: -1.0,
-            u: -1.0,
-            h: -1.0,
+            t: saturatedRegionLine.t,
+            p: saturatedRegionLine.p,
+            v: saturatedRegionLine.v_f,
+            u: saturatedRegionLine.u_f,
+            h: saturatedRegionLine.h_f,
             s: entropy,
             x: -1.0
         )
