@@ -24,7 +24,9 @@ class ThermodynamicCalculator {
     // Minimum temperature to display on the T-s diagram (C)
     private static let T_SAT_MIN: Double = 1.0
 
-    static func calculateProperties(with xValue: Double, and yValue: Double, for chartType: ChartType) -> PlotPoint? {
+    static func calculateProperties(with xValue: Double,
+                                    and  yValue: Double,
+                                    for  chartType: ChartType) -> PlotPoint? {
         switch chartType {
             case .Ts:
                 return calculateTS(with: xValue, and: yValue)
@@ -37,7 +39,8 @@ class ThermodynamicCalculator {
         }
     }
 
-    private static func calculateTS(with temperature: Double, and entropy: Double) -> PlotPoint? {
+    private static func calculateTS(with temperature: Double,
+                                    and  entropy: Double) -> PlotPoint? {
         var clampedTemp = temperature
 
         if clampedTemp < T_SAT_MIN {
@@ -74,7 +77,8 @@ class ThermodynamicCalculator {
         }
     }
 
-    private static func calculateSuperheated(with temperature: Double, and entropy: Double) -> PlotPoint? {
+    private static func calculateSuperheated(with temperature: Double,
+                                             and  entropy: Double) -> PlotPoint? {
 
         // calculate pressure (SuperheatedRegionCalculator)
 
@@ -100,7 +104,8 @@ class ThermodynamicCalculator {
         )
     }
 
-    private static func calculateCompressed(with saturatedRegionLine: Bool, and entropy: Double) -> PlotPoint? {
+    private static func calculateCompressed(with saturatedRegionLine: Bool,
+                                            and  entropy: Double) -> PlotPoint? {
         // return PlotPoint (with v_f, u_f, h_f)
 
         return PlotPoint(
@@ -114,7 +119,8 @@ class ThermodynamicCalculator {
         )
     }
 
-    private static func calculateSaturated(with saturatedRegionLine: Bool, and entropy: Double) -> PlotPoint? {
+    private static func calculateSaturated(with saturatedRegionLine: Bool,
+                                           and  entropy: Double) -> PlotPoint? {
 
         // pressure = satLine.p
         // interpolate quality, spec_volume, int_energy, enthalpy
