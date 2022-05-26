@@ -66,9 +66,9 @@ class ThermodynamicCalculator {
                 // get Saturated Region Line @ temperature
                 let saturatedRegionLine = SaturatedRegionLine(with: clampedTemp)
 
-                if entropy < 1.0 { // if s < s_f ... calculate compressed
+                if entropy < saturatedRegionLine.s_f { // if s < s_f ... calculate compressed
                     return calculateCompressed(with: saturatedRegionLine, and: entropy)
-                } else if entropy > 1.0 && entropy < 2.0 { // else if s >= s_f && entropy <= s_g ... calculate saturated
+                } else if entropy >= saturatedRegionLine.s_f && entropy <= saturatedRegionLine.s_g { // else if s >= s_f && entropy <= s_g ... calculate saturated
                     return calculateSaturated(with: saturatedRegionLine, and: entropy)
                 } else { // else ... calculate superheated
                     return calculateSuperheated(with: clampedTemp, and: entropy)
