@@ -47,11 +47,16 @@ class SuperheatedRegionCalculatorTests: XCTestCase {
         let SUPERHEATED_POINT_1_S: Double = 7.316159284557199 // kJ / kg . K
         let SUPERHEATED_POINT_1_P: Double = 3796.165343768067 // kPa
 
-        let calculatedValue = SuperheatedRegionCalculator.calculatePressure(
-            with: SUPERHEATED_POINT_1_T,
-            and: SUPERHEATED_POINT_1_S
-        )
-        XCTAssertLessThan(fabs(calculatedValue - SUPERHEATED_POINT_1_P), 25.0)
+        do {
+            let calculatedValue = try SuperheatedRegionCalculator.calculatePressure(
+                with: SUPERHEATED_POINT_1_T,
+                and: SUPERHEATED_POINT_1_S
+            )
+
+            XCTAssertLessThan(fabs(calculatedValue - SUPERHEATED_POINT_1_P), 25.0)
+        } catch {
+            XCTFail("calculatePressure threw an error")
+        }
     }
 
 }

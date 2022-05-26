@@ -29,7 +29,11 @@ class ThermodynamicCalculator {
                                     for  chartType: ChartType) -> PlotPoint? {
         switch chartType {
             case .Ts:
-                return calculateTS(with: xValue, and: yValue)
+                do {
+                    return try calculateTS(with: xValue, and: yValue)
+                } catch {
+                    return nil
+                }
             case .Pv:
                 print("Not supported yet")
                 return nil
@@ -40,7 +44,7 @@ class ThermodynamicCalculator {
     }
 
     private static func calculateTS(with temperature: Double,
-                                    and  entropy: Double) -> PlotPoint? {
+                                    and  entropy: Double) throws -> PlotPoint? {
         var clampedTemp = temperature
 
         if clampedTemp < T_SAT_MIN {
@@ -48,7 +52,7 @@ class ThermodynamicCalculator {
         }
 
         if clampedTemp > T_CRITICAL {
-            return calculateSuperheated(with: clampedTemp, and: entropy)
+            return try calculateSuperheated(with: clampedTemp, and: entropy)
         } else {
             if clampedTemp == T_CRITICAL {
                 // This was copied from Rust WASM code, not sure if it's invalid or...
@@ -71,7 +75,7 @@ class ThermodynamicCalculator {
                 } else if entropy >= saturatedRegionLine.s_f && entropy <= saturatedRegionLine.s_g { // else if s >= s_f && entropy <= s_g ... calculate saturated
                     return calculateSaturated(with: saturatedRegionLine, and: entropy)
                 } else { // else ... calculate superheated
-                    return calculateSuperheated(with: clampedTemp, and: entropy)
+                    return try calculateSuperheated(with: clampedTemp, and: entropy)
                 }
 
             }
@@ -79,10 +83,10 @@ class ThermodynamicCalculator {
     }
 
     private static func calculateSuperheated(with temperature: Double,
-                                             and  entropy: Double) -> PlotPoint? {
+                                             and  entropy: Double) throws -> PlotPoint? {
 
         // calculate pressure (SuperheatedRegionCalculator)
-        let pressure = SuperheatedRegionCalculator.calculatePressure(
+        let pressure = try SuperheatedRegionCalculator.calculatePressure(
             with: temperature,
             and: entropy
         )

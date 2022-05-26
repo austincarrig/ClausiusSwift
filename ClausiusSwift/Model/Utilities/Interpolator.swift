@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum InterpolatorError : Error {
+    case indexOutOfBounds
+}
+
 class Interpolator {
 
     static func interpolate1D(with array1D: [Double], and weight: Double, at index: Int) -> Double {
@@ -86,7 +90,7 @@ class Interpolator {
                                xArray: [Double],
                                yArray: [Double],
                                xValue: Double,
-                               array2DValue: Double) -> Double {
+                               array2DValue: Double) throws -> Double {
 
         // find xIndex
         var xIndex = 0
@@ -118,6 +122,9 @@ class Interpolator {
                 break
             }
             yIndex += 1
+            if yIndex + 1 >= zArray1.count || yIndex + 1 >= zArray2.count {
+                throw InterpolatorError.indexOutOfBounds
+            }
         }
 
         let x1 = xArray[xIndex]
