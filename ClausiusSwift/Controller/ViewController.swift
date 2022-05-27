@@ -7,13 +7,22 @@
 
 // TODO List:
 // - Add infoView (T-s overlay to explain regions)
+// - Add spaceController (for fine tuning)
 
 import UIKit
 import SnapKit
 
 class MainViewController: UIViewController {
 
+    // MARK: - Flags and Indicators
+
+    // tracks if a touch has EVER been registered on the current chart
+    var touchHadRegistered = false
+
+    // MARK: - Views
     var locationIndicatorImageView = LocationIndicatorImageView(frame: CGRect.zero, chartType: .Ts)
+
+    // MARK: - VC Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +38,36 @@ class MainViewController: UIViewController {
 
     }
 
-
 }
 
+// MARK: - LocationIndicatorImageViewDelegate
+
+extension MainViewController: LocationIndicatorImageViewDelegate {
+
+    func touchDidBegin(at location: CGPoint, in locationView: LocationIndicatorImageView) {
+        touchHadRegistered = true
+
+        // add large indicator at point to locationView
+
+        // update spaceController
+
+        // reset fine-tuning flag (should probably move this to a resetFlagsAndInds() function...)
+
+        // set lastTouchLocation = location
+
+        
+    }
+
+    func touchDidMove(to location: CGPoint, in locationView: LocationIndicatorImageView) {
+
+    }
+
+    func touchDidEnd(at location: CGPoint, in locationView: LocationIndicatorImageView) {
+
+        // add small indicator at point to locationView
+
+        // reset spaceController
+
+    }
+
+}
