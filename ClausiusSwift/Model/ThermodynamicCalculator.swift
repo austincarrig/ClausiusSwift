@@ -7,12 +7,6 @@
 
 import Foundation
 
-enum ChartType {
-    case Ts
-    case Pv
-    case Ph
-}
-
 class ThermodynamicCalculator {
 
     // Critical temperature of water (C)

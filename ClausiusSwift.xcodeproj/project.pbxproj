@@ -25,8 +25,6 @@
 		495B9B43283C21C60018DAB8 /* SuperheatedRegionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B42283C21C60018DAB8 /* SuperheatedRegionCalculator.swift */; };
 		495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift */; };
 		495B9B47283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B46283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift */; };
-		498835282840638500A34A79 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 498835272840638500A34A79 /* SnapKit */; };
-		4988352A2840638500A34A79 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 498835292840638500A34A79 /* SnapKit-Dynamic */; };
 		4988352D2840653000A34A79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4988352C2840653000A34A79 /* Assets.xcassets */; };
 		498835322840656900A34A79 /* Water_ph_chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 4988352E2840656900A34A79 /* Water_ph_chart.png */; };
 		498835332840656900A34A79 /* Legend.png in Resources */ = {isa = PBXBuildFile; fileRef = 4988352F2840656900A34A79 /* Legend.png */; };
@@ -37,6 +35,9 @@
 		4988353D2840685500A34A79 /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988353C2840685500A34A79 /* Axis.swift */; };
 		498B06E9283DB99700D33E52 /* H2OWagnerPruss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */; };
 		498B06EB283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */; };
+		49C7800128411D090049F1B2 /* CommonEnumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800028411D090049F1B2 /* CommonEnumerations.swift */; };
+		49C7800328411D270049F1B2 /* ClausiusErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800228411D270049F1B2 /* ClausiusErrors.swift */; };
+		49C78006284121EA0049F1B2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 49C78005284121EA0049F1B2 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,8 @@
 		4988353C2840685500A34A79 /* Axis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
 		498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPruss.swift; sourceTree = "<group>"; };
 		498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPrussConstants.swift; sourceTree = "<group>"; };
+		49C7800028411D090049F1B2 /* CommonEnumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonEnumerations.swift; sourceTree = "<group>"; };
+		49C7800228411D270049F1B2 /* ClausiusErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				498835282840638500A34A79 /* SnapKit in Frameworks */,
-				4988352A2840638500A34A79 /* SnapKit-Dynamic in Frameworks */,
+				49C78006284121EA0049F1B2 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +147,7 @@
 				495B9B2F283AFB6A0018DAB8 /* ClausiusSwift.entitlements */,
 				495B9AFF283AFB640018DAB8 /* AppDelegate.swift */,
 				495B9B01283AFB640018DAB8 /* SceneDelegate.swift */,
+				49C77FFF28411CF00049F1B2 /* Common */,
 				495B9B31283AFC100018DAB8 /* Controller */,
 				4988352B284064F600A34A79 /* Images */,
 				495B9B32283AFDC40018DAB8 /* Model */,
@@ -262,6 +265,15 @@
 			path = H2OWagnerPruss;
 			sourceTree = "<group>";
 		};
+		49C77FFF28411CF00049F1B2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				49C7800028411D090049F1B2 /* CommonEnumerations.swift */,
+				49C7800228411D270049F1B2 /* ClausiusErrors.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -279,8 +291,7 @@
 			);
 			name = ClausiusSwift;
 			packageProductDependencies = (
-				498835272840638500A34A79 /* SnapKit */,
-				498835292840638500A34A79 /* SnapKit-Dynamic */,
+				49C78005284121EA0049F1B2 /* SnapKit */,
 			);
 			productName = ClausiusSwift;
 			productReference = 495B9AFC283AFB640018DAB8 /* ClausiusSwift.app */;
@@ -355,7 +366,7 @@
 			);
 			mainGroup = 495B9AF3283AFB640018DAB8;
 			packageReferences = (
-				498835262840638500A34A79 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				49C78004284121EA0049F1B2 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 495B9AFD283AFB640018DAB8 /* Products */;
 			projectDirPath = "";
@@ -414,10 +425,12 @@
 				495B9B34283B1FED0018DAB8 /* ThermodynamicCalculator.swift in Sources */,
 				495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift in Sources */,
 				495B9B02283AFB640018DAB8 /* SceneDelegate.swift in Sources */,
+				49C7800328411D270049F1B2 /* ClausiusErrors.swift in Sources */,
 				495B9B36283B20900018DAB8 /* PlotPoint.swift in Sources */,
 				495B9B43283C21C60018DAB8 /* SuperheatedRegionCalculator.swift in Sources */,
 				495B9B39283C15880018DAB8 /* SaturatedRegionLineConstants.swift in Sources */,
 				498B06E9283DB99700D33E52 /* H2OWagnerPruss.swift in Sources */,
+				49C7800128411D090049F1B2 /* CommonEnumerations.swift in Sources */,
 				498B06EB283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,7 +600,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = ClausiusSwift/ClausiusSwift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -617,7 +630,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = ClausiusSwift/ClausiusSwift.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -761,26 +774,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		498835262840638500A34A79 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		49C78004284121EA0049F1B2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
+				branch = develop;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		498835272840638500A34A79 /* SnapKit */ = {
+		49C78005284121EA0049F1B2 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 498835262840638500A34A79 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 49C78004284121EA0049F1B2 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		498835292840638500A34A79 /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 498835262840638500A34A79 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
