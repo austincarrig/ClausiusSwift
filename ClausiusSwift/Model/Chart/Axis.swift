@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum RUAxisDirection {
+enum AxisDirection {
     case x
     case y
 }
 
-enum RUAxisValueType {
+enum AxisValueType {
     case temperature
     case pressure
     case specificVolume
@@ -21,19 +21,19 @@ enum RUAxisValueType {
     case entropy
 }
 
-enum RUAxisScaleType {
+enum AxisScaleType {
     case linear
     case log
 }
 
-struct RUAxis {
+struct Axis {
 
     let min: Double
     let max: Double
 
-    let direction: RUAxisDirection
-    let scaleType: RUAxisScaleType
-    let valueType: RUAxisValueType
+    let direction: AxisDirection
+    let scaleType: AxisScaleType
+    let valueType: AxisValueType
 
     lazy var range: Double = {
         return max - min
