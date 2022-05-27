@@ -51,14 +51,41 @@ class LocationIndicatorImageView : UIImageView {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+
+        // touches is only for this UIResponder
+        // event.allTouches is all touches for the event, which can contain multiple UIResponders
+
+        if touches.count == 1 {
+            let touchLocation = touches.first?.location(in: self)
+
+            if let delegate = delegate {
+                delegate.touchDidBegin(at: touchLocation ?? CGPoint.zero, in: self)
+            }
+        }
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
+
+        if touches.count == 1 {
+            let touchLocation = touches.first?.location(in: self)
+
+            if let delegate = delegate {
+                delegate.touchDidMove(to: touchLocation ?? CGPoint.zero, in: self)
+            }
+        }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
+
+        if touches.count == 1 {
+            let touchLocation = touches.first?.location(in: self)
+
+            if let delegate = delegate {
+                delegate.touchDidEnd(at: touchLocation ?? CGPoint.zero, in: self)
+            }
+        }
     }
 
 }
