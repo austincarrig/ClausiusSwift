@@ -14,12 +14,15 @@ import SnapKit
 
 class MainViewController: UIViewController {
 
-    // MARK: - Flags and Indicators
+    // Flags and Indicators
 
     // tracks if a touch has EVER been registered on the current chart
     var touchHadRegistered = false
 
-    // MARK: - Views
+    // Model Objects
+    var chart = Chart(with: .Ts)
+
+    // Views
     var locationIndicatorImageView = LocationIndicatorImageView(frame: CGRect.zero, chartType: .Ts)
 
     // MARK: - VC Lifecycle
