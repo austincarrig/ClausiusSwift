@@ -10,3 +10,12 @@ enum ChartType {
     case Pv
     case Ph
 }
+
+enum SubstanceType: String {
+    case Water = "Water"
+}
+
+enum DisplayOrientation {
+    case right
+    case left
+}
