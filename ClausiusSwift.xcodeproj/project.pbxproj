@@ -12,7 +12,7 @@
 		493EC8D9283EF966004C74C3 /* ThermodynamicCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493EC8D8283EF966004C74C3 /* ThermodynamicCalculatorTests.swift */; };
 		495B9B00283AFB640018DAB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9AFF283AFB640018DAB8 /* AppDelegate.swift */; };
 		495B9B02283AFB640018DAB8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B01283AFB640018DAB8 /* SceneDelegate.swift */; };
-		495B9B04283AFB640018DAB8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B03283AFB640018DAB8 /* ViewController.swift */; };
+		495B9B04283AFB640018DAB8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B03283AFB640018DAB8 /* MainViewController.swift */; };
 		495B9B0C283AFB640018DAB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 495B9B0A283AFB640018DAB8 /* LaunchScreen.storyboard */; };
 		495B9B21283AFB640018DAB8 /* ClausiusSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B20283AFB640018DAB8 /* ClausiusSwiftUITests.swift */; };
 		495B9B23283AFB640018DAB8 /* ClausiusSwiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B22283AFB640018DAB8 /* ClausiusSwiftUITestsLaunchTests.swift */; };
@@ -65,7 +65,7 @@
 		495B9AFC283AFB640018DAB8 /* ClausiusSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClausiusSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		495B9AFF283AFB640018DAB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		495B9B01283AFB640018DAB8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		495B9B03283AFB640018DAB8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		495B9B03283AFB640018DAB8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		495B9B0B283AFB640018DAB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		495B9B0D283AFB640018DAB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		495B9B12283AFB640018DAB8 /* ClausiusSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClausiusSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,7 +183,7 @@
 		495B9B31283AFC100018DAB8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				495B9B03283AFB640018DAB8 /* ViewController.swift */,
+				495B9B03283AFB640018DAB8 /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -422,7 +422,7 @@
 				495B9B3B283C16540018DAB8 /* SaturatedRegionLine.swift in Sources */,
 				498835382840668300A34A79 /* LocationIndicatorImageView.swift in Sources */,
 				493EC8D7283EF7E5004C74C3 /* ClausiusConstants.swift in Sources */,
-				495B9B04283AFB640018DAB8 /* ViewController.swift in Sources */,
+				495B9B04283AFB640018DAB8 /* MainViewController.swift in Sources */,
 				4988353D2840685500A34A79 /* Axis.swift in Sources */,
 				495B9B00283AFB640018DAB8 /* AppDelegate.swift in Sources */,
 				495B9B34283B1FED0018DAB8 /* ThermodynamicCalculator.swift in Sources */,
