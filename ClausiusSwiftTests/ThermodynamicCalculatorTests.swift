@@ -28,7 +28,7 @@ class ThermodynamicCalculatorTests: XCTestCase {
         // sets the random seed, necessary to make this test repeatable
         srand48(1)
 
-        for _ in 0..<10000 {
+        for _ in 0..<100 {
             // must use drand48 for repeatability purposes
             let temperature = bottomTBound + drand48() * (topTBound - bottomTBound)
 
@@ -46,14 +46,12 @@ class ThermodynamicCalculatorTests: XCTestCase {
                 for: .Ts
             )
 
-            // XCTAssertNotNil(plotPoint)
+            XCTAssertNotNil(plotPoint)
 
             if plotPoint == nil {
                 print((temperature, entropy))
             }
         }
-
-        XCTAssertTrue(true)
 
     }
 
