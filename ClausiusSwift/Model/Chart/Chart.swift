@@ -16,6 +16,8 @@ class Chart {
     var substanceType: SubstanceType
     var displayOrientation: DisplayOrientation?
 
+    var imageBoundaryLine: [Double]?
+
     init(with chartType: ChartType) {
 
         self.chartType = chartType
@@ -57,6 +59,8 @@ class Chart {
         )
 
         displayOrientation = .left
+
+        imageBoundaryLine = ChartLines.TS_CHART_LINE
 
     }
 

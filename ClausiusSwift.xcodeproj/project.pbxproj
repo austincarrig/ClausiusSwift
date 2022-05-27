@@ -38,6 +38,7 @@
 		49C7800128411D090049F1B2 /* CommonEnumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800028411D090049F1B2 /* CommonEnumerations.swift */; };
 		49C7800328411D270049F1B2 /* ClausiusErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800228411D270049F1B2 /* ClausiusErrors.swift */; };
 		49C78006284121EA0049F1B2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 49C78005284121EA0049F1B2 /* SnapKit */; };
+		49C7800828413A100049F1B2 /* ChartLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800728413A100049F1B2 /* ChartLines.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPrussConstants.swift; sourceTree = "<group>"; };
 		49C7800028411D090049F1B2 /* CommonEnumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonEnumerations.swift; sourceTree = "<group>"; };
 		49C7800228411D270049F1B2 /* ClausiusErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusErrors.swift; sourceTree = "<group>"; };
+		49C7800728413A100049F1B2 /* ChartLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLines.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 			children = (
 				4988353A284067B900A34A79 /* Chart.swift */,
 				4988353C2840685500A34A79 /* Axis.swift */,
+				49C7800728413A100049F1B2 /* ChartLines.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				495B9B43283C21C60018DAB8 /* SuperheatedRegionCalculator.swift in Sources */,
 				495B9B39283C15880018DAB8 /* SaturatedRegionLineConstants.swift in Sources */,
 				498B06E9283DB99700D33E52 /* H2OWagnerPruss.swift in Sources */,
+				49C7800828413A100049F1B2 /* ChartLines.swift in Sources */,
 				49C7800128411D090049F1B2 /* CommonEnumerations.swift in Sources */,
 				498B06EB283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift in Sources */,
 			);
