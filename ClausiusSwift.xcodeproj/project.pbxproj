@@ -13,7 +13,6 @@
 		495B9B00283AFB640018DAB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9AFF283AFB640018DAB8 /* AppDelegate.swift */; };
 		495B9B02283AFB640018DAB8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B01283AFB640018DAB8 /* SceneDelegate.swift */; };
 		495B9B04283AFB640018DAB8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B03283AFB640018DAB8 /* ViewController.swift */; };
-		495B9B09283AFB640018DAB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 495B9B08283AFB640018DAB8 /* Assets.xcassets */; };
 		495B9B0C283AFB640018DAB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 495B9B0A283AFB640018DAB8 /* LaunchScreen.storyboard */; };
 		495B9B21283AFB640018DAB8 /* ClausiusSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B20283AFB640018DAB8 /* ClausiusSwiftUITests.swift */; };
 		495B9B23283AFB640018DAB8 /* ClausiusSwiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B22283AFB640018DAB8 /* ClausiusSwiftUITestsLaunchTests.swift */; };
@@ -26,6 +25,16 @@
 		495B9B43283C21C60018DAB8 /* SuperheatedRegionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B42283C21C60018DAB8 /* SuperheatedRegionCalculator.swift */; };
 		495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift */; };
 		495B9B47283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B46283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift */; };
+		498835282840638500A34A79 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 498835272840638500A34A79 /* SnapKit */; };
+		4988352A2840638500A34A79 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 498835292840638500A34A79 /* SnapKit-Dynamic */; };
+		4988352D2840653000A34A79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4988352C2840653000A34A79 /* Assets.xcassets */; };
+		498835322840656900A34A79 /* Water_ph_chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 4988352E2840656900A34A79 /* Water_ph_chart.png */; };
+		498835332840656900A34A79 /* Legend.png in Resources */ = {isa = PBXBuildFile; fileRef = 4988352F2840656900A34A79 /* Legend.png */; };
+		498835342840656900A34A79 /* Water_pv_chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 498835302840656900A34A79 /* Water_pv_chart.png */; };
+		498835352840656900A34A79 /* Water_ts_chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 498835312840656900A34A79 /* Water_ts_chart.png */; };
+		498835382840668300A34A79 /* LocationIndicatorImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498835372840668300A34A79 /* LocationIndicatorImageView.swift */; };
+		4988353B284067B900A34A79 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988353A284067B900A34A79 /* Graph.swift */; };
+		4988353D2840685500A34A79 /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988353C2840685500A34A79 /* Axis.swift */; };
 		498B06E9283DB99700D33E52 /* H2OWagnerPruss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */; };
 		498B06EB283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */; };
 /* End PBXBuildFile section */
@@ -55,7 +64,6 @@
 		495B9AFF283AFB640018DAB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		495B9B01283AFB640018DAB8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		495B9B03283AFB640018DAB8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		495B9B08283AFB640018DAB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		495B9B0B283AFB640018DAB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		495B9B0D283AFB640018DAB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		495B9B12283AFB640018DAB8 /* ClausiusSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClausiusSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +80,14 @@
 		495B9B42283C21C60018DAB8 /* SuperheatedRegionCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculator.swift; sourceTree = "<group>"; };
 		495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculatorConstants.swift; sourceTree = "<group>"; };
 		495B9B46283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculatorTests.swift; sourceTree = "<group>"; };
+		4988352C2840653000A34A79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4988352E2840656900A34A79 /* Water_ph_chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water_ph_chart.png; sourceTree = "<group>"; };
+		4988352F2840656900A34A79 /* Legend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Legend.png; sourceTree = "<group>"; };
+		498835302840656900A34A79 /* Water_pv_chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water_pv_chart.png; sourceTree = "<group>"; };
+		498835312840656900A34A79 /* Water_ts_chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water_ts_chart.png; sourceTree = "<group>"; };
+		498835372840668300A34A79 /* LocationIndicatorImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationIndicatorImageView.swift; sourceTree = "<group>"; };
+		4988353A284067B900A34A79 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		4988353C2840685500A34A79 /* Axis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
 		498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPruss.swift; sourceTree = "<group>"; };
 		498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPrussConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +97,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				498835282840638500A34A79 /* SnapKit in Frameworks */,
+				4988352A2840638500A34A79 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,8 +146,9 @@
 				495B9AFF283AFB640018DAB8 /* AppDelegate.swift */,
 				495B9B01283AFB640018DAB8 /* SceneDelegate.swift */,
 				495B9B31283AFC100018DAB8 /* Controller */,
+				4988352B284064F600A34A79 /* Images */,
 				495B9B32283AFDC40018DAB8 /* Model */,
-				495B9B08283AFB640018DAB8 /* Assets.xcassets */,
+				498835362840664700A34A79 /* View */,
 				495B9B0A283AFB640018DAB8 /* LaunchScreen.storyboard */,
 				495B9B0D283AFB640018DAB8 /* Info.plist */,
 			);
@@ -167,6 +186,7 @@
 		495B9B32283AFDC40018DAB8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				498835392840679800A34A79 /* Chart */,
 				498B06E7283DB96D00D33E52 /* H2OWagnerPruss */,
 				495B9B37283C156F0018DAB8 /* SaturatedRegionLine */,
 				495B9B41283C21A60018DAB8 /* SuperheatedRegionCalculator */,
@@ -204,6 +224,35 @@
 			path = SuperheatedRegionCalculator;
 			sourceTree = "<group>";
 		};
+		4988352B284064F600A34A79 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				4988352C2840653000A34A79 /* Assets.xcassets */,
+				4988352F2840656900A34A79 /* Legend.png */,
+				4988352E2840656900A34A79 /* Water_ph_chart.png */,
+				498835302840656900A34A79 /* Water_pv_chart.png */,
+				498835312840656900A34A79 /* Water_ts_chart.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		498835362840664700A34A79 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				498835372840668300A34A79 /* LocationIndicatorImageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		498835392840679800A34A79 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				4988353A284067B900A34A79 /* Graph.swift */,
+				4988353C2840685500A34A79 /* Axis.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
 		498B06E7283DB96D00D33E52 /* H2OWagnerPruss */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +278,10 @@
 			dependencies = (
 			);
 			name = ClausiusSwift;
+			packageProductDependencies = (
+				498835272840638500A34A79 /* SnapKit */,
+				498835292840638500A34A79 /* SnapKit-Dynamic */,
+			);
 			productName = ClausiusSwift;
 			productReference = 495B9AFC283AFB640018DAB8 /* ClausiusSwift.app */;
 			productType = "com.apple.product-type.application";
@@ -301,6 +354,9 @@
 				Base,
 			);
 			mainGroup = 495B9AF3283AFB640018DAB8;
+			packageReferences = (
+				498835262840638500A34A79 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 495B9AFD283AFB640018DAB8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -317,8 +373,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				498835332840656900A34A79 /* Legend.png in Resources */,
+				498835342840656900A34A79 /* Water_pv_chart.png in Resources */,
+				4988352D2840653000A34A79 /* Assets.xcassets in Resources */,
+				498835322840656900A34A79 /* Water_ph_chart.png in Resources */,
 				495B9B0C283AFB640018DAB8 /* LaunchScreen.storyboard in Resources */,
-				495B9B09283AFB640018DAB8 /* Assets.xcassets in Resources */,
+				498835352840656900A34A79 /* Water_ts_chart.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,10 +403,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4988353B284067B900A34A79 /* Graph.swift in Sources */,
 				495B9B3E283C18820018DAB8 /* Interpolator.swift in Sources */,
 				495B9B3B283C16540018DAB8 /* SaturatedRegionLine.swift in Sources */,
+				498835382840668300A34A79 /* LocationIndicatorImageView.swift in Sources */,
 				493EC8D7283EF7E5004C74C3 /* ClausiusConstants.swift in Sources */,
 				495B9B04283AFB640018DAB8 /* ViewController.swift in Sources */,
+				4988353D2840685500A34A79 /* Axis.swift in Sources */,
 				495B9B00283AFB640018DAB8 /* AppDelegate.swift in Sources */,
 				495B9B34283B1FED0018DAB8 /* ThermodynamicCalculator.swift in Sources */,
 				495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift in Sources */,
@@ -696,6 +759,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		498835262840638500A34A79 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		498835272840638500A34A79 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 498835262840638500A34A79 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		498835292840638500A34A79 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 498835262840638500A34A79 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 495B9AF4283AFB640018DAB8 /* Project object */;
 }
