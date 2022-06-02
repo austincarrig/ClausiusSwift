@@ -41,6 +41,18 @@ class MainViewController: UIViewController {
             make.edges.equalTo(view)
         }
 
+        let row = DisplayViewRow(frame: CGRect.zero)
+
+        row.backgroundColor = .black
+
+        view.addSubview(row)
+
+        row.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalTo(225.0)
+            make.height.equalTo(36.0)
+        }
+
     }
 
 }
