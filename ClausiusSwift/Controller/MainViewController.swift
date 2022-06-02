@@ -34,6 +34,8 @@ class MainViewController: UIViewController {
 
         view.addSubview(locationIndicatorImageView)
 
+        locationIndicatorImageView.delegate = self
+
         // locationIndicatorImageView should fill the screen
         locationIndicatorImageView.snp.makeConstraints { make in
             make.edges.equalTo(view)
@@ -52,6 +54,14 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         // add large indicator at point to locationView
 
+        let clippedPoint = clipToImageBoundary(
+            point: location,
+            width: locationView.bounds.width,
+            height: locationView.bounds.height
+        )
+
+        locationView.drawLargeIndicator(at: clippedPoint)
+
         // update spaceController
 
         // reset fine-tuning flag (should probably move this to a resetFlagsAndInds() function...)
@@ -63,14 +73,54 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
     func touchDidMove(to location: CGPoint, in locationView: LocationIndicatorImageView) {
 
+        let clippedPoint = clipToImageBoundary(
+            point: location,
+            width: locationView.bounds.width,
+            height: locationView.bounds.height
+        )
+
+        locationView.drawLargeIndicator(at: clippedPoint)
+
     }
 
     func touchDidEnd(at location: CGPoint, in locationView: LocationIndicatorImageView) {
 
         // add small indicator at point to locationView
 
+        let clippedPoint = clipToImageBoundary(
+            point: location,
+            width: locationView.bounds.width,
+            height: locationView.bounds.height
+        )
+
+        locationView.drawSmallIndicator(at: clippedPoint)
+
         // reset spaceController
 
+    }
+
+    func clipToImageBoundary(point: CGPoint,
+                             width: CGFloat,
+                             height: CGFloat) -> CGPoint {
+        let yRatio = point.y / height
+        let xRatio = chart.imageBoundaryLine![Int(floor(yRatio * CGFloat(chart.imageBoundaryLine!.count)))]
+
+        var adjustment = 0.0
+
+        switch chart.displayOrientation! {
+            case .right:
+                adjustment = -3.0
+            case .left:
+                adjustment = 3.0
+        }
+
+        let x = xRatio * width + adjustment
+
+        if point.x > x {
+            return point
+        } else {
+            return CGPoint(x: x, y: point.y)
+        }
     }
 
 }

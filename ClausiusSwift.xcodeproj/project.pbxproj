@@ -39,6 +39,7 @@
 		49C7800328411D270049F1B2 /* ClausiusErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800228411D270049F1B2 /* ClausiusErrors.swift */; };
 		49C78006284121EA0049F1B2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 49C78005284121EA0049F1B2 /* SnapKit */; };
 		49C7800828413A100049F1B2 /* ChartLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800728413A100049F1B2 /* ChartLines.swift */; };
+		49F9900528481FF1003107FE /* ClausiusColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F9900428481FF1003107FE /* ClausiusColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		49C7800028411D090049F1B2 /* CommonEnumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonEnumerations.swift; sourceTree = "<group>"; };
 		49C7800228411D270049F1B2 /* ClausiusErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusErrors.swift; sourceTree = "<group>"; };
 		49C7800728413A100049F1B2 /* ChartLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLines.swift; sourceTree = "<group>"; };
+		49F9900428481FF1003107FE /* ClausiusColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +275,7 @@
 			children = (
 				49C7800028411D090049F1B2 /* CommonEnumerations.swift */,
 				49C7800228411D270049F1B2 /* ClausiusErrors.swift */,
+				49F9900428481FF1003107FE /* ClausiusColor.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				495B9B00283AFB640018DAB8 /* AppDelegate.swift in Sources */,
 				495B9B34283B1FED0018DAB8 /* ThermodynamicCalculator.swift in Sources */,
 				495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift in Sources */,
+				49F9900528481FF1003107FE /* ClausiusColor.swift in Sources */,
 				495B9B02283AFB640018DAB8 /* SceneDelegate.swift in Sources */,
 				49C7800328411D270049F1B2 /* ClausiusErrors.swift in Sources */,
 				495B9B36283B20900018DAB8 /* PlotPoint.swift in Sources */,
@@ -614,7 +618,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -644,7 +648,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
