@@ -36,6 +36,7 @@
 		498B06E9283DB99700D33E52 /* H2OWagnerPruss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */; };
 		498B06EB283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */; };
 		49BC3BD42849500C00402D18 /* DisplayViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC3BD32849500C00402D18 /* DisplayViewRow.swift */; };
+		49BC3BD62849A1F000402D18 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC3BD52849A1F000402D18 /* DisplayView.swift */; };
 		49C7800128411D090049F1B2 /* CommonEnumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800028411D090049F1B2 /* CommonEnumerations.swift */; };
 		49C7800328411D270049F1B2 /* ClausiusErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800228411D270049F1B2 /* ClausiusErrors.swift */; };
 		49C78006284121EA0049F1B2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 49C78005284121EA0049F1B2 /* SnapKit */; };
@@ -95,6 +96,7 @@
 		498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPruss.swift; sourceTree = "<group>"; };
 		498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPrussConstants.swift; sourceTree = "<group>"; };
 		49BC3BD32849500C00402D18 /* DisplayViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewRow.swift; sourceTree = "<group>"; };
+		49BC3BD52849A1F000402D18 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		49C7800028411D090049F1B2 /* CommonEnumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonEnumerations.swift; sourceTree = "<group>"; };
 		49C7800228411D270049F1B2 /* ClausiusErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusErrors.swift; sourceTree = "<group>"; };
 		49C7800728413A100049F1B2 /* ChartLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLines.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			children = (
 				498835372840668300A34A79 /* LocationIndicatorImageView.swift */,
 				49BC3BD32849500C00402D18 /* DisplayViewRow.swift */,
+				49BC3BD52849A1F000402D18 /* DisplayView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				493EC8D7283EF7E5004C74C3 /* ClausiusConstants.swift in Sources */,
 				495B9B04283AFB640018DAB8 /* MainViewController.swift in Sources */,
 				4988353D2840685500A34A79 /* Axis.swift in Sources */,
+				49BC3BD62849A1F000402D18 /* DisplayView.swift in Sources */,
 				495B9B00283AFB640018DAB8 /* AppDelegate.swift in Sources */,
 				495B9B34283B1FED0018DAB8 /* ThermodynamicCalculator.swift in Sources */,
 				495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift in Sources */,

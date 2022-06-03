@@ -28,7 +28,7 @@ class DisplayViewRow : UIView {
         let _label = UILabel(frame: CGRect.zero)
         _label.font = labelFont
         _label.textColor = .black
-        _label.textAlignment = .left
+        _label.textAlignment = .center
         return _label
     }()
 

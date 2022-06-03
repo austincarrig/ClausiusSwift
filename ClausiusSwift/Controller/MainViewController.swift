@@ -8,6 +8,7 @@
 // TODO List:
 // - Add infoView (T-s overlay to explain regions)
 // - Add spaceController (for fine tuning)
+// - superscripting 3 in m3 unit label
 
 import UIKit
 import SnapKit
@@ -25,6 +26,8 @@ class MainViewController: UIViewController {
     // Views
     var locationIndicatorImageView = LocationIndicatorImageView(frame: CGRect.zero, chartType: .Ts)
 
+    var displayView = DisplayView(frame: CGRect.zero)
+
     // MARK: - VC Lifecycle
 
     override func viewDidLoad() {
@@ -34,6 +37,7 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
 
         view.addSubview(locationIndicatorImageView)
+        view.addSubview(displayView)
 
         locationIndicatorImageView.delegate = self
 
@@ -42,14 +46,10 @@ class MainViewController: UIViewController {
             make.edges.equalTo(view)
         }
 
-        let row = DisplayViewRow(valueType: .t)
-
-        view.addSubview(row)
-
-        row.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        displayView.snp.makeConstraints { make in
+            make.height.equalTo(350.0)
             make.width.equalTo(225.0)
-            make.height.equalTo(36.0)
+            make.top.left.equalToSuperview().offset(20.0)
         }
 
     }
