@@ -28,6 +28,7 @@ class MainViewController: UIViewController {
     // MARK: - VC Lifecycle
 
     override func viewDidLoad() {
+
         super.viewDidLoad()
 
         view.backgroundColor = .white
@@ -41,9 +42,7 @@ class MainViewController: UIViewController {
             make.edges.equalTo(view)
         }
 
-        let row = DisplayViewRow(frame: CGRect.zero)
-
-        row.backgroundColor = .black
+        let row = DisplayViewRow(valueType: .t)
 
         view.addSubview(row)
 
@@ -62,6 +61,7 @@ class MainViewController: UIViewController {
 extension MainViewController: LocationIndicatorImageViewDelegate {
 
     func touchDidBegin(at location: CGPoint, in locationView: LocationIndicatorImageView) {
+
         touchHadRegistered = true
 
         // add large indicator at point to locationView
@@ -80,7 +80,6 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         // set lastTouchLocation = location
 
-        
     }
 
     func touchDidMove(to location: CGPoint, in locationView: LocationIndicatorImageView) {

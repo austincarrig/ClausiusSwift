@@ -22,24 +22,64 @@ import SnapKit
 
 class DisplayViewRow : UIView {
 
-    var nameLabel = UILabel(frame: CGRect.zero)
+    let labelFont = UIFont(name: "HelveticaNeue-Light", size: 16.0)
+
+    lazy var nameLabel : UILabel = {
+        let _label = UILabel(frame: CGRect.zero)
+        _label.font = labelFont
+        _label.textColor = .black
+        _label.textAlignment = .left
+        return _label
+    }()
+
+    lazy var valueLabel : UILabel = {
+        let _label = UILabel(frame: CGRect.zero)
+        _label.font = labelFont
+        _label.textColor = .black
+        _label.textAlignment = .left
+        return _label
+    }()
+
+    lazy var unitsLabel : UILabel = {
+        let _label = UILabel(frame: CGRect.zero)
+        _label.font = labelFont
+        _label.textColor = .black
+        _label.textAlignment = .left
+        return _label
+    }()
+
     var spacingView1 = UIView(frame: CGRect.zero)
-    var valueLabel = UILabel(frame: CGRect.zero)
     var spacingView2 = UIView(frame: CGRect.zero)
-    var unitsLabel = UILabel(frame: CGRect.zero)
+
+    var valueType: ValueType
+
+    init(valueType: ValueType) {
+
+        self.valueType = valueType
+
+        super.init(frame: CGRect.zero)
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func didMoveToSuperview() {
 
+        // Add subviews
         self.addSubview(nameLabel)
         self.addSubview(spacingView1)
         self.addSubview(valueLabel)
         self.addSubview(spacingView2)
         self.addSubview(unitsLabel)
 
-        nameLabel.backgroundColor = .red
-        valueLabel.backgroundColor = .orange
-        unitsLabel.backgroundColor = .yellow
+        // Set label text
+        setNameLabelText()
+        setValueLabel(to: nil)
+        setDefaultUnitsLabelText()
 
+        // Add subview constraints
         nameLabel.snp.makeConstraints { make in
             make.top.bottom.left.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.14)
@@ -68,6 +108,89 @@ class DisplayViewRow : UIView {
             make.width.equalToSuperview().multipliedBy(0.35)
             make.right.equalToSuperview()
         }
+
+    }
+
+    func setValueLabel(to value: Double?) {
+
+        var valueStr = ""
+
+        if let value = value {
+            var finalValue: Double = value
+            var formatString = "%.1f"
+
+            switch valueType {
+                case .t, .u, .h, .x:
+                    break
+                case .p:
+                    if finalValue >= 1000.0 {
+                        finalValue = finalValue / 1000.0
+                        unitsLabel.text = "MPa"
+                    } else {
+                        unitsLabel.text = "kPa"
+                    }
+                case .v:
+                    if finalValue < 10.0 {
+                        formatString = "%.4f"
+                    } else {
+                        formatString = "%.3f"
+                    }
+                case .s:
+                    formatString = "%.2f"
+            }
+
+            valueStr = String(format: formatString, finalValue)
+        }
+
+        valueLabel.text = valueStr
+
+    }
+
+    private func setNameLabelText() {
+
+        var name = ""
+
+        switch valueType {
+            case .t:
+                name = "T"
+            case .p:
+                name = "P"
+            case .v:
+                name = "v"
+            case .u:
+                name = "u"
+            case .h:
+                name = "h"
+            case .s:
+                name = "s"
+            case .x:
+                name = "x"
+        }
+
+        nameLabel.text = name
+
+    }
+
+    private func setDefaultUnitsLabelText() {
+
+        var units = ""
+
+        switch valueType {
+            case .t:
+                units = "℃"
+            case .p:
+                units = "kPa"
+            case .v:
+                units = "m3/kg"
+            case .u, .h:
+                units = "kJ/kg"
+            case .s:
+                units = "kJ/kg.K"
+            case .x:
+                units = "%"
+        }
+
+        unitsLabel.text = units
 
     }
 

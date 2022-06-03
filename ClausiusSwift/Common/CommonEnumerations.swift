@@ -19,3 +19,13 @@ enum DisplayOrientation {
     case right
     case left
 }
+
+enum ValueType {
+    case t
+    case p
+    case v
+    case u
+    case h
+    case s
+    case x
+}
