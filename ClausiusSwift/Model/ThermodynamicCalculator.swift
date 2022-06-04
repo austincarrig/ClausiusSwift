@@ -24,7 +24,7 @@ class ThermodynamicCalculator {
         switch chartType {
             case .Ts:
                 do {
-                    return try calculateTS(with: xValue, and: yValue)
+                    return try calculateTS(with: yValue, and: xValue)
                 } catch {
                     return nil
                 }
@@ -108,7 +108,7 @@ class ThermodynamicCalculator {
 
         // calculate enthalpy (WagnerPruss)
         let enthalpy = H2OWagnerPruss.calculate_enthalpy_with_u(
-            temperature: temperature,
+            temperature: temperatureKelvin,
             density: density,
             internal_energy: internalEnergy
         )
