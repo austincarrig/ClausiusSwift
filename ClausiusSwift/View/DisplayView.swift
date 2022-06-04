@@ -43,7 +43,7 @@ class DisplayView : UIView {
         self.addSubview(titleLabel)
         self.addSubview(stackView)
 
-        let size = (titleLabel.text as! NSString).size(withAttributes: [NSAttributedString.Key.font:self.titleLabel.font])
+        let size = (titleLabel.text! as NSString).size(withAttributes: [NSAttributedString.Key.font:self.titleLabel.font!])
 
         titleLabel.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
