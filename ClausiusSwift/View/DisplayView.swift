@@ -80,6 +80,12 @@ class DisplayView : UIView {
 
         if let row = rows[valueType] {
             row.setValueLabel(to: value)
+
+            if valueType == .x && fabs(-1.0 - value) < Double.ulpOfOne {
+                row.alpha = 0.0
+            } else {
+                row.alpha = 1.0
+            }
         }
 
     }
