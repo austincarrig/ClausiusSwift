@@ -20,6 +20,16 @@ class DisplayView : UIView {
         return _label
     }()
 
+    let rows : [ValueType:DisplayViewRow] = [
+        .t : DisplayViewRow(valueType: .t),
+        .p : DisplayViewRow(valueType: .p),
+        .v : DisplayViewRow(valueType: .v),
+        .u : DisplayViewRow(valueType: .u),
+        .h : DisplayViewRow(valueType: .h),
+        .s : DisplayViewRow(valueType: .s),
+        .x : DisplayViewRow(valueType: .x)
+    ]
+
     lazy var stackView: UIStackView = {
         let _stackView = UIStackView()
         _stackView.alignment = .fill
@@ -27,13 +37,13 @@ class DisplayView : UIView {
         _stackView.distribution = .fillEqually
         _stackView.spacing = 0.0
 
-        _stackView.addArrangedSubview(DisplayViewRow(valueType: .t))
-        _stackView.addArrangedSubview(DisplayViewRow(valueType: .p))
-        _stackView.addArrangedSubview(DisplayViewRow(valueType: .v))
-        _stackView.addArrangedSubview(DisplayViewRow(valueType: .u))
-        _stackView.addArrangedSubview(DisplayViewRow(valueType: .h))
-        _stackView.addArrangedSubview(DisplayViewRow(valueType: .s))
-        _stackView.addArrangedSubview(DisplayViewRow(valueType: .x))
+        _stackView.addArrangedSubview(rows[.t]!)
+        _stackView.addArrangedSubview(rows[.p]!)
+        _stackView.addArrangedSubview(rows[.v]!)
+        _stackView.addArrangedSubview(rows[.u]!)
+        _stackView.addArrangedSubview(rows[.h]!)
+        _stackView.addArrangedSubview(rows[.s]!)
+        _stackView.addArrangedSubview(rows[.x]!)
 
         return _stackView
     }()
@@ -53,6 +63,14 @@ class DisplayView : UIView {
         stackView.snp.makeConstraints { make in
             make.bottom.left.right.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom)
+        }
+
+    }
+
+    func updateRowValue(for valueType: ValueType, with value: Double) {
+
+        if let row = rows[valueType] {
+            row.setValueLabel(to: value)
         }
 
     }
