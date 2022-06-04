@@ -62,7 +62,16 @@ class DisplayView : UIView {
 
         stackView.snp.makeConstraints { make in
             make.bottom.left.right.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom) //.offset(10.0) <- if adding this, change displayview height from 340 to 350
+        }
+
+        for (_valueType, _row) in rows {
+            switch _valueType {
+                case .t:
+                    continue
+                case .p, .v, .u, .h, .s, .x:
+                    _row.addBorders(edges: [.top], color: UIColor.clausiusOrange)
+            }
         }
 
     }
