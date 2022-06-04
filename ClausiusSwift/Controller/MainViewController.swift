@@ -47,9 +47,10 @@ class MainViewController: UIViewController {
         }
 
         displayView.snp.makeConstraints { make in
-            make.height.equalTo(350.0)
-            make.width.equalTo(210.0)
-            make.top.left.equalToSuperview().offset(20.0)
+            make.height.equalTo(340.0)
+            make.width.equalTo(190.0)
+            make.top.equalToSuperview().offset(20.0)
+            make.left.equalToSuperview().offset(40.0)
         }
 
     }
