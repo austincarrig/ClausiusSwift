@@ -219,7 +219,7 @@ struct H2OWagnerPruss {
     }
 
     static func calculate_phi_r_delta_delta(temperature: Double,
-                                          density: Double) -> Double
+                                            density: Double) -> Double
     {
         var phi_r_delta_delta = 0.0
 
