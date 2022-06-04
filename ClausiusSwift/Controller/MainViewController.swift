@@ -65,7 +65,7 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
         touchHadRegistered = true
 
         // get the touch location clipped to the bounds of the chart
-        let clippedPoint = clipToImageBoundary(
+        let clippedPoint = clipToChartBoundary(
             point: location,
             width: locationView.bounds.width,
             height: locationView.bounds.height
@@ -87,7 +87,7 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
     func touchDidMove(to location: CGPoint, in locationView: LocationIndicatorImageView) {
 
         // get the touch location clipped to the bounds of the chart
-        let clippedPoint = clipToImageBoundary(
+        let clippedPoint = clipToChartBoundary(
             point: location,
             width: locationView.bounds.width,
             height: locationView.bounds.height
@@ -100,7 +100,7 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
     func touchDidEnd(at location: CGPoint, in locationView: LocationIndicatorImageView) {
 
         // get the touch location clipped to the bounds of the chart
-        let clippedPoint = clipToImageBoundary(
+        let clippedPoint = clipToChartBoundary(
             point: location,
             width: locationView.bounds.width,
             height: locationView.bounds.height
@@ -113,7 +113,7 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
     }
 
-    func clipToImageBoundary(point: CGPoint,
+    func clipToChartBoundary(point: CGPoint,
                              width: CGFloat,
                              height: CGFloat) -> CGPoint {
         let yRatio = point.y / height
@@ -123,9 +123,9 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         switch chart.displayOrientation! {
             case .right:
-                adjustment = -3.0
+                adjustment = -5.0
             case .left:
-                adjustment = 3.0
+                adjustment = 5.0
         }
 
         let x = xRatio * width + adjustment
