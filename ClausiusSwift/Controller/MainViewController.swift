@@ -80,7 +80,7 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         // set lastTouchLocation = location
 
-        
+        touchDidRegister(at: clippedPoint, in: locationView)
 
     }
 
@@ -94,6 +94,8 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
         )
 
         locationView.drawLargeIndicator(at: clippedPoint)
+
+        touchDidRegister(at: clippedPoint, in: locationView)
 
     }
 
@@ -135,6 +137,47 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
         } else {
             return CGPoint(x: x, y: point.y)
         }
+    }
+
+    func touchDidRegister(at location: CGPoint,
+                          in locationView: LocationIndicatorImageView) {
+
+        if let xAxis = chart.xAxis, let yAxis = chart.yAxis {
+            let xScale = (xAxis.max - xAxis.min) / locationView.bounds.width
+            let yScale = (yAxis.max - yAxis.min) / locationView.bounds.height
+
+            let xValue = xAxis.min + xScale * location.x
+            // y on iOS screen and y on graph point in opposite directions, hence height - y
+            let yValue = yAxis.min + yScale * (locationView.bounds.height - location.y)
+
+            let plotPoint = ThermodynamicCalculator.calculateProperties(
+                with: xValue,
+                and: yValue,
+                for: chart.chartType
+            )
+
+            updateDisplayView(with: plotPoint)
+
+        } else {
+            print("Chart not properly initialized!! Should probably throw an exception here.")
+        }
+
+    }
+
+    func updateDisplayView(with plotPoint: PlotPoint?) {
+
+        if let plotPoint = plotPoint {
+            displayView.updateRowValue(for: .t, with: plotPoint.t)
+            displayView.updateRowValue(for: .p, with: plotPoint.p)
+            displayView.updateRowValue(for: .v, with: plotPoint.v)
+            displayView.updateRowValue(for: .u, with: plotPoint.u)
+            displayView.updateRowValue(for: .h, with: plotPoint.h)
+            displayView.updateRowValue(for: .s, with: plotPoint.s)
+            displayView.updateRowValue(for: .x, with: plotPoint.x)
+        } else {
+            print("Got a nil plot point, might want to do something else here?...")
+        }
+
     }
 
 }
