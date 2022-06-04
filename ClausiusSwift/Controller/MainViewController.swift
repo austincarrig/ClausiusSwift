@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
 
         displayView.snp.makeConstraints { make in
             make.height.equalTo(350.0)
-            make.width.equalTo(225.0)
+            make.width.equalTo(210.0)
             make.top.left.equalToSuperview().offset(20.0)
         }
 
@@ -64,14 +64,14 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         touchHadRegistered = true
 
-        // add large indicator at point to locationView
-
+        // get the touch location clipped to the bounds of the chart
         let clippedPoint = clipToImageBoundary(
             point: location,
             width: locationView.bounds.width,
             height: locationView.bounds.height
         )
 
+        // add large indicator at point to locationView
         locationView.drawLargeIndicator(at: clippedPoint)
 
         // update spaceController
@@ -80,10 +80,13 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         // set lastTouchLocation = location
 
+        
+
     }
 
     func touchDidMove(to location: CGPoint, in locationView: LocationIndicatorImageView) {
 
+        // get the touch location clipped to the bounds of the chart
         let clippedPoint = clipToImageBoundary(
             point: location,
             width: locationView.bounds.width,
@@ -96,14 +99,14 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
     func touchDidEnd(at location: CGPoint, in locationView: LocationIndicatorImageView) {
 
-        // add small indicator at point to locationView
-
+        // get the touch location clipped to the bounds of the chart
         let clippedPoint = clipToImageBoundary(
             point: location,
             width: locationView.bounds.width,
             height: locationView.bounds.height
         )
 
+        // add small indicator to locationView
         locationView.drawSmallIndicator(at: clippedPoint)
 
         // reset spaceController
