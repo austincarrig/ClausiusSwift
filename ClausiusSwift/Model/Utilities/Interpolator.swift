@@ -105,7 +105,23 @@ class Interpolator {
             xIndex += 1
         }
 
-        let xWeight = (xValue - xArray[xIndex]) / (xArray[xIndex + 1] - xArray[xIndex])
+        var xWeight = 0.0
+
+        // This prevents crashes if we are at the max Index
+        // Normally, given the logic above, the range of xWeight is 0.0 <= xWeight < 1.0
+        // This means that if xValue exactly matches the value at a given xIndex, the arrays
+        // used in the yIndex logic will be the index matching xValue, and the index after that.
+        // For the case of xValue == xArray.last, this can't work because there is no xIndex + 1,
+        // so we change the logic slightly by decrementing the index by 1 and making the weight 1.0,
+        // basically interpolating using the arrays of the value and one below, rather than one above
+        // as we do with all other values. The result, in real terms, is the same, but we avoid
+        // throwing an uncatchable fatal error
+        if xIndex == xArray.count - 1 {
+            xWeight = 1.0
+            xIndex -= 1
+        } else {
+            xWeight = (xValue - xArray[xIndex]) / (xArray[xIndex + 1] - xArray[xIndex])
+        }
 
         // find yIndex
         var yIndex = 0
