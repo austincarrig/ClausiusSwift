@@ -7,8 +7,9 @@
 
 // TODO List:
 // - Add infoView (T-s overlay to explain regions)
-// - Add spaceController (for fine tuning)
+// - Add spaceController (for fine tuning) [DONE]
 // - superscripting 3 in m3 unit label
+// - move location indicator when screen size changes (Mac)
 
 import UIKit
 import SnapKit
@@ -20,16 +21,21 @@ class MainViewController: UIViewController {
     // tracks if a touch has EVER been registered on the current chart
     var touchHadRegistered = false
 
+    // keeps track of the last point received from the LocationIndicator delegate
+    // we need this so we can place the small indicator at the last calculated point
+    // we could calculate at the "end" point, but this is how it worked in legacy...
     var lastTouchLocation: CGPoint?
 
     // Model Objects
     var chart = Chart(with: .Ts)
 
+    // use for fine tuning, could probably re-name...
     let spaceController = SpaceController()
 
     // Views
     var locationIndicatorImageView = LocationIndicatorImageView(frame: CGRect.zero, chartType: .Ts)
 
+    // for displaying calculated thermodynamic values
     var displayView = DisplayView(frame: CGRect.zero)
 
     // MARK: - VC Lifecycle
