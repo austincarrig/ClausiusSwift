@@ -20,8 +20,12 @@ class MainViewController: UIViewController {
     // tracks if a touch has EVER been registered on the current chart
     var touchHadRegistered = false
 
+    var lastTouchLocation: CGPoint?
+
     // Model Objects
     var chart = Chart(with: .Ts)
+
+    let spaceController = SpaceController()
 
     // Views
     var locationIndicatorImageView = LocationIndicatorImageView(frame: CGRect.zero, chartType: .Ts)
@@ -79,17 +83,19 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         // reset fine-tuning flag (should probably move this to a resetFlagsAndInds() function...)
 
-        // set lastTouchLocation = location
-
         touchDidRegister(at: clippedPoint, in: locationView)
+
+        lastTouchLocation = clippedPoint
 
     }
 
     func touchDidMove(to location: CGPoint, in locationView: LocationIndicatorImageView) {
 
+        let fineTunedPoint = spaceController.fineTunedWithLatest(point: location)
+
         // get the touch location clipped to the bounds of the chart
         let clippedPoint = clipToChartBoundary(
-            point: location,
+            point: fineTunedPoint,
             width: locationView.bounds.width,
             height: locationView.bounds.height
         )
@@ -98,21 +104,17 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         touchDidRegister(at: clippedPoint, in: locationView)
 
+        lastTouchLocation = clippedPoint
+
     }
 
     func touchDidEnd(at location: CGPoint, in locationView: LocationIndicatorImageView) {
 
-        // get the touch location clipped to the bounds of the chart
-        let clippedPoint = clipToChartBoundary(
-            point: location,
-            width: locationView.bounds.width,
-            height: locationView.bounds.height
-        )
-
         // add small indicator to locationView
-        locationView.drawSmallIndicator(at: clippedPoint)
+        locationView.drawSmallIndicator(at: lastTouchLocation!)
 
         // reset spaceController
+        spaceController.reset()
 
     }
 

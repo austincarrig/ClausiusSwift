@@ -35,6 +35,7 @@
 		4988353D2840685500A34A79 /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988353C2840685500A34A79 /* Axis.swift */; };
 		498B06E9283DB99700D33E52 /* H2OWagnerPruss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */; };
 		498B06EB283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */; };
+		498F0E9B284BFBD80007EC86 /* SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498F0E9A284BFBD80007EC86 /* SpaceController.swift */; };
 		49BC3BD42849500C00402D18 /* DisplayViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC3BD32849500C00402D18 /* DisplayViewRow.swift */; };
 		49BC3BD62849A1F000402D18 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC3BD52849A1F000402D18 /* DisplayView.swift */; };
 		49C7800128411D090049F1B2 /* CommonEnumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800028411D090049F1B2 /* CommonEnumerations.swift */; };
@@ -95,6 +96,7 @@
 		4988353C2840685500A34A79 /* Axis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
 		498B06E8283DB99700D33E52 /* H2OWagnerPruss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPruss.swift; sourceTree = "<group>"; };
 		498B06EA283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPrussConstants.swift; sourceTree = "<group>"; };
+		498F0E9A284BFBD80007EC86 /* SpaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceController.swift; sourceTree = "<group>"; };
 		49BC3BD32849500C00402D18 /* DisplayViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewRow.swift; sourceTree = "<group>"; };
 		49BC3BD52849A1F000402D18 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		49C7800028411D090049F1B2 /* CommonEnumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonEnumerations.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				495B9B3C283C18770018DAB8 /* Utilities */,
 				495B9B33283B1FED0018DAB8 /* ThermodynamicCalculator.swift */,
 				495B9B35283B20900018DAB8 /* PlotPoint.swift */,
+				498F0E9A284BFBD80007EC86 /* SpaceController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift in Sources */,
 				49F9900528481FF1003107FE /* ClausiusColor.swift in Sources */,
 				49BC3BD42849500C00402D18 /* DisplayViewRow.swift in Sources */,
+				498F0E9B284BFBD80007EC86 /* SpaceController.swift in Sources */,
 				495B9B02283AFB640018DAB8 /* SceneDelegate.swift in Sources */,
 				49C7800328411D270049F1B2 /* ClausiusErrors.swift in Sources */,
 				495B9B36283B20900018DAB8 /* PlotPoint.swift in Sources */,
