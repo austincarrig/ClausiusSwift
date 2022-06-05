@@ -116,9 +116,9 @@ class Interpolator {
         // basically interpolating using the arrays of the value and one below, rather than one above
         // as we do with all other values. The result, in real terms, is the same, but we avoid
         // throwing an uncatchable fatal error
-        if xIndex == xArray.count - 1 {
+        if xIndex >= xArray.count - 1 {
             xWeight = 1.0
-            xIndex -= 1
+            xIndex -= xArray.count - 2
         } else {
             xWeight = (xValue - xArray[xIndex]) / (xArray[xIndex + 1] - xArray[xIndex])
         }

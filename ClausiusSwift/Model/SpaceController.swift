@@ -6,6 +6,7 @@
 //
 
 import CoreGraphics
+import Foundation
 
 extension CGPoint {
 
@@ -16,10 +17,17 @@ extension CGPoint {
 }
 
 class SpaceController {
-
+#if targetEnvironment(macCatalyst)
+    private let numPoints: Int = 15
+#else
     private let numPoints: Int = 5
+#endif
 
+#if targetEnvironment(macCatalyst)
+    private let maxDiff: CGFloat = 20.0
+#else
     private let maxDiff: CGFloat = 30.0
+#endif
 
     private var points: [CGPoint] = []
 
@@ -74,8 +82,8 @@ class SpaceController {
     private func largestDistance() -> CGFloat {
         var highestDiff: CGFloat = 0.0
 
-        for i in 0..<5 {
-            for j in 0..<5 {
+        for i in 0..<numPoints {
+            for j in 0..<numPoints {
                 let p1 = points[i]
                 let p2 = points[j]
 

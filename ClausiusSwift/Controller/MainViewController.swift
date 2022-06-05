@@ -121,7 +121,7 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
     func clipToChartBoundary(point: CGPoint,
                              width: CGFloat,
                              height: CGFloat) -> CGPoint {
-        let yRatio = point.y / height
+        let yRatio = max(point.y, 0.0) / height
         let xRatio = chart.imageBoundaryLine![Int(floor(yRatio * CGFloat(chart.imageBoundaryLine!.count)))]
 
         var adjustment = 0.0
