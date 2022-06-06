@@ -38,11 +38,9 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
             let entropy = minSBound + drand48() * (maxSBound - minSBound)
 
-            // Need to update this to test for nil... print it out to get some idea of what we're dealing with
-
             let plotPoint = ThermodynamicCalculator.calculateProperties(
-                with: temperature,
-                and: entropy,
+                with: entropy,
+                and: temperature,
                 for: .Ts
             )
 
