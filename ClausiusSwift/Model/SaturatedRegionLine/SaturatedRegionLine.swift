@@ -18,7 +18,11 @@ struct SaturatedRegionLine {
     let s_f: Double
     let s_g: Double
 
-    init(with temperature: Double) {
+    init?(with temperature: Double) {
+
+        if temperature >= SaturatedRegionLineConstants.TEMPERATURE.last! {
+            return nil
+        }
 
         var i = 0
 

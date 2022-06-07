@@ -45,34 +45,17 @@ class ThermodynamicCalculator {
             clampedTemp = T_SAT_MIN
         }
 
-        if clampedTemp > T_CRITICAL {
-            return try calculateSuperheated(with: clampedTemp, and: entropy)
-        } else {
-            if clampedTemp == T_CRITICAL {
-                // This was copied from Rust WASM code, not sure if it's invalid or...
-                // Probably better to just return nil
-                return PlotPoint(
-                    t: clampedTemp,
-                    p: -1.0,
-                    v: -1.0,
-                    u: -1.0,
-                    h: -1.0,
-                    s: entropy,
-                    x: -1.0
-                )
-            } else {
-                // get Saturated Region Line @ temperature
-                let saturatedRegionLine = SaturatedRegionLine(with: clampedTemp)
-
-                if entropy < saturatedRegionLine.s_f { // if s < s_f ... calculate compressed
-                    return calculateCompressed(with: saturatedRegionLine, and: entropy)
-                } else if entropy >= saturatedRegionLine.s_f && entropy <= saturatedRegionLine.s_g { // else if s >= s_f && entropy <= s_g ... calculate saturated
-                    return calculateSaturated(with: saturatedRegionLine, and: entropy)
-                } else { // else ... calculate superheated
-                    return try calculateSuperheated(with: clampedTemp, and: entropy)
-                }
-
+        if let saturatedRegionLine = SaturatedRegionLine(with: clampedTemp) {
+            if entropy < saturatedRegionLine.s_f { // if s < s_f ... calculate compressed
+                return calculateCompressed(with: saturatedRegionLine, and: entropy)
+            } else if entropy >= saturatedRegionLine.s_f && entropy <= saturatedRegionLine.s_g { // else if s >= s_f && entropy <= s_g ... calculate saturated
+                return calculateSaturated(with: saturatedRegionLine, and: entropy)
+            } else { // else ... calculate superheated
+                return try calculateSuperheated(with: clampedTemp, and: entropy)
             }
+        } else {
+            // if we don't have a SaturatedRegionLine, then we're in the superheated region...
+            return try calculateSuperheated(with: clampedTemp, and: entropy)
         }
     }
 
