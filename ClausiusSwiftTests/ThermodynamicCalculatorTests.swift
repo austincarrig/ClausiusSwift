@@ -23,6 +23,47 @@ class ThermodynamicCalculatorTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    /*         ---------
+     *        /        |
+     *       /    3    |
+     *      _5_        |
+     *   4 /   \       |
+     *    /  1  \   2  |
+     *   /_______\______
+     *
+     * 1 - Saturated Region
+     * 2 - Superheated Region, T < T_CRITICAL
+     * 3 - Superheated Region, T > T_CRITICAL
+     * 4 - Compressed Liquid Region
+     * 5 - Critical Point
+     *
+     */
+
+    let point1T = 200.0
+    let point1S = 4.2
+
+    let point2T = 250.0
+    let point2S = 8.24
+
+    let point3T = 523.59
+    let point3S = 7.26
+
+    let point4T = 314.34
+    let point4S = 3.25
+
+    func testPoint1() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: point1S,
+            and: point1T,
+            for: .Ts
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    /*
     func testTSReliability() throws {
 
         // sets the random seed, necessary to make this test repeatable
@@ -52,5 +93,6 @@ class ThermodynamicCalculatorTests: XCTestCase {
         }
 
     }
+    */
 
 }
