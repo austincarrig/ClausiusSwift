@@ -41,6 +41,18 @@ class SaturatedRegionLineTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testTempBottom() throws {
+        let saturatedLine = SaturatedRegionLine(with: 0.13)
+
+        XCTAssertNil(saturatedLine)
+    }
+
+    func testTempTop() throws {
+        let saturatedLine = SaturatedRegionLine(with: 373.9)
+
+        XCTAssertNil(saturatedLine)
+    }
+
     func testPressure() throws {
         XCTAssertLessThan(fabs(PRESSURE - sat_line!.p), PRESSURE_SIG_DIG)
     }

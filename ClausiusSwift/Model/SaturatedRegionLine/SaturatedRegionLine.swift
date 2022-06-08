@@ -20,7 +20,7 @@ struct SaturatedRegionLine {
 
     init?(with temperature: Double) {
 
-        if temperature >= SaturatedRegionLineConstants.TEMPERATURE.last! {
+        if temperature >= SaturatedRegionLineConstants.TEMPERATURE.last! || temperature <= SaturatedRegionLineConstants.TEMPERATURE.first! {
             return nil
         }
 
