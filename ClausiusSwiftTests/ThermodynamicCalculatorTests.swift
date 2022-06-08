@@ -51,6 +51,9 @@ class ThermodynamicCalculatorTests: XCTestCase {
     let point4T = 314.34
     let point4S = 3.25
 
+    let point5T = 373.9
+    let point5S = 4.532841
+
     func testPoint1() throws {
 
         let plotPoint = ThermodynamicCalculator.calculateProperties(
@@ -92,6 +95,18 @@ class ThermodynamicCalculatorTests: XCTestCase {
         let plotPoint = ThermodynamicCalculator.calculateProperties(
             with: point4S,
             and: point4T,
+            for: .Ts
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPoint5() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: point5S,
+            and: point5T,
             for: .Ts
         )
 
