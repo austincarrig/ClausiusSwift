@@ -54,7 +54,7 @@ class ThermodynamicCalculatorTests: XCTestCase {
     let point5T = 373.9
     let point5S = 4.532841
 
-    func testPoint1() throws {
+    func testPointTs1() throws {
 
         let plotPoint = ThermodynamicCalculator.calculateProperties(
             with: point1S,
@@ -66,7 +66,7 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     }
 
-    func testPoint2() throws {
+    func testPointTs2() throws {
 
         let plotPoint = ThermodynamicCalculator.calculateProperties(
             with: point2S,
@@ -78,7 +78,7 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     }
 
-    func testPoint3() throws {
+    func testPointTs3() throws {
 
         let plotPoint = ThermodynamicCalculator.calculateProperties(
             with: point3S,
@@ -90,7 +90,7 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     }
 
-    func testPoint4() throws {
+    func testPointTs4() throws {
 
         let plotPoint = ThermodynamicCalculator.calculateProperties(
             with: point4S,
@@ -102,7 +102,7 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     }
 
-    func testPoint5() throws {
+    func testPointTs5() throws {
 
         let plotPoint = ThermodynamicCalculator.calculateProperties(
             with: point5S,
