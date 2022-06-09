@@ -114,6 +114,30 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     }
 
+    func testPh() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: 0.0,
+            and: 0.0,
+            for: .Ph
+        )
+
+        XCTAssertNil(plotPoint)
+
+    }
+
+    func testPv() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: 0.0,
+            and: 0.0,
+            for: .Pv
+        )
+
+        XCTAssertNil(plotPoint)
+
+    }
+
     /*
     func testTSReliability() throws {
 
