@@ -13,7 +13,6 @@
 		495B9B00283AFB640018DAB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9AFF283AFB640018DAB8 /* AppDelegate.swift */; };
 		495B9B02283AFB640018DAB8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B01283AFB640018DAB8 /* SceneDelegate.swift */; };
 		495B9B04283AFB640018DAB8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B03283AFB640018DAB8 /* MainViewController.swift */; };
-		495B9B0C283AFB640018DAB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 495B9B0A283AFB640018DAB8 /* LaunchScreen.storyboard */; };
 		495B9B21283AFB640018DAB8 /* ClausiusSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B20283AFB640018DAB8 /* ClausiusSwiftUITests.swift */; };
 		495B9B23283AFB640018DAB8 /* ClausiusSwiftUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B22283AFB640018DAB8 /* ClausiusSwiftUITestsLaunchTests.swift */; };
 		495B9B34283B1FED0018DAB8 /* ThermodynamicCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B33283B1FED0018DAB8 /* ThermodynamicCalculator.swift */; };
@@ -70,7 +69,6 @@
 		495B9AFF283AFB640018DAB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		495B9B01283AFB640018DAB8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		495B9B03283AFB640018DAB8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		495B9B0B283AFB640018DAB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		495B9B0D283AFB640018DAB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		495B9B12283AFB640018DAB8 /* ClausiusSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClausiusSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		495B9B1C283AFB640018DAB8 /* ClausiusSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClausiusSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,13 +155,12 @@
 				495B9B2F283AFB6A0018DAB8 /* ClausiusSwift.entitlements */,
 				495B9AFF283AFB640018DAB8 /* AppDelegate.swift */,
 				495B9B01283AFB640018DAB8 /* SceneDelegate.swift */,
+				495B9B0D283AFB640018DAB8 /* Info.plist */,
 				49C77FFF28411CF00049F1B2 /* Common */,
 				495B9B31283AFC100018DAB8 /* Controller */,
 				4988352B284064F600A34A79 /* Images */,
 				495B9B32283AFDC40018DAB8 /* Model */,
 				498835362840664700A34A79 /* View */,
-				495B9B0A283AFB640018DAB8 /* LaunchScreen.storyboard */,
-				495B9B0D283AFB640018DAB8 /* Info.plist */,
 			);
 			path = ClausiusSwift;
 			sourceTree = "<group>";
@@ -403,7 +400,6 @@
 				498835342840656900A34A79 /* Water_pv_chart.png in Resources */,
 				4988352D2840653000A34A79 /* Assets.xcassets in Resources */,
 				498835322840656900A34A79 /* Water_ph_chart.png in Resources */,
-				495B9B0C283AFB640018DAB8 /* LaunchScreen.storyboard in Resources */,
 				498835352840656900A34A79 /* Water_ts_chart.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,17 +485,6 @@
 			targetProxy = 495B9B1D283AFB640018DAB8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		495B9B0A283AFB640018DAB8 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				495B9B0B283AFB640018DAB8 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		495B9B24283AFB640018DAB8 /* Debug */ = {
@@ -628,7 +613,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ClausiusSwift/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -658,7 +642,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ClausiusSwift/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
