@@ -9,9 +9,9 @@ struct H2OWagnerPrussConstants {
 
     static let extrap_max_density: Double = 2500.0;
 
-    static let T_c: Double   = 647.096;    // K
+    static let T_c: Double   = 647.096;    // Critical Temperature [Kelvin]
     static let rho_c: Double = 322.0;      // kg/m^3
-    static let P_c: Double   = 22.064;     // MPa
+    static let P_c: Double   = 22.064;     // Critical Pressure [MPa]
     static let R: Double     = 0.46151805; // kJ/kg/K Rm/M
 
     static let M: Double = 18.015268;  // g/mol
