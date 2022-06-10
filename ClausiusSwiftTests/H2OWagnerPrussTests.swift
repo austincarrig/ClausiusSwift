@@ -138,4 +138,21 @@ class H2OWagnerPrussTests: XCTestCase {
         XCTAssertLessThan(fabs(calc - SUPERHEATED_POINT_1_TAU), Double(Float.ulpOfOne))
     }
 
+    func testTemperatureVapourLiquid() {
+
+        let SATURATED_POINT_1_T: Double = 200.4938163846731 + ClausiusConstants.C_TO_K // C
+        let SATURATED_POINT_1_P: Double = 1.5710645 // MPa
+
+        let calc = H2OWagnerPruss.temperatureVapourLiquid(with: SATURATED_POINT_1_P)
+
+        XCTAssertNotNil(calc)
+
+        if let calc = calc {
+            XCTAssertLessThan(fabs(calc - SATURATED_POINT_1_T), Double.ulpOfOne)
+        }
+
+        //XCTAssertLessThan(fabs(calc - SATURATED_POINT_1_T), Double.ulpOfOne)
+
+    }
+
 }

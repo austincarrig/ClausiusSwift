@@ -69,7 +69,7 @@ struct H2OWagnerPruss {
             return rho2
         }
 
-        let p_sat = H2OWagnerPruss.pressure_vapor_liquid(temperature: temperature)
+        let p_sat = H2OWagnerPruss.pressureVapourLiquid(with: temperature)
 
         // Temperature below critical point pressure below vapor-liquid pressure
         if temperature <= H2OWagnerPrussConstants.T_c && pressure >= p_sat
@@ -280,23 +280,6 @@ struct H2OWagnerPruss {
         return density / H2OWagnerPrussConstants.rho_c
     }
 
-    static func pressure_vapor_liquid(temperature: Double) -> Double
-    {
-        let ALV1: Double =  -7.85951783
-        let ALV2: Double =   1.84408259
-        let ALV3: Double = -11.7866497
-        let ALV4: Double =  22.6807411
-        let ALV5: Double = -15.9618719
-        let ALV6: Double =   1.80122502
-
-        let theta = 1.0 - temperature / H2OWagnerPrussConstants.T_c
-
-        let p_vl = H2OWagnerPrussConstants.P_c * exp(H2OWagnerPrussConstants.T_c / temperature * (ALV1 * theta + ALV2 * pow(theta, 1.5) + ALV3 * pow(theta, 3.0)
-                                                                             + ALV4 * pow(theta, 3.5) + ALV5 * pow(theta, 4.0) + ALV6 * pow(theta, 7.5)))
-
-        return p_vl
-    }
-
     // Calcualte the ideal part of phi_0_tau with temp and density
     static func calculate_phi_0_tau(temperature: Double,
                                     density: Double) -> Double
@@ -348,6 +331,88 @@ struct H2OWagnerPruss {
         }
 
         return phi_r_tau
+    }
+
+    static func temperatureVapourLiquid(with pressure: Double) -> Double? {
+
+        let minT_K = 273.0
+        let maxT_K = 647.05
+
+        return findSide(
+            with: pressure,
+            minT: minT_K,
+            maxT: maxT_K
+        )
+    }
+
+    private static func findSide(with pressure: Double,
+                                 minT: Double,
+                                 maxT: Double) -> Double? {
+
+        let midT = (minT + maxT) / 2.0
+
+        let minP = pressureVapourLiquid(with: minT)
+        let midP = pressureVapourLiquid(with: midT)
+        let maxP = pressureVapourLiquid(with: maxT)
+
+        if pressure < minP || pressure > maxP {
+            return nil
+        }
+
+        let threshold = 1.0 / 10000000.0 // 0.1 Pa in MPa
+
+        if fabs(pressure - minP) < threshold {
+            return minT
+        }
+
+        if fabs(pressure - maxP) < threshold {
+            return maxT
+        }
+
+        if fabs(pressure - midP) < threshold {
+            return midT
+        }
+
+        if minP < pressure && pressure < midP {
+            return findSide(
+                with: pressure,
+                minT: minT,
+                maxT: midT)
+        }
+
+        if midP < pressure && pressure < maxP {
+            return findSide(
+                with: pressure,
+                minT: midT,
+                maxT: maxT
+            )
+        }
+
+        return nil
+
+    }
+
+    private static func pressureVapourLiquid(with temperature: Double) -> Double {
+        let aLV : [Double] = [
+            -7.85951783,
+             1.84408259,
+           -11.7866497,
+            22.6807411,
+           -15.9618719,
+             1.80122502,
+        ]
+
+        let theta : Double = 1.0 - temperature / H2OWagnerPrussConstants.T_c
+
+        let pLV : Double = H2OWagnerPrussConstants.P_c * exp(H2OWagnerPrussConstants.T_c / temperature *
+            (aLV[0] * theta +
+             aLV[1] * pow(theta,1.5) +
+             aLV[2] * pow(theta,3.0) +
+             aLV[3] * pow(theta,3.5) +
+             aLV[4] * pow(theta,4.0) +
+             aLV[5] * pow(theta,7.5)))
+
+        return pLV
     }
 
 }
