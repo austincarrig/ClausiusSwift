@@ -138,6 +138,19 @@ struct H2OWagnerPruss {
         return H2OWagnerPrussConstants.R * temperature + internal_energy + extra // kJ/kg
     }
 
+    static func calculate_entropy(temperature: Double,
+                                  density: Double) -> Double {
+        let tau       = calculate_tau(temperature: temperature)
+        let phi_0     = calculate_phi_0(temperature: temperature, density: density)
+        let phi_r     = calculate_phi_r(temperature: temperature, density: density)
+        let phi_0_tau = calculate_phi_0_tau(temperature: temperature, density: density)
+        let phi_r_tau = calculate_phi_r_tau(temperature: temperature, density: density)
+
+        let entropy = H2OWagnerPrussConstants.R * (tau * (phi_0_tau + phi_r_tau) - phi_0 - phi_r)
+
+        return entropy
+    }
+
     static func find_rho_with_estimated_density(temperature: Double,
                                                 pressure: Double,
                                                 density_estimate:Double) -> Double
@@ -280,7 +293,24 @@ struct H2OWagnerPruss {
         return density / H2OWagnerPrussConstants.rho_c
     }
 
-    // Calcualte the ideal part of phi_0_tau with temp and density
+    static func calculate_phi_0(temperature: Double,
+                                density: Double) -> Double
+    {
+        let tau = H2OWagnerPruss.calculate_tau(temperature: temperature)
+        let delta = calculate_delta(density: density)
+
+        let n_0 = H2OWagnerPrussConstants.n_0
+
+        var phi_0 = log(delta) + n_0[1] + n_0[2] * tau + n_0[3] * log(tau)
+
+        for i in 4...8 {
+            phi_0 += n_0[i] * log(1.0 - exp(-H2OWagnerPrussConstants.gamma_0[i] * tau))
+        }
+
+        return phi_0
+    }
+
+    // Calculate the ideal part of phi_0_tau with temp and density
     static func calculate_phi_0_tau(temperature: Double,
                                     density: Double) -> Double
     {
@@ -294,6 +324,33 @@ struct H2OWagnerPruss {
         }
 
         return phi_0_tau
+    }
+
+    static func calculate_phi_r(temperature: Double,
+                                density: Double) -> Double
+    {
+        var phi_r = 0.0
+
+        let tau = H2OWagnerPruss.calculate_tau(temperature: temperature)
+        let delta = H2OWagnerPruss.calculate_delta(density: density)
+
+        for i in 1...7 {
+            phi_r += H2OWagnerPrussConstants.n[i] * pow(delta, H2OWagnerPrussConstants.d[i]) * pow(tau, H2OWagnerPrussConstants.t[i])
+        }
+        for i in 8...51 {
+            phi_r += H2OWagnerPrussConstants.n[i] * pow(delta, H2OWagnerPrussConstants.d[i]) * pow(tau, H2OWagnerPrussConstants.t[i]) * exp(-pow(delta, H2OWagnerPrussConstants.c[i]))
+        }
+        for i in 52...54 {
+            phi_r += H2OWagnerPrussConstants.n[i] * pow(delta, H2OWagnerPrussConstants.d[i]) * pow(tau, H2OWagnerPrussConstants.t[i]) * exp(-H2OWagnerPrussConstants.alpha[i] * pow(delta - H2OWagnerPrussConstants.epsilon[i], 2.0) - H2OWagnerPrussConstants.beta[i] * pow(tau - H2OWagnerPrussConstants.gamma[i], 2.0))
+        }
+        for i in 55...56 {
+            let theta = (1.0 - tau) + H2OWagnerPrussConstants.A[i] * pow((delta - 1.0) * (delta - 1.0), 1.0/(2.0 * H2OWagnerPrussConstants.beta[i]))
+            let gdelta = theta * theta + H2OWagnerPrussConstants.B[i] * pow((delta - 1.0) * (delta - 1.0), H2OWagnerPrussConstants.a[i])
+            let psi = exp(-H2OWagnerPrussConstants.C[i] * (delta - 1.0) * (delta - 1.0) - H2OWagnerPrussConstants.D[i] * (tau - 1.0) * (tau - 1.0))
+            phi_r += H2OWagnerPrussConstants.n[i] * pow(gdelta, H2OWagnerPrussConstants.b[i]) * delta * psi
+        }
+
+        return phi_r
     }
 
     // Calculate the residual part of phi_r_tau
