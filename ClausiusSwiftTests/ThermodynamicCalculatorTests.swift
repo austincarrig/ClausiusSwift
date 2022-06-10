@@ -40,18 +40,28 @@ class ThermodynamicCalculatorTests: XCTestCase {
      */
 
     let point1T = 200.0
+    let point1P = 1554.672
+    let point1H = 1736.7981385534822
     let point1S = 4.2
 
     let point2T = 250.0
+    let point2P = 64.50704225395404
+    let point2H = 2975.6753384544436
     let point2S = 8.24
 
     let point3T = 523.59
+    let point3P = 3290.5672268868357
+    let point3H = 3507.264790490782
     let point3S = 7.26
 
     let point4T = 314.34
+    let point4P = 10462.659139999996
+    let point4H = 1420.0
     let point4S = 3.25
 
     let point5T = 373.9
+    let point5P = 21366.04797723749
+    let point5H = 2439.993624552725
     let point5S = 4.532841
 
     func testPointTs1() throws {
@@ -114,15 +124,63 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     }
 
-    func testPh() throws {
+    func testPointPh1() throws {
 
         let plotPoint = ThermodynamicCalculator.calculateProperties(
-            with: 0.0,
-            and: 0.0,
+            with: point1H,
+            and: point1P,
             for: .Ph
         )
 
-        XCTAssertNil(plotPoint)
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPointPh2() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: point2H,
+            and: point2P,
+            for: .Ph
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPointPh3() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: point3H,
+            and: point3P,
+            for: .Ph
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPointPh4() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: point4H,
+            and: point4P,
+            for: .Ph
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPointPh5() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: point5H,
+            and: point5P,
+            for: .Ph
+        )
+
+        XCTAssertNotNil(plotPoint)
 
     }
 
