@@ -156,7 +156,10 @@ class ThermodynamicCalculator {
         )
 
         // calculate entropy
-        let entropy = -1.0
+        let entropy = H2OWagnerPruss.calculate_entropy(
+            temperature: temperatureKelvin,
+            density: density
+        )
 
         // return PlotPoint
         return PlotPoint(
