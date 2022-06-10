@@ -134,6 +134,8 @@ class ThermodynamicCalculator {
                                                _    temperature: Double,
                                                _    enthalpy: Double) -> PlotPoint? {
 
+        // THE TEMPERATURE ABOVE IS DEFINITELY WRONG, IT'S THE VL TEMPERATURE, INVALID IN SUPERHEATED REGION
+
         // calculate temperature K
         let temperatureKelvin = temperature + ClausiusConstants.C_TO_K // temperature (C -> K)
 
