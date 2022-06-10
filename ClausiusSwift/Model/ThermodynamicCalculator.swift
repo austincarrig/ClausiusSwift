@@ -32,8 +32,11 @@ class ThermodynamicCalculator {
                 print("Not supported yet")
                 return nil
             case .Ph:
-                print("Not supported yet")
-                return nil
+                do {
+                    return try calculatePH(with: yValue, and: xValue)
+                } catch {
+                    return nil
+                }
         }
     }
 
@@ -57,6 +60,31 @@ class ThermodynamicCalculator {
             // if we don't have a SaturatedRegionLine, then we're in the superheated region...
             return try calculateSuperheated(with: clampedTemp, and: entropy)
         }
+    }
+
+    private static func calculatePH(with pressure: Double,
+                                    and  enthalpy: Double) throws -> PlotPoint? {
+        let pressureMPa = pressure / 1000.0
+
+        guard let temperatureK = H2OWagnerPruss.temperatureVapourLiquid(with: pressureMPa) else {
+            return nil
+        }
+
+        let temperatureC = temperatureK - ClausiusConstants.C_TO_K
+
+        if let saturatedRegionLine = SaturatedRegionLine(with: temperatureC) {
+            if enthalpy < saturatedRegionLine.h_f {
+
+            } else if enthalpy >= saturatedRegionLine.h_f && enthalpy <= saturatedRegionLine.h_g {
+
+            } else {
+
+            }
+        } else {
+
+        }
+
+        return nil
     }
 
     private static func calculateSuperheated(with temperature: Double,
