@@ -94,6 +94,15 @@ class H2OWagnerPrussTests: XCTestCase {
         XCTAssertLessThan(fabs(calc - SUPERHEATED_POINT_1_ENTHALPY), 0.0001)
     }
 
+    func testEntropy() {
+        let SUPERHEATED_POINT_1_ENTROPY: Double = 7.316
+        let calc = H2OWagnerPruss.calculate_entropy(
+            temperature: SUPERHEATED_POINT_1_T,
+            density: SUPERHEATED_POINT_1_D
+        )
+        XCTAssertLessThan(fabs(calc - SUPERHEATED_POINT_1_ENTROPY), 0.001)
+    }
+
     func testPhi0Tau() {
         let SUPERHEATED_POINT_1_PHI_0_TAU: Double = 10.887587170062671
         let calc = H2OWagnerPruss.calculate_phi_0_tau(
