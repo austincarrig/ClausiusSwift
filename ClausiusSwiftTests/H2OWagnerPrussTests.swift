@@ -151,8 +151,6 @@ class H2OWagnerPrussTests: XCTestCase {
             XCTAssertLessThan(fabs(calc - SATURATED_POINT_1_T), Double.ulpOfOne)
         }
 
-        //XCTAssertLessThan(fabs(calc - SATURATED_POINT_1_T), Double.ulpOfOne)
-
     }
 
 }
