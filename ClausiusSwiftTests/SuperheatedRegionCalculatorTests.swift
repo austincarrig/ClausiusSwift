@@ -48,7 +48,7 @@ class SuperheatedRegionCalculatorTests: XCTestCase {
         let SUPERHEATED_POINT_1_P: Double = 3796.165343768067 // kPa
 
         do {
-            let calculatedValue = try SuperheatedRegionCalculator.calculatePressure(
+            let calculatedValue = try SuperheatedRegionCalculator.calculateTertiaryValue(
                 with: SUPERHEATED_POINT_1_T,
                 and: SUPERHEATED_POINT_1_S,
                 for: .Ts

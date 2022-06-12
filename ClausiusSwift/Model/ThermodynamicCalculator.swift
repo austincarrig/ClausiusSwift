@@ -32,7 +32,11 @@ class ThermodynamicCalculator {
                 print("Not supported yet")
                 return nil
             case .Ph:
-                return calculatePh(with: yValue, and: xValue)
+                do {
+                    return try calculatePh(with: yValue, and: xValue)
+                } catch {
+                    return nil
+                }
         }
     }
 
@@ -59,7 +63,7 @@ class ThermodynamicCalculator {
     }
 
     private static func calculatePh(with pressure: Double,
-                                    and  enthalpy: Double) -> PlotPoint? {
+                                    and  enthalpy: Double) throws -> PlotPoint? {
         let pressureMPa = pressure / 1000.0
 
         guard let temperatureK = H2OWagnerPruss.temperatureVapourLiquid(with: pressureMPa) else {
@@ -74,10 +78,10 @@ class ThermodynamicCalculator {
             } else if enthalpy >= saturatedRegionLine.h_f && enthalpy <= saturatedRegionLine.h_g { // calculate saturated
                 return calculateSaturatedPh(with: saturatedRegionLine, and: enthalpy)
             } else { // calculate superheated
-                return calculateSuperheatedPh(with: pressure, temperatureC, enthalpy)
+                return try calculateSuperheatedPh(with: pressure, and: enthalpy)
             }
         } else {
-            return calculateSuperheatedPh(with: pressure, temperatureC, enthalpy)
+            return try calculateSuperheatedPh(with: pressure, and: enthalpy)
         }
     }
 
@@ -85,7 +89,7 @@ class ThermodynamicCalculator {
                                                and  entropy: Double) throws -> PlotPoint? {
 
         // calculate pressure (SuperheatedRegionCalculator)
-        let pressure = try SuperheatedRegionCalculator.calculatePressure(
+        let pressure = try SuperheatedRegionCalculator.calculateTertiaryValue(
             with: temperature,
             and: entropy,
             for: .Ts
@@ -132,10 +136,14 @@ class ThermodynamicCalculator {
     }
 
     private static func calculateSuperheatedPh(with pressure: Double,
-                                               _    temperature: Double,
-                                               _    enthalpy: Double) -> PlotPoint? {
+                                               and  enthalpy: Double) throws -> PlotPoint? {
 
-        // THE TEMPERATURE ABOVE IS DEFINITELY WRONG, IT'S THE VL TEMPERATURE, INVALID IN SUPERHEATED REGION
+        // calculate temperature
+        let temperature = try SuperheatedRegionCalculator.calculateTertiaryValue(
+            with: pressure,
+            and: enthalpy,
+            for: .Ph
+        )
 
         // calculate temperature K
         let temperatureKelvin = temperature + ClausiusConstants.C_TO_K // temperature (C -> K)

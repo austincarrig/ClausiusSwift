@@ -6,9 +6,9 @@
 //
 
 struct SuperheatedRegionCalculator {
-    static func calculatePressure(with primaryValue: Double,
-                                  and  secondaryValue: Double,
-                                  for  chartType: ChartType) throws -> Double {
+    static func calculateTertiaryValue(with primaryValue: Double,
+                                       and  secondaryValue: Double,
+                                       for  chartType: ChartType) throws -> Double {
         switch chartType {
             case .Ts:
                 return try Interpolator.interpolateY2D(
