@@ -87,7 +87,8 @@ class ThermodynamicCalculator {
         // calculate pressure (SuperheatedRegionCalculator)
         let pressure = try SuperheatedRegionCalculator.calculatePressure(
             with: temperature,
-            and: entropy
+            and: entropy,
+            for: .Ts
         )
 
         // calculate temperature K

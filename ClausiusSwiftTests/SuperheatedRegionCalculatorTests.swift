@@ -19,19 +19,19 @@ class SuperheatedRegionCalculatorTests: XCTestCase {
     }
 
     func testClampHigh() {
-        let maxValue = SuperheatedRegionCalculatorConstants.TEMPERATURE_T_S.last!
+        let maxValue = SuperheatedRegionCalculatorConstantsTS.TEMPERATURE.last!
         let clampedValue = SuperheatedRegionCalculator.clamp(temperature: maxValue + 1.0)
         XCTAssertEqual(clampedValue, maxValue)
     }
 
     func testClampLow() {
-        let minValue = SuperheatedRegionCalculatorConstants.TEMPERATURE_T_S.first!
+        let minValue = SuperheatedRegionCalculatorConstantsTS.TEMPERATURE.first!
         let clampedValue = SuperheatedRegionCalculator.clamp(temperature: minValue - 1.0)
         XCTAssertEqual(clampedValue, minValue)
     }
 
     func testClampMiddle() {
-        let midValue = SuperheatedRegionCalculatorConstants.TEMPERATURE_T_S[SuperheatedRegionCalculatorConstants.TEMPERATURE_T_S.count / 2]
+        let midValue = SuperheatedRegionCalculatorConstantsTS.TEMPERATURE[SuperheatedRegionCalculatorConstantsTS.TEMPERATURE.count / 2]
         let clampedValue = SuperheatedRegionCalculator.clamp(temperature: midValue)
         XCTAssertEqual(clampedValue, midValue)
     }
@@ -50,7 +50,8 @@ class SuperheatedRegionCalculatorTests: XCTestCase {
         do {
             let calculatedValue = try SuperheatedRegionCalculator.calculatePressure(
                 with: SUPERHEATED_POINT_1_T,
-                and: SUPERHEATED_POINT_1_S
+                and: SUPERHEATED_POINT_1_S,
+                for: .Ts
             )
 
             XCTAssertLessThan(fabs(calculatedValue - SUPERHEATED_POINT_1_P), 25.0)
