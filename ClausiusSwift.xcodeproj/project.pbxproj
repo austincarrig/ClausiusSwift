@@ -22,7 +22,7 @@
 		495B9B3E283C18820018DAB8 /* Interpolator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B3D283C18820018DAB8 /* Interpolator.swift */; };
 		495B9B40283C1E620018DAB8 /* SaturatedRegionLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B3F283C1E620018DAB8 /* SaturatedRegionLineTests.swift */; };
 		495B9B43283C21C60018DAB8 /* SuperheatedRegionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B42283C21C60018DAB8 /* SuperheatedRegionCalculator.swift */; };
-		495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift */; };
+		495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstantsTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstantsTS.swift */; };
 		495B9B47283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495B9B46283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift */; };
 		4988352D2840653000A34A79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4988352C2840653000A34A79 /* Assets.xcassets */; };
 		498835322840656900A34A79 /* Water_ph_chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 4988352E2840656900A34A79 /* Water_ph_chart.png */; };
@@ -82,7 +82,7 @@
 		495B9B3D283C18820018DAB8 /* Interpolator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolator.swift; sourceTree = "<group>"; };
 		495B9B3F283C1E620018DAB8 /* SaturatedRegionLineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaturatedRegionLineTests.swift; sourceTree = "<group>"; };
 		495B9B42283C21C60018DAB8 /* SuperheatedRegionCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculator.swift; sourceTree = "<group>"; };
-		495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculatorConstants.swift; sourceTree = "<group>"; };
+		495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstantsTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculatorConstantsTS.swift; sourceTree = "<group>"; };
 		495B9B46283C23460018DAB8 /* SuperheatedRegionCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculatorTests.swift; sourceTree = "<group>"; };
 		4988352C2840653000A34A79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4988352E2840656900A34A79 /* Water_ph_chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water_ph_chart.png; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 		495B9B41283C21A60018DAB8 /* SuperheatedRegionCalculator */ = {
 			isa = PBXGroup;
 			children = (
-				495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift */,
+				495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstantsTS.swift */,
 				495B9B42283C21C60018DAB8 /* SuperheatedRegionCalculator.swift */,
 			);
 			path = SuperheatedRegionCalculator;
@@ -435,7 +435,7 @@
 				49BC3BD62849A1F000402D18 /* DisplayView.swift in Sources */,
 				495B9B00283AFB640018DAB8 /* AppDelegate.swift in Sources */,
 				495B9B34283B1FED0018DAB8 /* ThermodynamicCalculator.swift in Sources */,
-				495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstants.swift in Sources */,
+				495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstantsTS.swift in Sources */,
 				49F9900528481FF1003107FE /* ClausiusColor.swift in Sources */,
 				49BC3BD42849500C00402D18 /* DisplayViewRow.swift in Sources */,
 				498F0E9B284BFBD80007EC86 /* SpaceController.swift in Sources */,

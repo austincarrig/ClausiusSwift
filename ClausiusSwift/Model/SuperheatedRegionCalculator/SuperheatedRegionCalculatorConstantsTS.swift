@@ -5,8 +5,8 @@
 //  Created by Austin Carrig on 5/23/22.
 //
 
-struct SuperheatedRegionCalculatorConstants {
-    static let PRESSURE_T_S: [Double] = [
+struct SuperheatedRegionCalculatorConstantsTS {
+    static let PRESSURE: [Double] = [
         0.45,
         0.617,
         1.0,
@@ -68,7 +68,7 @@ struct SuperheatedRegionCalculatorConstants {
         100000.0
     ]
 
-    static let TEMPERATURE_T_S: [Double] = [
+    static let TEMPERATURE: [Double] = [
         1.0,
         2.0,
         3.0,
@@ -778,7 +778,7 @@ struct SuperheatedRegionCalculatorConstants {
     // bounds of the T-s chart. Without these added values, the reverse interpolation
     // function to get P from T and s crashes in the bottom-right portion of the T-s
     // diagram (high s, low T)
-    static let ENTROPY_T_S: [[Double]] = [
+    static let ENTROPY: [[Double]] = [
         [ 9.304, 9.158, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
         [ 9.311, 9.165, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
         [ 9.318, 9.172, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
