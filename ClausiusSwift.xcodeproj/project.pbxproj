@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4906A5F52855918100588B21 /* SuperheatedRegionCalculatorConstantsPH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906A5F42855918100588B21 /* SuperheatedRegionCalculatorConstantsPH.swift */; };
+		4906A5F728559B8C00588B21 /* SuperheatedRegionCalculatorConstantsPV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906A5F628559B8C00588B21 /* SuperheatedRegionCalculatorConstantsPV.swift */; };
 		4938924F283EBF6E0038D304 /* H2OWagnerPrussTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938924E283EBF6E0038D304 /* H2OWagnerPrussTests.swift */; };
 		493EC8D7283EF7E5004C74C3 /* ClausiusConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493EC8D6283EF7E5004C74C3 /* ClausiusConstants.swift */; };
 		493EC8D9283EF966004C74C3 /* ThermodynamicCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493EC8D8283EF966004C74C3 /* ThermodynamicCalculatorTests.swift */; };
@@ -62,6 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4906A5F42855918100588B21 /* SuperheatedRegionCalculatorConstantsPH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculatorConstantsPH.swift; sourceTree = "<group>"; };
+		4906A5F628559B8C00588B21 /* SuperheatedRegionCalculatorConstantsPV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheatedRegionCalculatorConstantsPV.swift; sourceTree = "<group>"; };
 		4938924E283EBF6E0038D304 /* H2OWagnerPrussTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPrussTests.swift; sourceTree = "<group>"; };
 		493EC8D6283EF7E5004C74C3 /* ClausiusConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusConstants.swift; sourceTree = "<group>"; };
 		493EC8D8283EF966004C74C3 /* ThermodynamicCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermodynamicCalculatorTests.swift; sourceTree = "<group>"; };
@@ -231,6 +235,8 @@
 			children = (
 				495B9B44283C21D20018DAB8 /* SuperheatedRegionCalculatorConstantsTS.swift */,
 				495B9B42283C21C60018DAB8 /* SuperheatedRegionCalculator.swift */,
+				4906A5F42855918100588B21 /* SuperheatedRegionCalculatorConstantsPH.swift */,
+				4906A5F628559B8C00588B21 /* SuperheatedRegionCalculatorConstantsPV.swift */,
 			);
 			path = SuperheatedRegionCalculator;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 				495B9B34283B1FED0018DAB8 /* ThermodynamicCalculator.swift in Sources */,
 				495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstantsTS.swift in Sources */,
 				49F9900528481FF1003107FE /* ClausiusColor.swift in Sources */,
+				4906A5F728559B8C00588B21 /* SuperheatedRegionCalculatorConstantsPV.swift in Sources */,
 				49BC3BD42849500C00402D18 /* DisplayViewRow.swift in Sources */,
 				498F0E9B284BFBD80007EC86 /* SpaceController.swift in Sources */,
 				495B9B02283AFB640018DAB8 /* SceneDelegate.swift in Sources */,
@@ -445,6 +452,7 @@
 				495B9B43283C21C60018DAB8 /* SuperheatedRegionCalculator.swift in Sources */,
 				495B9B39283C15880018DAB8 /* SaturatedRegionLineConstants.swift in Sources */,
 				498B06E9283DB99700D33E52 /* H2OWagnerPruss.swift in Sources */,
+				4906A5F52855918100588B21 /* SuperheatedRegionCalculatorConstantsPH.swift in Sources */,
 				49C7800828413A100049F1B2 /* ChartLines.swift in Sources */,
 				49C7800128411D090049F1B2 /* CommonEnumerations.swift in Sources */,
 				498B06EB283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift in Sources */,
