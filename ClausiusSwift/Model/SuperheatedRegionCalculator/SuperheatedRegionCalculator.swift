@@ -5,9 +5,6 @@
 //  Created by Austin Carrig on 5/23/22.
 //
 
-import Foundation
-
-
 struct SuperheatedRegionCalculator {
     static func calculatePressure(with temperature: Double, and entropy: Double) throws -> Double {
         return try Interpolator.interpolateY2D(
