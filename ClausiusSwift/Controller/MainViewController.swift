@@ -38,16 +38,40 @@ class MainViewController: UIViewController {
     // for displaying calculated thermodynamic values
     var displayView = DisplayView(frame: CGRect.zero)
 
+    var tsButton = UIButton(frame: CGRect.zero)
+
+    var pvButton = UIButton(frame: CGRect.zero)
+
+    var phButton = UIButton(frame: CGRect.zero)
+
     // MARK: - VC Lifecycle
 
     override func viewDidLoad() {
 
         super.viewDidLoad()
 
+        // use temporarily while we work on other features
+        spaceController.enableFineTuning = false
+
         view.backgroundColor = .white
 
         view.addSubview(locationIndicatorImageView)
         view.addSubview(displayView)
+        view.addSubview(tsButton)
+        view.addSubview(pvButton)
+        view.addSubview(phButton)
+
+        tsButton.setTitle("T-s", for: .normal)
+        tsButton.addTarget(self, action: #selector(pressTsButton), for: .touchUpInside)
+        tsButton.setTitleColor(.clausiusOrange, for: .normal)
+
+        pvButton.setTitle("P-v", for: .normal)
+        pvButton.addTarget(self, action: #selector(pressPvButton), for: .touchUpInside)
+        pvButton.setTitleColor(.clausiusOrange, for: .normal)
+
+        phButton.setTitle("P-h", for: .normal)
+        phButton.addTarget(self, action: #selector(pressPhButton), for: .touchUpInside)
+        phButton.setTitleColor(.clausiusOrange, for: .normal)
 
         locationIndicatorImageView.delegate = self
 
@@ -56,11 +80,122 @@ class MainViewController: UIViewController {
             make.edges.equalTo(view)
         }
 
+        alignViewsLeft()
+
+    }
+
+    @objc func pressTsButton() {
+
+        if chart.displayOrientation! == .right {
+            alignViewsLeft()
+        }
+
+        chart.updateChart(with: .Ts)
+
+        locationIndicatorImageView.removeIndicators()
+
+        do {
+            try locationIndicatorImageView.changeImage(to: .Ts)
+        } catch {
+            print("Error thrown, unable to change image")
+        }
+
+    }
+
+    @objc func pressPvButton() {
+
+        if chart.displayOrientation! == .left {
+            alignViewsRight()
+        }
+
+        chart.updateChart(with: .Pv)
+
+        locationIndicatorImageView.removeIndicators()
+
+        do {
+            try locationIndicatorImageView.changeImage(to: .Pv)
+        } catch {
+            print("Error thrown, unable to change image")
+        }
+
+    }
+
+    @objc func pressPhButton() {
+
+        if chart.displayOrientation! == .right {
+            alignViewsLeft()
+        }
+
+        chart.updateChart(with: .Ph)
+
+        locationIndicatorImageView.removeIndicators()
+
+        do {
+            try locationIndicatorImageView.changeImage(to: .Ph)
+        } catch {
+            print("Error thrown, unable to change image")
+        }
+
+    }
+
+    func alignViewsLeft() {
+
+        displayView.snp.removeConstraints()
+        tsButton.snp.removeConstraints()
+        pvButton.snp.removeConstraints()
+        phButton.snp.removeConstraints()
+
         displayView.snp.makeConstraints { make in
             make.height.equalTo(340.0)
             make.width.equalTo(190.0)
             make.top.equalToSuperview().offset(20.0)
             make.left.equalToSuperview().offset(40.0)
+        }
+
+        tsButton.snp.makeConstraints { make in
+            make.left.equalTo(displayView.snp.right).offset(20.0)
+            make.top.equalTo(displayView)
+        }
+
+        pvButton.snp.makeConstraints { make in
+            make.left.equalTo(displayView.snp.right).offset(20.0)
+            make.top.equalTo(tsButton.snp.bottom)
+        }
+
+        phButton.snp.makeConstraints { make in
+            make.left.equalTo(displayView.snp.right).offset(20.0)
+            make.top.equalTo(pvButton.snp.bottom)
+        }
+
+    }
+
+    func alignViewsRight() {
+
+        displayView.snp.removeConstraints()
+        tsButton.snp.removeConstraints()
+        pvButton.snp.removeConstraints()
+        phButton.snp.removeConstraints()
+
+        displayView.snp.makeConstraints { make in
+            make.height.equalTo(340.0)
+            make.width.equalTo(190.0)
+            make.top.equalToSuperview().offset(20.0)
+            make.right.equalToSuperview().offset(-40.0)
+        }
+
+        tsButton.snp.makeConstraints { make in
+            make.right.equalTo(displayView.snp.left).offset(-20.0)
+            make.top.equalTo(displayView)
+        }
+
+        pvButton.snp.makeConstraints { make in
+            make.right.equalTo(displayView.snp.left).offset(-20.0)
+            make.top.equalTo(tsButton.snp.bottom)
+        }
+
+        phButton.snp.makeConstraints { make in
+            make.right.equalTo(displayView.snp.left).offset(-20.0)
+            make.top.equalTo(pvButton.snp.bottom)
         }
 
     }
@@ -84,10 +219,6 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         // add large indicator at point to locationView
         locationView.drawLargeIndicator(at: clippedPoint)
-
-        // update spaceController
-
-        // reset fine-tuning flag (should probably move this to a resetFlagsAndInds() function...)
 
         touchDidRegister(at: clippedPoint, in: locationView)
 
@@ -117,7 +248,7 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
     func touchDidEnd(at location: CGPoint, in locationView: LocationIndicatorImageView) {
 
         // add small indicator to locationView
-        locationView.drawSmallIndicator(at: lastTouchLocation!)
+        locationView.drawSmallIndicator(at: lastTouchLocation ?? CGPoint(x: -20.0, y: -20.0))
 
         // reset spaceController
         spaceController.reset()
@@ -127,6 +258,7 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
     func clipToChartBoundary(point: CGPoint,
                              width: CGFloat,
                              height: CGFloat) -> CGPoint {
+
         let yRatio = max(point.y, 0.0) / height
         let xRatio = chart.imageBoundaryLine![Int(floor(yRatio * CGFloat(chart.imageBoundaryLine!.count)))]
 
@@ -141,23 +273,48 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         let x = xRatio * width + adjustment
 
-        if point.x > x {
+        var condition = false
+
+        switch chart.displayOrientation! {
+            case .right:
+                condition = point.x < x
+            case .left:
+                condition = point.x > x
+        }
+
+        if condition {
             return point
         } else {
             return CGPoint(x: x, y: point.y)
         }
+
     }
 
     func touchDidRegister(at location: CGPoint,
                           in locationView: LocationIndicatorImageView) {
 
         if let xAxis = chart.xAxis, let yAxis = chart.yAxis {
-            let xScale = (xAxis.max - xAxis.min) / locationView.bounds.width
-            let yScale = (yAxis.max - yAxis.min) / locationView.bounds.height
 
-            let xValue = xAxis.min + xScale * location.x
+            var xValue = 0.0, yValue = 0.0
+
+            switch xAxis.scaleType {
+                case .linear:
+                    let xScale = (xAxis.max - xAxis.min) / locationView.bounds.width
+                    xValue = xAxis.min + xScale * location.x
+                case .log:
+                    let xScale = (log10(xAxis.max) - log10(xAxis.min)) / locationView.bounds.width
+                    xValue = pow(10.0, log10(xAxis.min) + xScale * location.x)
+            }
+
             // y on iOS screen and y on graph point in opposite directions, hence height - y
-            let yValue = yAxis.min + yScale * (locationView.bounds.height - location.y)
+            switch yAxis.scaleType {
+                case .linear:
+                    let yScale = (yAxis.max - yAxis.min) / locationView.bounds.height
+                    yValue = yAxis.min + yScale * (locationView.bounds.height - location.y)
+                case .log:
+                    let yScale = (log10(yAxis.max) - log10(yAxis.min)) / locationView.bounds.height
+                    yValue = pow(10.0, log10(yAxis.min) + yScale * (locationView.bounds.height - location.y))
+            }
 
             let plotPoint = ThermodynamicCalculator.calculateProperties(
                 with: xValue,
