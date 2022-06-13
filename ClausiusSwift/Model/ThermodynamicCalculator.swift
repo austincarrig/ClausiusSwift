@@ -66,13 +66,12 @@ class ThermodynamicCalculator {
                                     and  enthalpy: Double) throws -> PlotPoint? {
         let pressureMPa = pressure / 1000.0
 
-        guard let temperatureK = H2OWagnerPruss.temperatureVapourLiquid(with: pressureMPa) else {
-            return nil
-        }
-
-        let temperatureC = temperatureK - ClausiusConstants.C_TO_K
-
-        if let saturatedRegionLine = SaturatedRegionLine(with: temperatureC) {
+        if let temperatureK = H2OWagnerPruss.temperatureVapourLiquid(with: pressureMPa) {
+            let temperatureC = temperatureK - ClausiusConstants.C_TO_K
+            guard let saturatedRegionLine = SaturatedRegionLine(with: temperatureC) else {
+                print("Probably should not hit this condition")
+                return nil
+            }
             if enthalpy < saturatedRegionLine.h_f { // calculate compressed
                 return calculateCompressed(with: saturatedRegionLine)
             } else if enthalpy >= saturatedRegionLine.h_f && enthalpy <= saturatedRegionLine.h_g { // calculate saturated
