@@ -29,8 +29,11 @@ class ThermodynamicCalculator {
                     return nil
                 }
             case .Pv:
-                print("Not supported yet")
-                return nil
+                do {
+                    return try calculatePv(with: yValue, and: xValue)
+                } catch {
+                    return nil
+                }
             case .Ph:
                 do {
                     return try calculatePh(with: yValue, and: xValue)
@@ -62,16 +65,44 @@ class ThermodynamicCalculator {
         }
     }
 
+    private static func calculatePv(with pressure: Double,
+                                    and  specificVolume: Double) throws -> PlotPoint? {
+        let pressureMPa = pressure / 1000.0
+
+        if let temperatureK = H2OWagnerPruss.temperatureVapourLiquid(with: pressureMPa) {
+
+            let temperatureC = temperatureK - ClausiusConstants.C_TO_K
+
+            guard let saturatedRegionLine = SaturatedRegionLine(with: temperatureC) else {
+                print("Probably should not hit this condition")
+                return nil
+            }
+
+            if specificVolume < saturatedRegionLine.v_f { // calculate compressed
+                return calculateCompressed(with: saturatedRegionLine)
+            } else if specificVolume >= saturatedRegionLine.v_f && specificVolume <= saturatedRegionLine.v_g { // calculate saturated
+                return calculateSaturatedPv(with: saturatedRegionLine, and: specificVolume)
+            } else { // calculate superheated
+                return try calculateSuperheatedPv(with: pressure, and: specificVolume)
+            }
+        } else {
+            return try calculateSuperheatedPv(with: pressure, and: specificVolume)
+        }
+    }
+
     private static func calculatePh(with pressure: Double,
                                     and  enthalpy: Double) throws -> PlotPoint? {
         let pressureMPa = pressure / 1000.0
 
         if let temperatureK = H2OWagnerPruss.temperatureVapourLiquid(with: pressureMPa) {
+
             let temperatureC = temperatureK - ClausiusConstants.C_TO_K
+
             guard let saturatedRegionLine = SaturatedRegionLine(with: temperatureC) else {
                 print("Probably should not hit this condition")
                 return nil
             }
+
             if enthalpy < saturatedRegionLine.h_f { // calculate compressed
                 return calculateCompressed(with: saturatedRegionLine)
             } else if enthalpy >= saturatedRegionLine.h_f && enthalpy <= saturatedRegionLine.h_g { // calculate saturated
@@ -120,6 +151,53 @@ class ThermodynamicCalculator {
             temperature: temperatureKelvin,
             density: density,
             internal_energy: internalEnergy
+        )
+
+        // return PlotPoint
+        return PlotPoint(
+            t: temperature,
+            p: pressure,
+            v: specificVolume,
+            u: internalEnergy,
+            h: enthalpy,
+            s: entropy,
+            x: -1.0
+        )
+    }
+
+    private static func calculateSuperheatedPv(with pressure: Double,
+                                               and  specificVolume: Double) throws -> PlotPoint? {
+
+        // calculate temperature
+        let temperature = try SuperheatedRegionCalculator.calculateTertiaryValue(
+            with: pressure,
+            and: specificVolume,
+            for: .Pv
+        )
+
+        // calculate temperature K
+        let temperatureKelvin = temperature + ClausiusConstants.C_TO_K // temperature (C -> K)
+
+        // calculate density
+        let density = 1.0 / specificVolume
+
+        // calculate internal energy (WagnerPruss)
+        let internalEnergy = H2OWagnerPruss.calculate_internal_energy(
+            temperature: temperatureKelvin,
+            density: density
+        )
+
+        // calculate enthalpy (WagnerPruss)
+        let enthalpy = H2OWagnerPruss.calculate_enthalpy_with_u(
+            temperature: temperatureKelvin,
+            density: density,
+            internal_energy: internalEnergy
+        )
+
+        // calculate entropy
+        let entropy = H2OWagnerPruss.calculate_entropy(
+            temperature: temperatureKelvin,
+            density: density
         )
 
         // return PlotPoint
@@ -198,6 +276,16 @@ class ThermodynamicCalculator {
     private static func calculateSaturatedTs(with saturatedRegionLine: SaturatedRegionLine,
                                              and  entropy: Double) -> PlotPoint? {
         let quality = (entropy - saturatedRegionLine.s_f) / (saturatedRegionLine.s_g - saturatedRegionLine.s_f)
+
+        return calculateSaturated(
+            with: saturatedRegionLine,
+            and: quality
+        )
+    }
+
+    private static func calculateSaturatedPv(with saturatedRegionLine: SaturatedRegionLine,
+                                             and  specificVolume: Double) -> PlotPoint? {
+        let quality = (specificVolume - saturatedRegionLine.v_f) / (saturatedRegionLine.v_g - saturatedRegionLine.v_f)
 
         return calculateSaturated(
             with: saturatedRegionLine,
