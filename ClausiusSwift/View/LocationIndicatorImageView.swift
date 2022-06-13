@@ -85,9 +85,9 @@ class LocationIndicatorImageView : UIImageView {
             case .Ts:
                 self.image = UIImage(imageLiteralResourceName: "Water_ts_chart")
             case .Pv:
-                throw ClausiusError.invalidChartType
+                self.image = UIImage(imageLiteralResourceName: "Water_pv_chart")
             case .Ph:
-                throw ClausiusError.invalidChartType
+                self.image = UIImage(imageLiteralResourceName: "Water_ph_chart")
         }
     }
 
@@ -158,6 +158,10 @@ class LocationIndicatorImageView : UIImageView {
             with: smallOuterRadius,
             and: smallOuterLineWidth
         )
+    }
+
+    func removeIndicators() {
+        clearLayers()
     }
 
     private func clearLayers() {
