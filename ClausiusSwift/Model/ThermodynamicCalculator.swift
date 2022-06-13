@@ -21,6 +21,7 @@ class ThermodynamicCalculator {
     static func calculateProperties(with xValue: Double,
                                     and  yValue: Double,
                                     for  chartType: ChartType) -> PlotPoint? {
+
         switch chartType {
             case .Ts:
                 do {
@@ -45,6 +46,7 @@ class ThermodynamicCalculator {
 
     private static func calculateTs(with temperature: Double,
                                     and  entropy: Double) throws -> PlotPoint? {
+
         var clampedTemp = temperature
 
         if clampedTemp < T_SAT_MIN {
@@ -67,6 +69,7 @@ class ThermodynamicCalculator {
 
     private static func calculatePv(with pressure: Double,
                                     and  specificVolume: Double) throws -> PlotPoint? {
+
         let pressureMPa = pressure / 1000.0
 
         if let temperatureK = H2OWagnerPruss.temperatureVapourLiquid(with: pressureMPa) {
@@ -92,6 +95,7 @@ class ThermodynamicCalculator {
 
     private static func calculatePh(with pressure: Double,
                                     and  enthalpy: Double) throws -> PlotPoint? {
+
         let pressureMPa = pressure / 1000.0
 
         if let temperatureK = H2OWagnerPruss.temperatureVapourLiquid(with: pressureMPa) {
