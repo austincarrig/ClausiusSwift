@@ -29,6 +29,8 @@ class Chart {
 
     func updateChart(with chartType: ChartType) {
 
+        self.chartType = chartType
+
         switch chartType {
             case .Ts:
                 updateChartForTs()
@@ -84,6 +86,8 @@ class Chart {
 
         displayOrientation = .right
 
+        imageBoundaryLine = ChartLines.PV_CHART_LINE
+
     }
 
     func updateChartForPh() {
@@ -105,6 +109,8 @@ class Chart {
         )
 
         displayOrientation = .left
+
+        imageBoundaryLine = ChartLines.PH_CHART_LINE
 
     }
 
