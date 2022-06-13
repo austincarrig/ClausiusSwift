@@ -17,6 +17,7 @@ extension CGPoint {
 }
 
 class SpaceController {
+
 #if targetEnvironment(macCatalyst)
     private let numPoints: Int = 15
 #else
@@ -29,6 +30,8 @@ class SpaceController {
     private let maxDiff: CGFloat = 30.0
 #endif
 
+    var enableFineTuning = true
+
     private var points: [CGPoint] = []
 
     private var shouldFineTune = false
@@ -36,15 +39,17 @@ class SpaceController {
     private var lastFineTuneLocation: CGPoint?
 
     func fineTunedWithLatest(point: CGPoint) -> CGPoint {
-        addLatest(point: point)
+        if enableFineTuning {
+            addLatest(point: point)
 
-        if points.count == numPoints {
-            if largestDistance() < maxDiff || shouldFineTune {
-                shouldFineTune = true
+            if points.count == numPoints {
+                if largestDistance() < maxDiff || shouldFineTune {
+                    shouldFineTune = true
 
-                lastFineTuneLocation = fineTunedPoint()
+                    lastFineTuneLocation = fineTunedPoint()
 
-                return lastFineTuneLocation!
+                    return lastFineTuneLocation!
+                }
             }
         }
 
