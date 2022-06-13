@@ -312,6 +312,24 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     }
 
+    func testPvSuperheated2() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: 6.3141322,
+            and: 74.9047873,
+            for: .Pv
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
+
+    }
+
     /*
     func testTSReliability() throws {
 
