@@ -15,13 +15,10 @@ class ThermodynamicCalculatorTests: XCTestCase {
     let maxSBound = 9.30
     let minSBounds = (3.00, 5.68)
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    let topPBound = 1000000.0
+    let bottomPBound = 10.0
+    let maxHBound = 4400.0
+    let minHBound = 0.0
 
     /*         ---------
      *        /        |
@@ -177,6 +174,30 @@ class ThermodynamicCalculatorTests: XCTestCase {
         let plotPoint = ThermodynamicCalculator.calculateProperties(
             with: point5H,
             and: point5P,
+            for: .Ph
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPhTopRight() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: maxHBound - 10.0,
+            and: bottomPBound + 1.0,
+            for: .Ph
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPhBottomRight() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: maxHBound - 10.0,
+            and: topPBound - 1000.0,
             for: .Ph
         )
 
