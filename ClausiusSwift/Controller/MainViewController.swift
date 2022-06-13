@@ -259,8 +259,17 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
                              width: CGFloat,
                              height: CGFloat) -> CGPoint {
 
-        let yRatio = max(point.y, 0.0) / height
-        let xRatio = chart.imageBoundaryLine![Int(floor(yRatio * CGFloat(chart.imageBoundaryLine!.count)))]
+        let yRatio = min(max(point.y, 0.0), height) / height
+
+        var index = Int(floor(yRatio * CGFloat(chart.imageBoundaryLine!.count)))
+
+        if index >= chart.imageBoundaryLine!.count {
+            index = chart.imageBoundaryLine!.count - 1
+        } else if index < 0 {
+            index = 0
+        }
+
+        let xRatio = chart.imageBoundaryLine![index]
 
         var adjustment = 0.0
 
