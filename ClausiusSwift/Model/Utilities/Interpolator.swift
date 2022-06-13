@@ -118,7 +118,9 @@ class Interpolator {
         // throwing an uncatchable fatal error
         if xIndex >= xArray.count - 1 {
             xWeight = 1.0
-            xIndex -= xArray.count - 2
+            xIndex = xArray.count - 2
+        } else if xIndex < 0 {
+            throw InterpolatorError.indexOutOfBounds
         } else {
             xWeight = (xValue - xArray[xIndex]) / (xArray[xIndex + 1] - xArray[xIndex])
         }
