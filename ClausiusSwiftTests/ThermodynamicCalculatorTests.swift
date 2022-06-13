@@ -15,10 +15,14 @@ class ThermodynamicCalculatorTests: XCTestCase {
     let maxSBound = 9.30
     let minSBounds = (3.00, 5.68)
 
-    let topPBound = 1000000.0
+    let topPBound_PH = 1000000.0
     let bottomPBound = 10.0
     let maxHBound = 4400.0
     let minHBound = 0.0
+
+    let topPBound_PV = 50000.0
+    let minVBound = 0.001
+    let maxVBound = 35.6
 
     /*         ---------
      *        /        |
@@ -38,26 +42,31 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     let point1T = 200.0
     let point1P = 1554.672
+    let point1V = 0.12723395
     let point1H = 1736.7981385534822
     let point1S = 4.2
 
     let point2T = 250.0
     let point2P = 64.50704225395404
+    let point2V = 3.7346344
     let point2H = 2975.6753384544436
     let point2S = 8.24
 
     let point3T = 523.59
     let point3P = 3290.5672268868357
+    let point3V = 0.10923792
     let point3H = 3507.264790490782
     let point3S = 7.26
 
     let point4T = 314.34
     let point4P = 10462.659139999996
+    let point4V = 0.017041273
     let point4H = 1420.0
     let point4S = 3.25
 
     let point5T = 373.9
     let point5P = 21366.04797723749
+    let point5V = 0.005736274
     let point5H = 2439.993624552725
     let point5S = 4.532841
 
@@ -197,7 +206,7 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         let plotPoint = ThermodynamicCalculator.calculateProperties(
             with: maxHBound - 10.0,
-            and: topPBound - 1000.0,
+            and: topPBound_PH - 1000.0,
             for: .Ph
         )
 
@@ -205,15 +214,87 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     }
 
-    func testPv() throws {
+    func testPointPv1() throws {
 
         let plotPoint = ThermodynamicCalculator.calculateProperties(
-            with: 0.0,
-            and: 0.0,
+            with: point1V,
+            and: point1P,
             for: .Pv
         )
 
-        XCTAssertNil(plotPoint)
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPointPv2() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: point2V,
+            and: point2P,
+            for: .Pv
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPointPv3() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: point3V,
+            and: point3P,
+            for: .Pv
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPointPv4() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: point4V,
+            and: point4P,
+            for: .Pv
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPointPv5() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: point5V,
+            and: point5P,
+            for: .Pv
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPvBottomRight() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: maxVBound - 0.1,
+            and: bottomPBound + 1.0,
+            for: .Pv
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+    }
+
+    func testPvTopLeft() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: minVBound + 0.0001,
+            and: topPBound_PV - 1000.0,
+            for: .Pv
+        )
+
+        XCTAssertNotNil(plotPoint)
 
     }
 
