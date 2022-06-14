@@ -23,10 +23,11 @@ import SnapKit
 class DisplayViewRow : UIView {
 
     let labelFont = UIFont(name: "HelveticaNeue-Light", size: 16.0)
+    let labelFontItalic = UIFont(name: "HelveticaNeue-LightItalic", size: 16.0)
 
     lazy var nameLabel : UILabel = {
         let _label = UILabel(frame: CGRect.zero)
-        _label.font = labelFont
+        _label.font = labelFontItalic
         _label.textColor = .black
         _label.textAlignment = .center
         return _label
