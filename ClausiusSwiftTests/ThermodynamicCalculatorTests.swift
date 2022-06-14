@@ -80,6 +80,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         XCTAssertNotNil(plotPoint)
 
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.p, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+        }
+
     }
 
     func testPointTs2() throws {
@@ -91,6 +98,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
         )
 
         XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.p, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+        }
 
     }
 
@@ -104,6 +118,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         XCTAssertNotNil(plotPoint)
 
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.p, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+        }
+
     }
 
     func testPointTs4() throws {
@@ -115,6 +136,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
         )
 
         XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.p, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+        }
 
     }
 
@@ -128,6 +156,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         XCTAssertNotNil(plotPoint)
 
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.p, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+        }
+
     }
 
     func testPointPh1() throws {
@@ -139,6 +174,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
         )
 
         XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
 
     }
 
@@ -152,6 +194,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         XCTAssertNotNil(plotPoint)
 
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
+
     }
 
     func testPointPh3() throws {
@@ -163,6 +212,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
         )
 
         XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
 
     }
 
@@ -176,6 +232,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         XCTAssertNotNil(plotPoint)
 
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
+
     }
 
     func testPointPh5() throws {
@@ -187,6 +250,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
         )
 
         XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
 
     }
 
@@ -200,6 +270,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         XCTAssertNotNil(plotPoint)
 
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
+
     }
 
     func testPhBottomRight() throws {
@@ -211,6 +288,32 @@ class ThermodynamicCalculatorTests: XCTestCase {
         )
 
         XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
+
+    }
+
+    func testPhSuperheated() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: 1346.4,
+            and: 34200.0,
+            for: .Ph
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
 
     }
 
@@ -224,6 +327,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         XCTAssertNotNil(plotPoint)
 
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
+
     }
 
     func testPointPv2() throws {
@@ -235,6 +345,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
         )
 
         XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
 
     }
 
@@ -248,6 +365,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         XCTAssertNotNil(plotPoint)
 
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
+
     }
 
     func testPointPv4() throws {
@@ -259,6 +383,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
         )
 
         XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
 
     }
 
@@ -272,6 +403,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         XCTAssertNotNil(plotPoint)
 
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
+
     }
 
     func testPvBottomRight() throws {
@@ -283,6 +421,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
         )
 
         XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
 
     }
 
@@ -296,6 +441,13 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
         XCTAssertNotNil(plotPoint)
 
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
+
     }
 
     func testPvSuperheated() throws {
@@ -306,9 +458,14 @@ class ThermodynamicCalculatorTests: XCTestCase {
             for: .Pv
         )
 
-        XCTAssertGreaterThan(plotPoint!.h, 0.0)
-        XCTAssertGreaterThan(plotPoint!.u, 0.0)
-        XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.s, 0.0)
+        }
 
     }
 
@@ -323,6 +480,7 @@ class ThermodynamicCalculatorTests: XCTestCase {
         XCTAssertNotNil(plotPoint)
 
         if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.t, 0.0)
             XCTAssertGreaterThan(plotPoint!.h, 0.0)
             XCTAssertGreaterThan(plotPoint!.u, 0.0)
             XCTAssertGreaterThan(plotPoint!.s, 0.0)
