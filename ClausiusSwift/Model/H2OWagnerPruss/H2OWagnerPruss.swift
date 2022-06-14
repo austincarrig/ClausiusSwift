@@ -159,7 +159,7 @@ struct H2OWagnerPruss {
 
         var rho = density_estimate
 
-        let iteration_goal = 1.0e-12
+        let iteration_goal = 1.0e-6
         let max_iteration = 20 // old value: 1000
 
         var i: Int = 1
@@ -189,7 +189,13 @@ struct H2OWagnerPruss {
             }
         }
 
-        return rho
+        if rho > 0.0 {
+            return rho
+        } else {
+            // This was added by Austin Carrig on 6/14/2022 as a workaround for very wrong rho values
+            // This is an estimate in the superheated regions of P-h chart with low T, high P
+            return (pressure * 1000.0) / (H2OWagnerPrussConstants.R * temperature * (1 + H2OWagnerPruss.calculate_delta(density: density_estimate) * H2OWagnerPruss.calculate_phi_r_delta(temperature: temperature, density: density_estimate)))
+        }
     }
 
     static func calculate_phi_r_delta(temperature: Double,
