@@ -270,6 +270,8 @@ open class Floaty: UIView {
      */
     fileprivate var plusLayer: CAShapeLayer = CAShapeLayer()
 
+
+
     /**
      Button image view.
      */

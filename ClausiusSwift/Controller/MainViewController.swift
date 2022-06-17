@@ -56,13 +56,13 @@ class MainViewController: UIViewController {
         view.addSubview(floaty)
 
         floaty.addItem(innerTitle: "T-s") { _ in
-            self.pressTsButton()
+            self.switchChart(to: .Ts)
         }
         floaty.addItem(innerTitle: "P-h") { _ in
-            self.pressPhButton()
+            self.switchChart(to: .Ph)
         }
         floaty.addItem(innerTitle: "P-v") { _ in
-            self.pressPvButton()
+            self.switchChart(to: .Pv)
         }
 
         floaty.verticalDirection = .down
@@ -80,54 +80,21 @@ class MainViewController: UIViewController {
 
     }
 
-    @objc func pressTsButton() {
+    func switchChart(to chartType: ChartType) {
 
-        if chart.displayOrientation! == .right {
-            alignViewsLeft()
+        chart.updateChart(with: chartType)
+
+        switch chart.displayOrientation! {
+            case .left:
+                alignViewsLeft()
+            case .right:
+                alignViewsRight()
         }
-
-        chart.updateChart(with: .Ts)
 
         locationIndicatorImageView.removeIndicators()
 
         do {
-            try locationIndicatorImageView.changeImage(to: .Ts)
-        } catch {
-            print("Error thrown, unable to change image")
-        }
-
-    }
-
-    @objc func pressPvButton() {
-
-        if chart.displayOrientation! == .left {
-            alignViewsRight()
-        }
-
-        chart.updateChart(with: .Pv)
-
-        locationIndicatorImageView.removeIndicators()
-
-        do {
-            try locationIndicatorImageView.changeImage(to: .Pv)
-        } catch {
-            print("Error thrown, unable to change image")
-        }
-
-    }
-
-    @objc func pressPhButton() {
-
-        if chart.displayOrientation! == .right {
-            alignViewsLeft()
-        }
-
-        chart.updateChart(with: .Ph)
-
-        locationIndicatorImageView.removeIndicators()
-
-        do {
-            try locationIndicatorImageView.changeImage(to: .Ph)
+            try locationIndicatorImageView.changeImage(to: chartType)
         } catch {
             print("Error thrown, unable to change image")
         }
