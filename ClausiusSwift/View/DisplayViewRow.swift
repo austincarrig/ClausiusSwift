@@ -191,7 +191,25 @@ class DisplayViewRow : UIView {
                 units = "%"
         }
 
-        unitsLabel.text = units
+        switch valueType {
+            case .t, .p, .u, .h, .s, .x:
+                unitsLabel.text = units
+            case .v:
+
+                if let labelFont = labelFont {
+                    let attrString: NSMutableAttributedString = NSMutableAttributedString(string: units,
+                                                                                          attributes: [NSMutableAttributedString.Key.font : labelFont])
+
+                    if let range = units.rangeOfCharacter(from: CharacterSet.decimalDigits) {
+                        attrString.setAttributes([NSMutableAttributedString.Key.baselineOffset : 5,
+                                                  NSMutableAttributedString.Key.font : labelFont.withSize(10.0)],
+                                                 range: NSRange(range, in: units))
+                    }
+                    unitsLabel.attributedText = attrString
+                } else {
+                    unitsLabel.text = units
+                }
+        }
 
     }
 
