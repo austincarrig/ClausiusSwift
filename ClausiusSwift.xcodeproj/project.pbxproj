@@ -39,10 +39,17 @@
 		498F0E9B284BFBD80007EC86 /* SpaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498F0E9A284BFBD80007EC86 /* SpaceController.swift */; };
 		49BC3BD42849500C00402D18 /* DisplayViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC3BD32849500C00402D18 /* DisplayViewRow.swift */; };
 		49BC3BD62849A1F000402D18 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC3BD52849A1F000402D18 /* DisplayView.swift */; };
+		49C5CC76285A577C00B8BD88 /* ClausiusFloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C5CC75285A577C00B8BD88 /* ClausiusFloatyItem.swift */; };
+		49C5CC78285A585E00B8BD88 /* ClausiusFloaty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C5CC77285A585E00B8BD88 /* ClausiusFloaty.swift */; };
 		49C7800128411D090049F1B2 /* CommonEnumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800028411D090049F1B2 /* CommonEnumerations.swift */; };
 		49C7800328411D270049F1B2 /* ClausiusErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800228411D270049F1B2 /* ClausiusErrors.swift */; };
 		49C78006284121EA0049F1B2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 49C78005284121EA0049F1B2 /* SnapKit */; };
 		49C7800828413A100049F1B2 /* ChartLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800728413A100049F1B2 /* ChartLines.swift */; };
+		49DC9C062858FBDD005DEE56 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 49DC9C052858FBDD005DEE56 /* SwiftyBeaver */; };
+		49DC9C102859052C005DEE56 /* FloatyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC9C092859052C005DEE56 /* FloatyDelegate.swift */; };
+		49DC9C112859052C005DEE56 /* FloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC9C0A2859052C005DEE56 /* FloatyItem.swift */; };
+		49DC9C122859052C005DEE56 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC9C0B2859052C005DEE56 /* FloatyManager.swift */; };
+		49DC9C132859052C005DEE56 /* Floaty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC9C0C2859052C005DEE56 /* Floaty.swift */; };
 		49F9900528481FF1003107FE /* ClausiusColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F9900428481FF1003107FE /* ClausiusColor.swift */; };
 /* End PBXBuildFile section */
 
@@ -101,9 +108,15 @@
 		498F0E9A284BFBD80007EC86 /* SpaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceController.swift; sourceTree = "<group>"; };
 		49BC3BD32849500C00402D18 /* DisplayViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewRow.swift; sourceTree = "<group>"; };
 		49BC3BD52849A1F000402D18 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
+		49C5CC75285A577C00B8BD88 /* ClausiusFloatyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusFloatyItem.swift; sourceTree = "<group>"; };
+		49C5CC77285A585E00B8BD88 /* ClausiusFloaty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusFloaty.swift; sourceTree = "<group>"; };
 		49C7800028411D090049F1B2 /* CommonEnumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonEnumerations.swift; sourceTree = "<group>"; };
 		49C7800228411D270049F1B2 /* ClausiusErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusErrors.swift; sourceTree = "<group>"; };
 		49C7800728413A100049F1B2 /* ChartLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLines.swift; sourceTree = "<group>"; };
+		49DC9C092859052C005DEE56 /* FloatyDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyDelegate.swift; sourceTree = "<group>"; };
+		49DC9C0A2859052C005DEE56 /* FloatyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyItem.swift; sourceTree = "<group>"; };
+		49DC9C0B2859052C005DEE56 /* FloatyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyManager.swift; sourceTree = "<group>"; };
+		49DC9C0C2859052C005DEE56 /* Floaty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Floaty.swift; sourceTree = "<group>"; };
 		49F9900428481FF1003107FE /* ClausiusColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C78006284121EA0049F1B2 /* SnapKit in Frameworks */,
+				49DC9C062858FBDD005DEE56 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +270,7 @@
 		498835362840664700A34A79 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				49DC9C08285904EE005DEE56 /* Floaty */,
 				498835372840668300A34A79 /* LocationIndicatorImageView.swift */,
 				49BC3BD32849500C00402D18 /* DisplayViewRow.swift */,
 				49BC3BD52849A1F000402D18 /* DisplayView.swift */,
@@ -292,6 +307,19 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		49DC9C08285904EE005DEE56 /* Floaty */ = {
+			isa = PBXGroup;
+			children = (
+				49DC9C0C2859052C005DEE56 /* Floaty.swift */,
+				49DC9C092859052C005DEE56 /* FloatyDelegate.swift */,
+				49DC9C0A2859052C005DEE56 /* FloatyItem.swift */,
+				49DC9C0B2859052C005DEE56 /* FloatyManager.swift */,
+				49C5CC75285A577C00B8BD88 /* ClausiusFloatyItem.swift */,
+				49C5CC77285A585E00B8BD88 /* ClausiusFloaty.swift */,
+			);
+			path = Floaty;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -310,6 +338,7 @@
 			name = ClausiusSwift;
 			packageProductDependencies = (
 				49C78005284121EA0049F1B2 /* SnapKit */,
+				49DC9C052858FBDD005DEE56 /* SwiftyBeaver */,
 			);
 			productName = ClausiusSwift;
 			productReference = 495B9AFC283AFB640018DAB8 /* ClausiusSwift.app */;
@@ -385,6 +414,7 @@
 			mainGroup = 495B9AF3283AFB640018DAB8;
 			packageReferences = (
 				49C78004284121EA0049F1B2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				49DC9C042858FBDD005DEE56 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
 			productRefGroup = 495B9AFD283AFB640018DAB8 /* Products */;
 			projectDirPath = "";
@@ -439,20 +469,26 @@
 				495B9B04283AFB640018DAB8 /* MainViewController.swift in Sources */,
 				4988353D2840685500A34A79 /* Axis.swift in Sources */,
 				49BC3BD62849A1F000402D18 /* DisplayView.swift in Sources */,
+				49DC9C112859052C005DEE56 /* FloatyItem.swift in Sources */,
+				49C5CC78285A585E00B8BD88 /* ClausiusFloaty.swift in Sources */,
 				495B9B00283AFB640018DAB8 /* AppDelegate.swift in Sources */,
 				495B9B34283B1FED0018DAB8 /* ThermodynamicCalculator.swift in Sources */,
 				495B9B45283C21D20018DAB8 /* SuperheatedRegionCalculatorConstantsTS.swift in Sources */,
 				49F9900528481FF1003107FE /* ClausiusColor.swift in Sources */,
 				4906A5F728559B8C00588B21 /* SuperheatedRegionCalculatorConstantsPV.swift in Sources */,
+				49C5CC76285A577C00B8BD88 /* ClausiusFloatyItem.swift in Sources */,
 				49BC3BD42849500C00402D18 /* DisplayViewRow.swift in Sources */,
 				498F0E9B284BFBD80007EC86 /* SpaceController.swift in Sources */,
 				495B9B02283AFB640018DAB8 /* SceneDelegate.swift in Sources */,
 				49C7800328411D270049F1B2 /* ClausiusErrors.swift in Sources */,
+				49DC9C102859052C005DEE56 /* FloatyDelegate.swift in Sources */,
 				495B9B36283B20900018DAB8 /* PlotPoint.swift in Sources */,
 				495B9B43283C21C60018DAB8 /* SuperheatedRegionCalculator.swift in Sources */,
 				495B9B39283C15880018DAB8 /* SaturatedRegionLineConstants.swift in Sources */,
 				498B06E9283DB99700D33E52 /* H2OWagnerPruss.swift in Sources */,
+				49DC9C132859052C005DEE56 /* Floaty.swift in Sources */,
 				4906A5F52855918100588B21 /* SuperheatedRegionCalculatorConstantsPH.swift in Sources */,
+				49DC9C122859052C005DEE56 /* FloatyManager.swift in Sources */,
 				49C7800828413A100049F1B2 /* ChartLines.swift in Sources */,
 				49C7800128411D090049F1B2 /* CommonEnumerations.swift in Sources */,
 				498B06EB283DB9BD00D33E52 /* H2OWagnerPrussConstants.swift in Sources */,
@@ -793,6 +829,14 @@
 				kind = branch;
 			};
 		};
+		49DC9C042858FBDD005DEE56 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -800,6 +844,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 49C78004284121EA0049F1B2 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		49DC9C052858FBDD005DEE56 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49DC9C042858FBDD005DEE56 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

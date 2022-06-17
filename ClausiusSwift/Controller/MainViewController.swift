@@ -38,11 +38,7 @@ class MainViewController: UIViewController {
     // for displaying calculated thermodynamic values
     var displayView = DisplayView(frame: CGRect.zero)
 
-    var tsButton = UIButton(frame: CGRect.zero)
-
-    var pvButton = UIButton(frame: CGRect.zero)
-
-    var phButton = UIButton(frame: CGRect.zero)
+    var floaty = ClausiusFloaty(frame: CGRect(x: 0.0, y: 0.0, width: 48.0, height: 48.0))
 
     // MARK: - VC Lifecycle
 
@@ -57,21 +53,21 @@ class MainViewController: UIViewController {
 
         view.addSubview(locationIndicatorImageView)
         view.addSubview(displayView)
-        view.addSubview(tsButton)
-        view.addSubview(pvButton)
-        view.addSubview(phButton)
+        view.addSubview(floaty)
 
-        tsButton.setTitle("T-s", for: .normal)
-        tsButton.addTarget(self, action: #selector(pressTsButton), for: .touchUpInside)
-        tsButton.setTitleColor(.clausiusOrange, for: .normal)
+        floaty.addItem(innerTitle: "T-s") { _ in
+            self.pressTsButton()
+        }
+        floaty.addItem(innerTitle: "P-h") { _ in
+            self.pressPhButton()
+        }
+        floaty.addItem(innerTitle: "P-v") { _ in
+            self.pressPvButton()
+        }
 
-        pvButton.setTitle("P-v", for: .normal)
-        pvButton.addTarget(self, action: #selector(pressPvButton), for: .touchUpInside)
-        pvButton.setTitleColor(.clausiusOrange, for: .normal)
-
-        phButton.setTitle("P-h", for: .normal)
-        phButton.addTarget(self, action: #selector(pressPhButton), for: .touchUpInside)
-        phButton.setTitleColor(.clausiusOrange, for: .normal)
+        floaty.verticalDirection = .down
+        floaty.horizontalDirection = .right
+        floaty.openAnimationType = .slideDown
 
         locationIndicatorImageView.delegate = self
 
@@ -141,9 +137,7 @@ class MainViewController: UIViewController {
     func alignViewsLeft() {
 
         displayView.snp.removeConstraints()
-        tsButton.snp.removeConstraints()
-        pvButton.snp.removeConstraints()
-        phButton.snp.removeConstraints()
+        floaty.snp.removeConstraints()
 
         displayView.snp.makeConstraints { make in
             make.height.equalTo(340.0)
@@ -152,19 +146,10 @@ class MainViewController: UIViewController {
             make.left.equalToSuperview().offset(40.0)
         }
 
-        tsButton.snp.makeConstraints { make in
+        floaty.snp.makeConstraints { make in
             make.left.equalTo(displayView.snp.right).offset(20.0)
             make.top.equalTo(displayView)
-        }
-
-        pvButton.snp.makeConstraints { make in
-            make.left.equalTo(displayView.snp.right).offset(20.0)
-            make.top.equalTo(tsButton.snp.bottom)
-        }
-
-        phButton.snp.makeConstraints { make in
-            make.left.equalTo(displayView.snp.right).offset(20.0)
-            make.top.equalTo(pvButton.snp.bottom)
+            make.height.width.equalTo(56.0)
         }
 
     }
@@ -172,9 +157,7 @@ class MainViewController: UIViewController {
     func alignViewsRight() {
 
         displayView.snp.removeConstraints()
-        tsButton.snp.removeConstraints()
-        pvButton.snp.removeConstraints()
-        phButton.snp.removeConstraints()
+        floaty.snp.removeConstraints()
 
         displayView.snp.makeConstraints { make in
             make.height.equalTo(340.0)
@@ -183,19 +166,10 @@ class MainViewController: UIViewController {
             make.right.equalToSuperview().offset(-40.0)
         }
 
-        tsButton.snp.makeConstraints { make in
+        floaty.snp.makeConstraints { make in
             make.right.equalTo(displayView.snp.left).offset(-20.0)
             make.top.equalTo(displayView)
-        }
-
-        pvButton.snp.makeConstraints { make in
-            make.right.equalTo(displayView.snp.left).offset(-20.0)
-            make.top.equalTo(tsButton.snp.bottom)
-        }
-
-        phButton.snp.makeConstraints { make in
-            make.right.equalTo(displayView.snp.left).offset(-20.0)
-            make.top.equalTo(pvButton.snp.bottom)
+            make.height.width.equalTo(56.0)
         }
 
     }
