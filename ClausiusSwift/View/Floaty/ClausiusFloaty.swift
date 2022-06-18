@@ -13,6 +13,7 @@ class ClausiusFloaty : Floaty {
         super.init(frame: frame)
 
         buttonColor = .clausiusOrange
+        hasShadow = false
     }
 
     required init?(coder aDecoder: NSCoder) {

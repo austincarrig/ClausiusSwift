@@ -13,6 +13,8 @@ class ClausiusFloatyItem : FloatyItem {
         super.init()
 
         innerTitleFont = UIFont(name: "HelveticaNeue-LightItalic", size: 16.0)
+        innerTitleLabel.textColor = .clausiusOrange
+        hasShadow = false
     }
 
     public convenience init(innerTitle: String) {

@@ -115,8 +115,8 @@ class MainViewController: UIViewController {
 
         floaty.snp.makeConstraints { make in
             make.left.equalTo(displayView.snp.right).offset(20.0)
-            make.top.equalTo(displayView)
-            make.height.width.equalTo(56.0)
+            make.lastBaseline.equalTo(displayView.titleLabel)
+            make.height.width.equalTo(48.0)
         }
 
     }
@@ -136,7 +136,7 @@ class MainViewController: UIViewController {
         floaty.snp.makeConstraints { make in
             make.right.equalTo(displayView.snp.left).offset(-20.0)
             make.top.equalTo(displayView)
-            make.height.width.equalTo(56.0)
+            make.height.width.equalTo(48.0)
         }
 
     }
