@@ -124,6 +124,8 @@ open class Floaty: UIView {
     @objc @IBInspectable
     open var buttonColor: UIColor = UIColor(red: 73/255.0, green: 151/255.0, blue: 241/255.0, alpha: 1)
 
+    open var buttonBorderColor: UIColor = .clear
+
     /**
      Button highlighted color.
      */
@@ -152,6 +154,8 @@ open class Floaty: UIView {
      */
     @objc @IBInspectable
     open var plusColor: UIColor = UIColor(white: 0.2, alpha: 1)
+
+    open var menuButtonColor: UIColor = UIColor(white: 0.2, alpha: 1)
 
     /**
      Background overlaying color.
@@ -270,7 +274,9 @@ open class Floaty: UIView {
      */
     fileprivate var plusLayer: CAShapeLayer = CAShapeLayer()
 
-
+    fileprivate var topLineLayer: CAShapeLayer = CAShapeLayer()
+    fileprivate var middleLineLayer: CAShapeLayer = CAShapeLayer()
+    fileprivate var bottomLineLayer: CAShapeLayer = CAShapeLayer()
 
     /**
      Button image view.
@@ -370,12 +376,14 @@ open class Floaty: UIView {
 
         setCircleLayer()
         if buttonImage == nil {
-            setPlusLayer()
+            setMenuLayer()
         } else {
             setButtonImage()
         }
         setShadow()
     }
+
+    fileprivate let animationDuration = 0.4
 
     /**
      Items open.
@@ -406,17 +414,66 @@ open class Floaty: UIView {
 
             overlayViewDidCompleteOpenAnimation = false
             animationGroup.enter()
-            UIView.animate(withDuration: 0.3, delay: 0,
-                           usingSpringWithDamping: 0.55,
-                           initialSpringVelocity: 0.3,
-                           options: UIView.AnimationOptions(), animations: { () -> Void in
-                self.plusLayer.transform = CATransform3DMakeRotation(self.degreesToRadians(self.rotationDegrees), 0.0, 0.0, 1.0)
-                self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(self.rotationDegrees))
-                self.overlayView.alpha = 1
-            }, completion: {(f) -> Void in
+
+            let duration = animationDuration
+
+            let animation = CAKeyframeAnimation(keyPath: "position.y")
+            animation.values = [NSNumber(value: 0.0), NSNumber(value: size/6.0), NSNumber(value: size/6.0)]
+            animation.keyTimes = [NSNumber(value: 0.0), NSNumber(value: duration/2.0), NSNumber(value: duration)]
+            animation.duration = CFTimeInterval(duration)
+            animation.fillMode = .forwards
+            animation.isRemovedOnCompletion = false
+            animation.isAdditive = true
+            topLineLayer.add(animation, forKey: nil)
+
+            let animation2 = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+            animation2.values = [NSNumber(value: 0.0), NSNumber(value: 0.0), NSNumber(value: degreesToRadians(rotationDegrees))]
+            animation2.keyTimes = [NSNumber(value: 0.0), NSNumber(value: duration/2.0), NSNumber(value: duration)]
+            animation2.duration = CFTimeInterval(duration)
+            animation2.fillMode = .forwards
+            animation2.isRemovedOnCompletion = false
+            animation2.isAdditive = true
+            topLineLayer.add(animation2, forKey: nil)
+
+            let animation3 = CAKeyframeAnimation(keyPath: "position.y")
+            animation3.values = [NSNumber(value: 0.0), NSNumber(value: -size/6.0), NSNumber(value: -size/6.0)]
+            animation3.keyTimes = [NSNumber(value: 0.0), NSNumber(value: duration/2.0), NSNumber(value: duration)]
+            animation3.duration = CFTimeInterval(duration)
+            animation3.fillMode = .forwards
+            animation3.isRemovedOnCompletion = false
+            animation3.isAdditive = true
+            bottomLineLayer.add(animation3, forKey: nil)
+
+            let animation4 = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+            animation4.values = [NSNumber(value: 0.0), NSNumber(value: 0.0), NSNumber(value: -degreesToRadians(rotationDegrees))]
+            animation4.keyTimes = [NSNumber(value: 0.0), NSNumber(value: duration/2.0), NSNumber(value: duration)]
+            animation4.duration = CFTimeInterval(duration)
+            animation4.fillMode = .forwards
+            animation4.isRemovedOnCompletion = false
+            animation4.isAdditive = true
+            bottomLineLayer.add(animation4, forKey: nil)
+
+            let animation5 = CAKeyframeAnimation(keyPath: "strokeColor")
+            animation5.values = [menuButtonColor.cgColor,
+                                 menuButtonColor.withAlphaComponent(0.0).cgColor,
+                                 menuButtonColor.withAlphaComponent(0.0).cgColor]
+            animation5.keyTimes = [NSNumber(value: 0.0), NSNumber(value: duration/2.0), NSNumber(value: duration)]
+            animation5.duration = CFTimeInterval(duration)
+            animation5.fillMode = .forwards
+            animation5.isRemovedOnCompletion = false
+            middleLineLayer.add(animation5, forKey: nil)
+
+            UIView.animateKeyframes(withDuration: 0.4,
+                                    delay: 0.0,
+                                    options: UIView.KeyframeAnimationOptions()) {
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0) {
+                    self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(self.rotationDegrees))
+                    self.overlayView.alpha = 1
+                }
+            } completion: { _ in
                 self.overlayViewDidCompleteOpenAnimation = true
                 animationGroup.leave()
-            })
+            }
 
             switch openAnimationType {
                 case .pop:
@@ -470,20 +527,70 @@ open class Floaty: UIView {
         if(items.count > 0){
             self.overlayView.removeTarget(self, action: #selector(close), for: UIControl.Event.touchUpInside)
             animationGroup.enter()
-            UIView.animate(withDuration: 0.3, delay: 0,
-                           usingSpringWithDamping: 0.6,
-                           initialSpringVelocity: 0.8,
-                           options: [], animations: { () -> Void in
-                self.plusLayer.transform = CATransform3DMakeRotation(self.degreesToRadians(0), 0.0, 0.0, 1.0)
-                self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(0))
-                self.overlayView.alpha = 0
-            }, completion: {(f) -> Void in
+
+            let duration = animationDuration
+
+            let rotRad = degreesToRadians(rotationDegrees)
+
+            let animation = CAKeyframeAnimation(keyPath: "position.y")
+            animation.values = [NSNumber(value: 0.0), NSNumber(value: 0.0), NSNumber(value: -size/6.0)]
+            animation.keyTimes = [NSNumber(value: 0.0), NSNumber(value: duration/2.0), NSNumber(value: duration)]
+            animation.duration = CFTimeInterval(duration)
+            animation.fillMode = .forwards
+            animation.isRemovedOnCompletion = false
+            animation.isAdditive = true
+            topLineLayer.add(animation, forKey: nil)
+
+            let animation2 = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+            animation2.values = [NSNumber(value: 0.0), NSNumber(value: -rotRad), NSNumber(value: -rotRad)]
+            animation2.keyTimes = [NSNumber(value: 0.0), NSNumber(value: duration/2.0), NSNumber(value: duration)]
+            animation2.duration = CFTimeInterval(duration)
+            animation2.fillMode = .forwards
+            animation2.isRemovedOnCompletion = false
+            animation2.isAdditive = true
+            topLineLayer.add(animation2, forKey: nil)
+
+            let animation3 = CAKeyframeAnimation(keyPath: "position.y")
+            animation3.values = [NSNumber(value: 0.0), NSNumber(value: 0.0), NSNumber(value: size/6.0)]
+            animation3.keyTimes = [NSNumber(value: 0.0), NSNumber(value: duration/2.0), NSNumber(value: duration)]
+            animation3.duration = CFTimeInterval(duration)
+            animation3.fillMode = .forwards
+            animation3.isRemovedOnCompletion = false
+            animation3.isAdditive = true
+            bottomLineLayer.add(animation3, forKey: nil)
+
+            let animation4 = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+            animation4.values = [NSNumber(value: 0.0), NSNumber(value: rotRad), NSNumber(value: rotRad)]
+            animation4.keyTimes = [NSNumber(value: 0.0), NSNumber(value: duration/2.0), NSNumber(value: duration)]
+            animation4.duration = CFTimeInterval(duration)
+            animation4.fillMode = .forwards
+            animation4.isRemovedOnCompletion = false
+            animation4.isAdditive = true
+            bottomLineLayer.add(animation4, forKey: nil)
+
+            let animation5 = CAKeyframeAnimation(keyPath: "strokeColor")
+            animation5.values = [menuButtonColor.withAlphaComponent(0.0).cgColor,
+                                 menuButtonColor.withAlphaComponent(0.0).cgColor,
+                                 menuButtonColor.cgColor]
+            animation5.keyTimes = [NSNumber(value: 0.0), NSNumber(value: duration/2.0), NSNumber(value: duration)]
+            animation5.duration = CFTimeInterval(duration)
+            animation5.fillMode = .forwards
+            animation5.isRemovedOnCompletion = false
+            middleLineLayer.add(animation5, forKey: nil)
+
+            UIView.animateKeyframes(withDuration: 0.4,
+                                    delay: 0.0,
+                                    options: UIView.KeyframeAnimationOptions()) {
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0) {
+                    self.buttonImageView.transform = CGAffineTransform(rotationAngle: self.degreesToRadians(0))
+                    self.overlayView.alpha = 0
+                }
+            } completion: { _ in
                 if self.overlayViewDidCompleteOpenAnimation {
                     self.overlayView.removeFromSuperview()
                 }
                 animationGroup.leave()
-            })
-
+            }
 
             switch openAnimationType {
                 case .pop:
@@ -740,7 +847,63 @@ open class Floaty: UIView {
         circleLayer.frame = CGRect(x: 0, y: 0, width: size, height: size)
         circleLayer.backgroundColor = buttonColor.cgColor
         circleLayer.cornerRadius = size/2
+        circleLayer.borderColor = buttonBorderColor.cgColor
+        circleLayer.borderWidth = 0.75
+        circleLayer.shouldRasterize = true
+        circleLayer.rasterizationScale = 2.0
         layer.addSublayer(circleLayer)
+    }
+
+    fileprivate func setMenuLayer() {
+        setTopLineLayer()
+        setMiddleLineLayer()
+        setBottomLineLayer()
+    }
+
+    fileprivate func setTopLineLayer() {
+        topLineLayer.removeFromSuperlayer()
+        let currentTransform = topLineLayer.transform
+        topLineLayer.transform = CATransform3DIdentity
+        topLineLayer.frame = CGRect(x: size/3.0, y: size/6.0, width: size/3.0, height: size/3.0)
+        topLineLayer.transform = currentTransform
+        topLineLayer.lineCap = CAShapeLayerLineCap.round
+        topLineLayer.strokeColor = menuButtonColor.cgColor
+        topLineLayer.lineWidth = 2.0
+        topLineLayer.path = menuLineBezierPath().cgPath
+        layer.addSublayer(topLineLayer)
+    }
+
+    fileprivate func setMiddleLineLayer() {
+        middleLineLayer.removeFromSuperlayer()
+        let currentTransform = middleLineLayer.transform
+        middleLineLayer.transform = CATransform3DIdentity
+        middleLineLayer.frame = CGRect(x: size/3.0, y: size/3.0, width: size/3.0, height: size/3.0)
+        middleLineLayer.transform = currentTransform
+        middleLineLayer.lineCap = CAShapeLayerLineCap.round
+        middleLineLayer.strokeColor = menuButtonColor.cgColor
+        middleLineLayer.lineWidth = 2.0
+        middleLineLayer.path = menuLineBezierPath().cgPath
+        layer.addSublayer(middleLineLayer)
+    }
+
+    fileprivate func setBottomLineLayer() {
+        bottomLineLayer.removeFromSuperlayer()
+        let currentTransform = bottomLineLayer.transform
+        bottomLineLayer.transform = CATransform3DIdentity
+        bottomLineLayer.frame = CGRect(x: size/3.0, y: size/2.0, width: size/3.0, height: size/3.0)
+        bottomLineLayer.transform = currentTransform
+        bottomLineLayer.lineCap = CAShapeLayerLineCap.round
+        bottomLineLayer.strokeColor = menuButtonColor.cgColor
+        bottomLineLayer.lineWidth = 2.0
+        bottomLineLayer.path = menuLineBezierPath().cgPath
+        layer.addSublayer(bottomLineLayer)
+    }
+
+    func lineBezierPath() -> UIBezierPath {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0.0, y: size/6.0))
+        path.addLine(to: CGPoint(x: size/3.0, y: size/6.0))
+        return path
     }
 
     fileprivate func setPlusLayer() {
@@ -812,6 +975,13 @@ open class Floaty: UIView {
         path.addLine(to: CGPoint(x: size/2, y: size-size/3))
         path.move(to: CGPoint(x: size/3, y: size/2))
         path.addLine(to: CGPoint(x: size-size/3, y: size/2))
+        return path
+    }
+
+    fileprivate func menuLineBezierPath() -> UIBezierPath {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0.0, y: size/6.0))
+        path.addLine(to: CGPoint(x: size/3.0, y: size/6.0))
         return path
     }
 

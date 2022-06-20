@@ -34,6 +34,8 @@ open class FloatyItem: UIView {
         }
     }
 
+    @objc open var gapSize: CGFloat = 4.5
+
     /**
      Button color.
      */
@@ -52,6 +54,11 @@ open class FloatyItem: UIView {
      Enable/disable shadow.
      */
     @objc open var hasShadow: Bool = true
+
+    /**
+     Circle Shadow color.
+     */
+    @objc open var primaryColor: UIColor = UIColor.black
 
     /**
      Circle Shadow color.
@@ -85,6 +92,11 @@ open class FloatyItem: UIView {
      Shape layer of button.
      */
     fileprivate var circleLayer: CAShapeLayer = CAShapeLayer()
+
+    /**
+     Inner shape layer of button.
+     */
+    fileprivate var innerCircleLayer: CAShapeLayer = CAShapeLayer()
 
     /**
      If you keeping touch inside button, button overlaid with tint layer.
@@ -238,6 +250,8 @@ open class FloatyItem: UIView {
         didSet { circleLayer.backgroundColor = itemBackgroundColor?.cgColor }
     }
 
+    open var shouldDrawInnerCircle: Bool = false
+
     // MARK: - Initialize
 
     /**
@@ -261,6 +275,9 @@ open class FloatyItem: UIView {
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
         createCircleLayer()
+        if shouldDrawInnerCircle {
+            createInnerCircleLayer()
+        }
         setShadow()
 
         if _titleLabel != nil {
@@ -275,16 +292,29 @@ open class FloatyItem: UIView {
     }
 
     fileprivate func createCircleLayer() {
-        //        circleLayer.frame = CGRectMake(frame.size.width - size, 0, size, size)
         let castParent : Floaty = superview as! Floaty
         circleLayer.frame = CGRect(x: castParent.itemSize/2 - (size/2), y: 0, width: size, height: size)
         circleLayer.backgroundColor = buttonColor.cgColor
         circleLayer.cornerRadius = size/2
+        circleLayer.borderColor = primaryColor.cgColor
+        circleLayer.borderWidth = 0.75
+        circleLayer.rasterizationScale = 2.0
+        circleLayer.shouldRasterize = true
         layer.addSublayer(circleLayer)
     }
 
+    fileprivate func createInnerCircleLayer() {
+        let castParent : Floaty = superview as! Floaty
+        let smallerSize = size - gapSize
+        innerCircleLayer.frame = CGRect(x: castParent.itemSize/2 - (smallerSize/2), y: gapSize/2, width: smallerSize, height: smallerSize)
+        innerCircleLayer.backgroundColor = primaryColor.cgColor
+        innerCircleLayer.cornerRadius = smallerSize/2
+        innerCircleLayer.rasterizationScale = 2.0
+        innerCircleLayer.shouldRasterize = true
+        layer.addSublayer(innerCircleLayer)
+    }
+
     fileprivate func createTintLayer() {
-        //        tintLayer.frame = CGRectMake(frame.size.width - size, 0, size, size)
         let castParent : Floaty = superview as! Floaty
         tintLayer.frame = CGRect(x: castParent.itemSize/2 - (size/2), y: 0, width: size, height: size)
         tintLayer.backgroundColor = UIColor.white.withAlphaComponent(0.2).cgColor

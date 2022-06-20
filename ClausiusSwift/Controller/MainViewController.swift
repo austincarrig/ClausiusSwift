@@ -55,14 +55,17 @@ class MainViewController: UIViewController {
         view.addSubview(displayView)
         view.addSubview(floaty)
 
-        floaty.addItem(innerTitle: "T-s") { _ in
+        floaty.addSelectedItem(innerTitle: "T-s") { item in
             self.switchChart(to: .Ts)
+            self.floaty.makeItemSelected((item as! ClausiusFloatyItem))
         }
-        floaty.addItem(innerTitle: "P-h") { _ in
+        floaty.addItem(innerTitle: "P-h") { item in
             self.switchChart(to: .Ph)
+            self.floaty.makeItemSelected((item as! ClausiusFloatyItem))
         }
-        floaty.addItem(innerTitle: "P-v") { _ in
+        floaty.addItem(innerTitle: "P-v") { item in
             self.switchChart(to: .Pv)
+            self.floaty.makeItemSelected((item as! ClausiusFloatyItem))
         }
 
         floaty.verticalDirection = .down
