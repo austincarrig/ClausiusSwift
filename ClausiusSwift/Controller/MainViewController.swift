@@ -203,7 +203,9 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
                              width: CGFloat,
                              height: CGFloat) -> CGPoint {
 
-        let yRatio = min(max(point.y, 0.0), height) / height
+        let boundedPoint = CGPoint(x: min(max(point.x, 0.0), width), y: min(max(point.y, 0.0), height))
+
+        let yRatio = min(max(boundedPoint.y, 0.0), height) / height
 
         var index = Int(floor(yRatio * CGFloat(chart.imageBoundaryLine!.count)))
 
@@ -230,15 +232,15 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         switch chart.displayOrientation! {
             case .right:
-                condition = point.x < x
+                condition = boundedPoint.x < x
             case .left:
-                condition = point.x > x
+                condition = boundedPoint.x > x
         }
 
         if condition {
-            return point
+            return boundedPoint
         } else {
-            return CGPoint(x: x, y: point.y)
+            return CGPoint(x: x, y: boundedPoint.y)
         }
 
     }
