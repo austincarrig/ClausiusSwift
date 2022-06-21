@@ -153,8 +153,16 @@ struct H2OWagnerPruss {
 
     static func find_rho_with_estimated_density(temperature: Double,
                                                 pressure: Double,
-                                                density_estimate:Double) -> Double
+                                                density_estimate: Double) -> Double
     {
+        // This logic was added by Austin Carrig, to account for issues with the function diverging in high P, low T region (P > P_CRIT, T < 400C)
+
+        if (pressure > H2OWagnerPrussConstants.P_c && temperature < 400 + 273.15) {
+            return calculate_rough_rho_with_estimated_density(temperature: temperature,
+                                                              pressure: pressure,
+                                                              density_estimate: density_estimate)
+        }
+
         var delta = 0.0
 
         var rho = density_estimate
@@ -194,8 +202,17 @@ struct H2OWagnerPruss {
         } else {
             // This was added by Austin Carrig on 6/14/2022 as a workaround for very wrong rho values
             // This is an estimate in the superheated regions of P-h chart with low T, high P
-            return (pressure * 1000.0) / (H2OWagnerPrussConstants.R * temperature * (1 + H2OWagnerPruss.calculate_delta(density: density_estimate) * H2OWagnerPruss.calculate_phi_r_delta(temperature: temperature, density: density_estimate)))
+            return calculate_rough_rho_with_estimated_density(temperature: temperature,
+                                                              pressure: pressure,
+                                                              density_estimate: density_estimate)
         }
+    }
+
+    fileprivate static func calculate_rough_rho_with_estimated_density(temperature: Double,
+                                                                       pressure: Double,
+                                                                       density_estimate: Double) -> Double
+    {
+        return (pressure * 1000.0) / (H2OWagnerPrussConstants.R * temperature * (1 + H2OWagnerPruss.calculate_delta(density: density_estimate) * H2OWagnerPruss.calculate_phi_r_delta(temperature: temperature, density: density_estimate)))
     }
 
     static func calculate_phi_r_delta(temperature: Double,
