@@ -165,6 +165,25 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     }
 
+    func testTsTopLeft() throws {
+
+        let plotPoint = ThermodynamicCalculator.calculateProperties(
+            with: 5.66,
+            and: 700.0,
+            for: .Ts
+        )
+
+        XCTAssertNotNil(plotPoint)
+
+        if plotPoint != nil {
+            XCTAssertGreaterThan(plotPoint!.p, 0.0)
+            XCTAssertGreaterThan(plotPoint!.v, 0.0)
+            XCTAssertGreaterThan(plotPoint!.u, 0.0)
+            XCTAssertGreaterThan(plotPoint!.h, 0.0)
+        }
+
+    }
+
     func testPointPh1() throws {
 
         let plotPoint = ThermodynamicCalculator.calculateProperties(
