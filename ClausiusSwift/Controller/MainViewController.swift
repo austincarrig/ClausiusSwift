@@ -8,11 +8,12 @@
 // TODO List:
 // - Add infoView (T-s overlay to explain regions)
 // - Add spaceController (for fine tuning) [DONE]
-// - superscripting 3 in m3 unit label
+// - superscripting 3 in m3 unit label [DONE]
 // - move location indicator when screen size changes (Mac)
 
 import UIKit
 import SnapKit
+import SwiftyBeaver
 
 class MainViewController: UIViewController {
 
@@ -39,6 +40,8 @@ class MainViewController: UIViewController {
     var displayView = DisplayView(frame: CGRect.zero)
 
     var floaty = ClausiusFloaty(frame: CGRect(x: 0.0, y: 0.0, width: 48.0, height: 48.0))
+
+    let log = SwiftyBeaver.self
 
     // MARK: - VC Lifecycle
 
@@ -99,7 +102,7 @@ class MainViewController: UIViewController {
         do {
             try locationIndicatorImageView.changeImage(to: chartType)
         } catch {
-            print("Error thrown, unable to change image")
+            log.error("Unable to change locationIndicationImageView image with chartType \(chartType)")
         }
 
     }
@@ -277,27 +280,27 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
                 for: chart.chartType
             )
 
-            updateDisplayView(with: plotPoint)
+            if let plotPoint = plotPoint {
+                updateDisplayView(with: plotPoint)
+            } else {
+                log.error("Nil plot point! -- chartType: \(chart.chartType) -- xValue \(xValue) -- yValue \(yValue)")
+            }
 
         } else {
-            print("Chart not properly initialized!! Should probably throw an exception here.")
+            log.error("Chart not properly initialized!")
         }
 
     }
 
-    func updateDisplayView(with plotPoint: PlotPoint?) {
+    func updateDisplayView(with plotPoint: PlotPoint) {
 
-        if let plotPoint = plotPoint {
-            displayView.updateRowValue(for: .t, with: plotPoint.t)
-            displayView.updateRowValue(for: .p, with: plotPoint.p)
-            displayView.updateRowValue(for: .v, with: plotPoint.v)
-            displayView.updateRowValue(for: .u, with: plotPoint.u)
-            displayView.updateRowValue(for: .h, with: plotPoint.h)
-            displayView.updateRowValue(for: .s, with: plotPoint.s)
-            displayView.updateRowValue(for: .x, with: plotPoint.x)
-        } else {
-            print("Got a nil plot point, might want to do something else here?...")
-        }
+        displayView.updateRowValue(for: .t, with: plotPoint.t)
+        displayView.updateRowValue(for: .p, with: plotPoint.p)
+        displayView.updateRowValue(for: .v, with: plotPoint.v)
+        displayView.updateRowValue(for: .u, with: plotPoint.u)
+        displayView.updateRowValue(for: .h, with: plotPoint.h)
+        displayView.updateRowValue(for: .s, with: plotPoint.s)
+        displayView.updateRowValue(for: .x, with: plotPoint.x)
 
     }
 

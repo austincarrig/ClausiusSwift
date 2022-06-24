@@ -6,14 +6,25 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    let log = SwiftyBeaver.self
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        let console = ConsoleDestination()
+        let cloud = SBPlatformDestination(appID: "OknqWo", appSecret: "gnagdulmIwld0vudxSbffmOhcdzhtyCn", encryptionKey: "defu2tzzxxbYbc1yiiayhzafQ7Eqiftn")
+
+        // below is the default, which is what I want anyway
+        // console.format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
+
+        log.addDestination(console)
+        log.addDestination(cloud)
+
         return true
     }
 
@@ -30,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
 
 }
 

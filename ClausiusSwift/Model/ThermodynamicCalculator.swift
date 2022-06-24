@@ -6,14 +6,9 @@
 //
 
 import Foundation
+import SwiftyBeaver
 
 class ThermodynamicCalculator {
-
-    // Critical temperature of water (C)
-    private static let T_CRITICAL: Double = 373.9
-
-    // Critical pressure of water (kPa)
-    // let P_CRITICAL = 22100.0
 
     // Minimum temperature to display on the T-s diagram (C)
     private static let T_SAT_MIN: Double = 1.0
@@ -77,7 +72,7 @@ class ThermodynamicCalculator {
             let temperatureC = temperatureK - ClausiusConstants.C_TO_K
 
             guard let saturatedRegionLine = SaturatedRegionLine(with: temperatureC) else {
-                print("Probably should not hit this condition")
+                SwiftyBeaver.self.error("Unable to create SaturatedRegionLine with temperature \(temperatureC)")
                 return nil
             }
 
@@ -103,7 +98,7 @@ class ThermodynamicCalculator {
             let temperatureC = temperatureK - ClausiusConstants.C_TO_K
 
             guard let saturatedRegionLine = SaturatedRegionLine(with: temperatureC) else {
-                print("Probably should not hit this condition")
+                SwiftyBeaver.self.error("Unable to create SaturatedRegionLine with temperature \(temperatureC)")
                 return nil
             }
 

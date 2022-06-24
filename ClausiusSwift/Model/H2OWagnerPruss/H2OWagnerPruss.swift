@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyBeaver
 
 struct H2OWagnerPruss {
 
@@ -83,7 +84,7 @@ struct H2OWagnerPruss {
             return rho1
         }
 
-        print("Error")
+        SwiftyBeaver.self.error("Unable to find valid return state -- temperature: \(temperature) -- pressure: \(pressure)")
         // Error return
         return -1.0
     }
