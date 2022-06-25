@@ -39,6 +39,15 @@ class ThermodynamicCalculator {
         }
     }
 
+    static func calculatePropertiesSpecVol(with xValue: Double,
+                                           and  yValue: Double) -> PlotPoint? {
+        do {
+            return try calculateTv(with: yValue, and: xValue)
+        } catch {
+            return nil
+        }
+    }
+
     private static func calculateTs(with temperature: Double,
                                     and  entropy: Double) throws -> PlotPoint? {
 
@@ -59,6 +68,29 @@ class ThermodynamicCalculator {
         } else {
             // if we don't have a SaturatedRegionLine, then we're in the superheated region...
             return try calculateSuperheatedTs(with: clampedTemp, and: entropy)
+        }
+    }
+
+    private static func calculateTv(with temperature: Double,
+                                    and  specVol: Double) throws -> PlotPoint? {
+
+        var clampedTemp = temperature
+
+        if clampedTemp < T_SAT_MIN {
+            clampedTemp = T_SAT_MIN
+        }
+
+        if let saturatedRegionLine = SaturatedRegionLine(with: clampedTemp) {
+            if specVol < saturatedRegionLine.v_f { // calculate compressed
+                return calculateCompressed(with: saturatedRegionLine)
+            } else if specVol >= saturatedRegionLine.v_f && specVol <= saturatedRegionLine.v_g { // calculate saturated
+                return calculateSaturatedTv(with: saturatedRegionLine, and: specVol)
+            } else { // calculate superheated
+                return try calculateSuperheatedTv(with: clampedTemp, and: specVol)
+            }
+        } else {
+            // if we don't have a SaturatedRegionLine, then we're in the superheated region...
+            return try calculateSuperheatedTv(with: clampedTemp, and: specVol)
         }
     }
 
@@ -150,6 +182,52 @@ class ThermodynamicCalculator {
             temperature: temperatureKelvin,
             density: density,
             internal_energy: internalEnergy
+        )
+
+        // return PlotPoint
+        return PlotPoint(
+            t: temperature,
+            p: pressure,
+            v: specificVolume,
+            u: internalEnergy,
+            h: enthalpy,
+            s: entropy,
+            x: -1.0
+        )
+    }
+
+    private static func calculateSuperheatedTv(with temperature: Double,
+                                               and  specificVolume: Double) throws -> PlotPoint? {
+
+        // calculate temperature K
+        let temperatureKelvin = temperature + ClausiusConstants.C_TO_K // temperature (C -> K)
+
+        // calculate density (1 / specificVolume)
+        let density = 1.0 / specificVolume
+
+        // calculate pressure (SuperheatedRegionCalculator)
+        let pressureMPa = H2OWagnerPruss.pressureVapourLiquid(with: temperatureKelvin)
+
+        // calculate pressure MPa
+        let pressure = pressureMPa * 1000.0 // pressure (MPa -> kPa)
+
+        // calculate internal energy (WagnerPruss)
+        let internalEnergy = H2OWagnerPruss.calculate_internal_energy(
+            temperature: temperatureKelvin,
+            density: density
+        )
+
+        // calculate enthalpy (WagnerPruss)
+        let enthalpy = H2OWagnerPruss.calculate_enthalpy_with_u(
+            temperature: temperatureKelvin,
+            density: density,
+            internal_energy: internalEnergy
+        )
+
+        // calculate entropy
+        let entropy = H2OWagnerPruss.calculate_entropy(
+            temperature: temperatureKelvin,
+            density: density
         )
 
         // return PlotPoint
@@ -275,6 +353,16 @@ class ThermodynamicCalculator {
     private static func calculateSaturatedTs(with saturatedRegionLine: SaturatedRegionLine,
                                              and  entropy: Double) -> PlotPoint? {
         let quality = (entropy - saturatedRegionLine.s_f) / (saturatedRegionLine.s_g - saturatedRegionLine.s_f)
+
+        return calculateSaturated(
+            with: saturatedRegionLine,
+            and: quality
+        )
+    }
+
+    private static func calculateSaturatedTv(with saturatedRegionLine: SaturatedRegionLine,
+                                             and  specificVolume: Double) -> PlotPoint? {
+        let quality = (specificVolume - saturatedRegionLine.v_f) / (saturatedRegionLine.v_g - saturatedRegionLine.v_f)
 
         return calculateSaturated(
             with: saturatedRegionLine,

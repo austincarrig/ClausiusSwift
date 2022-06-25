@@ -473,7 +473,7 @@ struct H2OWagnerPruss {
 
     }
 
-    private static func pressureVapourLiquid(with temperature: Double) -> Double {
+    static func pressureVapourLiquid(with temperature: Double) -> Double {
         let aLV : [Double] = [
             -7.85951783,
              1.84408259,

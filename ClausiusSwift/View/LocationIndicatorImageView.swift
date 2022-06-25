@@ -62,6 +62,16 @@ class LocationIndicatorImageView : UIImageView {
         return _layer
     }()
 
+    lazy var chartLinesLayer: CAShapeLayer = {
+        let _layer = CAShapeLayer()
+        _layer.fillColor = UIColor.clear.cgColor
+        _layer.strokeColor = UIColor.purple.cgColor
+        _layer.lineWidth = 1.0
+        _layer.rasterizationScale = 2.0 * UIScreen.screens.first!.scale
+        _layer.shouldRasterize = true
+        return _layer
+    }()
+
     init(frame: CGRect,
          chartType: ChartType) {
 
@@ -163,6 +173,29 @@ class LocationIndicatorImageView : UIImageView {
         )
     }
 
+    func drawLines(using points: [[CGPoint]]) {
+        let chartLine = CGMutablePath()
+
+        for setOfPoints in points {
+
+            var lastPoint: CGPoint?
+
+            for point in setOfPoints {
+                if let lastPoint = lastPoint {
+                    chartLine.move(to: lastPoint)
+                    chartLine.addLine(to: point)
+                }
+                lastPoint = point
+            }
+
+            chartLine.closeSubpath()
+        }
+
+        chartLinesLayer.path = chartLine
+
+        self.layer.addSublayer(chartLinesLayer)
+    }
+
     func removeIndicators() {
         clearLayers()
     }
@@ -171,6 +204,7 @@ class LocationIndicatorImageView : UIImageView {
         locationIndicatorRingLayer.removeFromSuperlayer()
         locationIndicatorCircleLayer.removeFromSuperlayer()
         locationIndicatorHitmarkerLayer.removeFromSuperlayer()
+        chartLinesLayer.removeFromSuperlayer()
     }
 
     private func drawInnerCircle(at location: CGPoint) {
