@@ -86,6 +86,78 @@ class Interpolator {
         return f
     }
 
+    static func interpolateX2D(array2D: [[Double]],
+                               xArray: [Double],
+                               yArray: [Double],
+                               yValue: Double,
+                               array2DValue: Double) throws -> Double {
+
+        // find xIndex
+        var yIndex = 0
+
+        for y in yArray {
+            if fabs(yValue - y) < Double.ulpOfOne {
+                break
+            } else if y > yValue {
+                yIndex -= 1
+                break
+            }
+            yIndex += 1
+        }
+
+        var yWeight = 0.0
+
+        // This prevents crashes if we are at the max Index
+        // See comment in interpolateY2D for full explanation
+        if yIndex >= yArray.count - 1 {
+            yWeight = 1.0
+            yIndex = yArray.count - 2
+        } else if yIndex < 0 {
+            throw InterpolatorError.indexOutOfBounds
+        } else {
+            yWeight = (yValue - yArray[yIndex]) / (yArray[yIndex + 1] - yArray[yIndex])
+        }
+
+        // find xIndex
+        var xIndex = 0
+
+        for _ in xArray {
+            let z1 = array2D[xIndex][yIndex] + yWeight * (array2D[xIndex][yIndex + 1] - array2D[xIndex][yIndex])
+            let z2 = array2D[xIndex + 1][yIndex] + yWeight * (array2D[xIndex + 1][yIndex + 1] - array2D[xIndex + 1][yIndex])
+            let cond1 = z1 > z2 && z1 >= array2DValue && array2DValue >= z2
+            let cond2 = z1 < z2 && z1 <= array2DValue && array2DValue <= z2
+            if cond1 || cond2 {
+                break
+            }
+            xIndex += 1
+            if xIndex + 1 >= xArray.count || xIndex + 1 >= xArray.count {
+                throw InterpolatorError.indexOutOfBounds
+            }
+        }
+
+        let x1 = xArray[xIndex]
+        let x2 = xArray[xIndex + 1]
+        let y1 = yArray[yIndex]
+        let y2 = yArray[yIndex + 1]
+        let f11 = array2D[xIndex][yIndex]
+        let f12 = array2D[xIndex][yIndex + 1]
+        let f21 = array2D[xIndex + 1][yIndex]
+        let f22 = array2D[xIndex + 1][yIndex + 1]
+
+        let a00 = ((x2 * y2 * f11) - (x2 * y1 * f12) - (x1 * y2 * f21) + (x1 * y1 * f22)) / ((x2 - x1) * (y2 - y1))
+        let a10 = ((-y2 * f11) + (y1 * f12) + (y2 * f21) - (y1 * f22)) / ((x2 - x1) * (y2 - y1))
+        let a01 = ((-x2 * f11) + (x2 * f12) + (x1 * f21) - (x1 * f22)) / ((x2 - x1) * (y2 - y1))
+        let a11 = (f11 - f12 - f21 + f22) / ((x2 - x1) * (y2 - y1))
+
+        let a = a00 + a01 * yValue
+        let b = a10
+        let c = a11 * yValue
+
+        let x = (array2DValue - a) / (b + c)
+
+        return x
+    }
+
     static func interpolateY2D(array2D: [[Double]],
                                xArray: [Double],
                                yArray: [Double],
@@ -144,6 +216,8 @@ class Interpolator {
                 throw InterpolatorError.indexOutOfBounds
             }
         }
+
+        // Polynomial fit using https://en.wikipedia.org/wiki/Bilinear_interpolation#Polynomial_fit
 
         let x1 = xArray[xIndex]
         let x2 = xArray[xIndex + 1]

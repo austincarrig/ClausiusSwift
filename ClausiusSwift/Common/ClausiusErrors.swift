@@ -9,8 +9,11 @@ import Foundation
 
 enum ClausiusError: Error {
     // Throw when we attempt to use a chart type which is unsupported
-    // For a while, this will be .Pv and .Ph, but eventually these charts
-    // will become supported, at which point this error will only be for
-    // invalid enumerated cases
     case invalidChartType
+
+    // Throw when we attempt to provide a function or calculator with an
+    // unsupported valueType (such as using .t to attempt to calculate
+    // superheated pressure in the SuperheatedRegionCalculator, for which
+    // temperature is already the primary input)
+    case invalidValueType
 }

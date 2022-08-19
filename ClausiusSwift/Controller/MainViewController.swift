@@ -89,7 +89,11 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        drawLineOfConstantSpecificVolume()
+        // drawLineOfConstantSpecificVolume()
+
+        // drawLinesOfConstantEnthalpy()
+
+        drawLineOfConstantPressure()
     }
 
     func switchChart(to chartType: ChartType) {
@@ -153,6 +157,58 @@ class MainViewController: UIViewController {
 
     }
 
+    func drawLineOfConstantPressure() {
+
+        let pressures = [1.0, 3.0, 6.0, 12.0, 25.0, 50.0, 100.0,
+                         200.0, 500.0, 1000.0, 2000.0, 5000.0, 10000.0,
+                         20000.0, 40000.0, 60000.0, 80000.0, 100000.0]
+        var points : [[CGPoint]] = []
+
+        for p in pressures {
+
+            var setOfPoints: [CGPoint] = []
+
+            for t in stride(from: 0, to: 701, by: 1) {
+
+                let plotPoint = ThermodynamicCalculator.calculatePropertiesPressure(with: p, and: Double(t))
+
+                if let plotPoint = plotPoint, let xAxis = chart.xAxis, let yAxis = chart.yAxis {
+
+                    var xPoint = 0.0, yPoint = 0.0
+
+                    let xValue = plotPoint.s, yValue = plotPoint.t
+
+                    switch xAxis.scaleType {
+                        case .linear:
+                            let xScale = (xAxis.max - xAxis.min) / locationIndicatorImageView.bounds.width
+                            xPoint = (xValue - xAxis.min) / xScale
+                        case .log:
+                            let xScale = (log10(xAxis.max) - log10(xAxis.min)) / locationIndicatorImageView.bounds.width
+                            xPoint = (log10(xValue) - log10(xAxis.min)) / xScale
+                    }
+
+                    // y on iOS screen and y on graph point in opposite directions, hence height - y
+                    switch yAxis.scaleType {
+                        case .linear:
+                            let yScale = (yAxis.max - yAxis.min) / locationIndicatorImageView.bounds.height
+                            yPoint = locationIndicatorImageView.bounds.height - (yValue - yAxis.min) / yScale
+                        case .log:
+                            let yScale = (log10(yAxis.max) - log10(yAxis.min)) / locationIndicatorImageView.bounds.height
+                            yPoint = locationIndicatorImageView.bounds.height - (log10(yValue) - log10(yAxis.min)) / yScale
+                    }
+
+                    setOfPoints.append(CGPoint(x: xPoint, y: yPoint))
+
+                }
+            }
+
+            points.append(setOfPoints)
+        }
+
+        locationIndicatorImageView.drawLines(using: points)
+
+    }
+
     func drawLineOfConstantSpecificVolume() {
 
         let specVols = [0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009,
@@ -166,9 +222,70 @@ class MainViewController: UIViewController {
 
             var setOfPoints: [CGPoint] = []
 
-            for t in stride(from: 0, to: 701, by: 2) {
+            for t in stride(from: 0, to: 701, by: 1) {
 
                 let plotPoint = ThermodynamicCalculator.calculatePropertiesSpecVol(with: specVol, and: Double(t))
+
+                if let plotPoint = plotPoint, let xAxis = chart.xAxis, let yAxis = chart.yAxis {
+
+                    var xPoint = 0.0, yPoint = 0.0
+
+                    let xValue = plotPoint.s, yValue = plotPoint.t
+
+                    switch xAxis.scaleType {
+                        case .linear:
+                            let xScale = (xAxis.max - xAxis.min) / locationIndicatorImageView.bounds.width
+                            xPoint = (xValue - xAxis.min) / xScale
+                        case .log:
+                            let xScale = (log10(xAxis.max) - log10(xAxis.min)) / locationIndicatorImageView.bounds.width
+                            xPoint = (log10(xValue) - log10(xAxis.min)) / xScale
+                    }
+
+                    // y on iOS screen and y on graph point in opposite directions, hence height - y
+                    switch yAxis.scaleType {
+                        case .linear:
+                            let yScale = (yAxis.max - yAxis.min) / locationIndicatorImageView.bounds.height
+                            yPoint = locationIndicatorImageView.bounds.height - (yValue - yAxis.min) / yScale
+                        case .log:
+                            let yScale = (log10(yAxis.max) - log10(yAxis.min)) / locationIndicatorImageView.bounds.height
+                            yPoint = locationIndicatorImageView.bounds.height - (log10(yValue) - log10(yAxis.min)) / yScale
+                    }
+
+                    setOfPoints.append(CGPoint(x: xPoint, y: yPoint))
+
+                }
+            }
+
+            points.append(setOfPoints)
+        }
+
+        locationIndicatorImageView.drawLines(using: points)
+
+    }
+
+    func drawLinesOfConstantEnthalpy() {
+
+        var enthalpies: [Double] = []
+        var temperatures: [Double] = []
+        var points : [[CGPoint]] = []
+
+        for h in stride(from: 0, to: 4001, by: 100) {
+            enthalpies.append(Double(h))
+        }
+
+        for t in 0...7000 {
+            if t == 0 || t % 10 == 0 || (t > 3720 && t < 4200) {
+                temperatures.append(Double(t) / 10.0)
+            }
+        }
+
+        for h in enthalpies {
+
+            var setOfPoints: [CGPoint] = []
+
+            for t in temperatures {
+
+                let plotPoint = ThermodynamicCalculator.calculatePropertiesEnthalpy(with: h, and: Double(t))
 
                 if let plotPoint = plotPoint, let xAxis = chart.xAxis, let yAxis = chart.yAxis {
 
