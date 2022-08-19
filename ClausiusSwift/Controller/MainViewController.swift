@@ -39,6 +39,8 @@ class MainViewController: UIViewController {
     // for displaying calculated thermodynamic values
     var displayView = DisplayView(frame: CGRect.zero)
 
+    // ClausiusFloaty is the floating button menu, which provides
+    // the capability to swap between different charts
     var floaty = ClausiusFloaty(frame: CGRect(x: 0.0, y: 0.0, width: 48.0, height: 48.0))
 
     let log = SwiftyBeaver.self
@@ -82,6 +84,7 @@ class MainViewController: UIViewController {
             make.edges.equalTo(view)
         }
 
+        // set constraints on load for T-s, which is to the left
         alignViewsLeft()
 
     }
@@ -107,6 +110,10 @@ class MainViewController: UIViewController {
 
     }
 
+    /*
+     * Align the DisplayView and Floaty menu to the left of the screen,
+     * by deleting and resetting their constraints to the top-left corner
+     */
     func alignViewsLeft() {
 
         displayView.snp.removeConstraints()
@@ -127,6 +134,10 @@ class MainViewController: UIViewController {
 
     }
 
+    /*
+     * Align the DisplayView and Floaty menu to the right of the screen,
+     * by deleting and resetting their constraints to the top-right corner
+     */
     func alignViewsRight() {
 
         displayView.snp.removeConstraints()
@@ -202,6 +213,7 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
     }
 
+    // TODO: Document this function
     func clipToChartBoundary(point: CGPoint,
                              width: CGFloat,
                              height: CGFloat) -> CGPoint {
@@ -248,6 +260,7 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
     }
 
+    // TODO: Document this function
     func touchDidRegister(at location: CGPoint,
                           in locationView: LocationIndicatorImageView) {
 
