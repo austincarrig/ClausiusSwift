@@ -18,24 +18,6 @@ class SuperheatedRegionCalculatorTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testClampHigh() {
-        let maxValue = SuperheatedRegionCalculatorConstantsTS.TEMPERATURE.last!
-        let clampedValue = SuperheatedRegionCalculator.clamp(temperature: maxValue + 1.0)
-        XCTAssertEqual(clampedValue, maxValue)
-    }
-
-    func testClampLow() {
-        let minValue = SuperheatedRegionCalculatorConstantsTS.TEMPERATURE.first!
-        let clampedValue = SuperheatedRegionCalculator.clamp(temperature: minValue - 1.0)
-        XCTAssertEqual(clampedValue, minValue)
-    }
-
-    func testClampMiddle() {
-        let midValue = SuperheatedRegionCalculatorConstantsTS.TEMPERATURE[SuperheatedRegionCalculatorConstantsTS.TEMPERATURE.count / 2]
-        let clampedValue = SuperheatedRegionCalculator.clamp(temperature: midValue)
-        XCTAssertEqual(clampedValue, midValue)
-    }
-
     func testCalculatePressure() {
         // This test unveiled a major issue in the interpolation processing within this function
         // It used to just be a rudamentary 1D interpolation, rather than 2D

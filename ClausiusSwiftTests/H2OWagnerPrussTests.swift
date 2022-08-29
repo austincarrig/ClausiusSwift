@@ -10,7 +10,7 @@ import XCTest
 
 // The compared epsilon in many of these test cases is Float.ulpOfOne, rather than Double.ulpOfOne
 // The reason for this is that these tests were originally written with 32-bit floating point
-// values in Rust, and there's little utility to changed the calculated values to have higher precision.
+// values in Rust, and there's little utility to change the calculated values to have higher precision.
 
 class H2OWagnerPrussTests: XCTestCase {
 
