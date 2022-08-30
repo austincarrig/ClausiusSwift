@@ -353,8 +353,6 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
 
         let x = xRatio * width + adjustment
 
-        print(width)
-
         var shouldReturnClippedPoint = false
 
         // we always calculate what the clipped x should be, but we only clip if we're
