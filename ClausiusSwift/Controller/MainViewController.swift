@@ -218,7 +218,7 @@ class MainViewController: UIViewController {
 
         floaty.snp.makeConstraints { make in
             make.right.equalTo(displayView.snp.left).offset(-FLOATY_SIDE_OFFSET)
-            make.top.equalTo(displayView)
+            make.lastBaseline.equalTo(displayView.titleLabel)
             make.height.width.equalTo(FLOATY_WIDTH_HEIGHT)
         }
 
