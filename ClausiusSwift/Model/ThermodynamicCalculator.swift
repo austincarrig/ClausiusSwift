@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftyBeaver
 
 class ThermodynamicCalculator {
 
@@ -72,7 +71,7 @@ class ThermodynamicCalculator {
             let temperatureC = temperatureK - ClausiusConstants.C_TO_K
 
             guard let saturatedRegionLine = SaturatedRegionLine(with: temperatureC) else {
-                SwiftyBeaver.self.error("Unable to create SaturatedRegionLine with temperature \(temperatureC)")
+                print("Unable to create SaturatedRegionLine with temperature \(temperatureC)")
                 return nil
             }
 
@@ -98,7 +97,7 @@ class ThermodynamicCalculator {
             let temperatureC = temperatureK - ClausiusConstants.C_TO_K
 
             guard let saturatedRegionLine = SaturatedRegionLine(with: temperatureC) else {
-                SwiftyBeaver.self.error("Unable to create SaturatedRegionLine with temperature \(temperatureC)")
+                print("Unable to create SaturatedRegionLine with temperature \(temperatureC)")
                 return nil
             }
 

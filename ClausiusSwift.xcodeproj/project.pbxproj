@@ -45,7 +45,6 @@
 		49C7800328411D270049F1B2 /* ClausiusErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800228411D270049F1B2 /* ClausiusErrors.swift */; };
 		49C78006284121EA0049F1B2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 49C78005284121EA0049F1B2 /* SnapKit */; };
 		49C7800828413A100049F1B2 /* ChartLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7800728413A100049F1B2 /* ChartLines.swift */; };
-		49DC9C062858FBDD005DEE56 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = 49DC9C052858FBDD005DEE56 /* SwiftyBeaver */; };
 		49DC9C102859052C005DEE56 /* FloatyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC9C092859052C005DEE56 /* FloatyDelegate.swift */; };
 		49DC9C112859052C005DEE56 /* FloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC9C0A2859052C005DEE56 /* FloatyItem.swift */; };
 		49DC9C122859052C005DEE56 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DC9C0B2859052C005DEE56 /* FloatyManager.swift */; };
@@ -76,7 +75,7 @@
 		4938924E283EBF6E0038D304 /* H2OWagnerPrussTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = H2OWagnerPrussTests.swift; sourceTree = "<group>"; };
 		493EC8D6283EF7E5004C74C3 /* ClausiusConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClausiusConstants.swift; sourceTree = "<group>"; };
 		493EC8D8283EF966004C74C3 /* ThermodynamicCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermodynamicCalculatorTests.swift; sourceTree = "<group>"; };
-		495B9AFC283AFB640018DAB8 /* ClausiusSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClausiusSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		495B9AFC283AFB640018DAB8 /* Clausius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clausius.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		495B9AFF283AFB640018DAB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		495B9B01283AFB640018DAB8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		495B9B03283AFB640018DAB8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -126,7 +125,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C78006284121EA0049F1B2 /* SnapKit in Frameworks */,
-				49DC9C062858FBDD005DEE56 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +158,7 @@
 		495B9AFD283AFB640018DAB8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				495B9AFC283AFB640018DAB8 /* ClausiusSwift.app */,
+				495B9AFC283AFB640018DAB8 /* Clausius.app */,
 				495B9B12283AFB640018DAB8 /* ClausiusSwiftTests.xctest */,
 				495B9B1C283AFB640018DAB8 /* ClausiusSwiftUITests.xctest */,
 			);
@@ -338,10 +336,9 @@
 			name = ClausiusSwift;
 			packageProductDependencies = (
 				49C78005284121EA0049F1B2 /* SnapKit */,
-				49DC9C052858FBDD005DEE56 /* SwiftyBeaver */,
 			);
 			productName = ClausiusSwift;
-			productReference = 495B9AFC283AFB640018DAB8 /* ClausiusSwift.app */;
+			productReference = 495B9AFC283AFB640018DAB8 /* Clausius.app */;
 			productType = "com.apple.product-type.application";
 		};
 		495B9B11283AFB640018DAB8 /* ClausiusSwiftTests */ = {
@@ -414,7 +411,6 @@
 			mainGroup = 495B9AF3283AFB640018DAB8;
 			packageReferences = (
 				49C78004284121EA0049F1B2 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				49DC9C042858FBDD005DEE56 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 			);
 			productRefGroup = 495B9AFD283AFB640018DAB8 /* Products */;
 			projectDirPath = "";
@@ -657,9 +653,10 @@
 				DEVELOPMENT_TEAM = 362H45Q9HF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ClausiusSwift/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Clausius;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -667,13 +664,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RowanApps.Clausius;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Clausius;
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "2,6";
 			};
 			name = Debug;
 		};
@@ -687,11 +685,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 362H45Q9HF;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ClausiusSwift/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Clausius;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationLandscapeLeft";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -699,13 +699,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RowanApps.Clausius;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Clausius;
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "2,6";
 			};
 			name = Release;
 		};
@@ -835,14 +836,6 @@
 				kind = branch;
 			};
 		};
-		49DC9C042858FBDD005DEE56 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -850,11 +843,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 49C78004284121EA0049F1B2 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		49DC9C052858FBDD005DEE56 /* SwiftyBeaver */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 49DC9C042858FBDD005DEE56 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
-			productName = SwiftyBeaver;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

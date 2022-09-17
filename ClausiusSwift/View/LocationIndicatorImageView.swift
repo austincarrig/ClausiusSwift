@@ -8,7 +8,6 @@
 import CoreGraphics
 import UIKit
 import SnapKit
-import SwiftyBeaver
 
 protocol LocationIndicatorImageViewDelegate {
     func touchDidBegin(at location: CGPoint, in locationView: LocationIndicatorImageView)
@@ -31,8 +30,6 @@ class LocationIndicatorImageView : UIImageView {
     let imageRadius: CGFloat = 34.0
 
     var delegate: LocationIndicatorImageViewDelegate?
-
-    let log = SwiftyBeaver.self
 
     lazy var locationIndicatorRingLayer: CAShapeLayer = {
         let _layer = CAShapeLayer()
@@ -70,9 +67,9 @@ class LocationIndicatorImageView : UIImageView {
         do {
             try self.changeImage(to: chartType)
         } catch ClausiusError.invalidChartType {
-            log.error("Attempted to initialize LocationIndicatorImageView with invalid chartType \(chartType)")
+            print("Attempted to initialize LocationIndicatorImageView with invalid chartType \(chartType)")
         } catch {
-            log.error("Unknown error")
+            print("Unknown error")
         }
 
         self.isUserInteractionEnabled = true

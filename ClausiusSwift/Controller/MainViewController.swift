@@ -13,7 +13,6 @@
 
 import UIKit
 import SnapKit
-import SwiftyBeaver
 
 // CONSTANTS
 let DISPLAY_VIEW_HEIGHT: CGFloat = 340.0
@@ -49,8 +48,6 @@ class MainViewController: UIViewController {
 
     // use for fine tuning, could probably re-name...
     let spaceController = SpaceController()
-
-    let log = SwiftyBeaver.self
 
     ///////////
     // Views //
@@ -171,7 +168,7 @@ class MainViewController: UIViewController {
         do {
             try locationIndicatorImageView.changeImage(to: chartType)
         } catch {
-            log.error("Unable to change locationIndicationImageView image with chartType \(chartType)")
+            print("Unable to change locationIndicationImageView image with chartType \(chartType)")
         }
 
     }
@@ -424,11 +421,11 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
             if let plotPoint = plotPoint {
                 updateDisplayView(with: plotPoint)
             } else {
-                log.error("Nil plot point! -- chartType: \(chart.chartType) -- xValue \(xValue) -- yValue \(yValue)")
+                print("Nil plot point! -- chartType: \(chart.chartType) -- xValue \(xValue) -- yValue \(yValue)")
             }
 
         } else {
-            log.error("Chart not properly initialized!")
+            print("Chart not properly initialized!")
         }
 
     }
