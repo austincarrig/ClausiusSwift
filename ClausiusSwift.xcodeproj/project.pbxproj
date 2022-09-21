@@ -649,7 +649,7 @@
 				CODE_SIGN_ENTITLEMENTS = ClausiusSwift/ClausiusSwift.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 362H45Q9HF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ClausiusSwift/Info.plist;
@@ -684,7 +684,7 @@
 				CODE_SIGN_ENTITLEMENTS = ClausiusSwift/ClausiusSwift.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 362H45Q9HF;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GENERATE_INFOPLIST_FILE = YES;
