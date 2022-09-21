@@ -28,8 +28,8 @@ class MainViewController: UIViewController {
     // Flags and Indicators //
     //////////////////////////
 
-    // tracks if a touch has EVER been registered on the current chart
-    var touchHadRegistered = false
+    // tracks if a touch is currently in progress (touchDidBegin has been called, but touchDidEnd has not)
+    var touchIsActive = false
 
     // keeps track of the last point received from the LocationIndicator delegate
     // we need this so we can place the small indicator at the last calculated point
@@ -221,71 +221,69 @@ class MainViewController: UIViewController {
 
     }
 
-}
+    // MARK: - Keyboard Responder
 
-// MARK: - LocationIndicatorImageViewDelegate
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
 
-extension MainViewController: LocationIndicatorImageViewDelegate {
+        var didHandleEvent = false
 
-    /*
-     * Delegate method called when the LocationIndicatorImageView receives an initial touch event.
-     */
-    func touchDidBegin(at location: CGPoint, in locationView: LocationIndicatorImageView) {
+        // only handle keyboard presses if there is no active touch,
+        // meaning the mouse button is NOT pressed down, but a touch
+        // has registered at some point since the app opened
+        if !touchIsActive && lastTouchLocation != nil {
+            let delta = 10.0
 
-        touchHadRegistered = true
+            for press in presses {
+                guard let key = press.key else { continue }
+                if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow {
+                    print("left")
 
-        // get the touch location clipped to the bounds of the chart
-        let clippedPoint = clipToChartBoundary(
-            point: location,
-            width: locationView.bounds.width,
-            height: locationView.bounds.height
-        )
+                    lastTouchLocation!.x = lastTouchLocation!.x - delta
 
-        // add large indicator at point to locationView
-        locationView.drawLargeIndicator(at: clippedPoint)
+                    didHandleEvent = true
+                }
+                if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
+                    print("right")
 
-        touchDidRegister(at: clippedPoint, in: locationView)
+                    lastTouchLocation!.x = lastTouchLocation!.x + delta
 
-        lastTouchLocation = clippedPoint
+                    didHandleEvent = true
+                }
+                if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
+                    print("up")
 
-        // Reset spaceController, which resets the parameters for fine-tuning. Every time a
-        // new touch BEGINS within the LocationIndicatorImageView, the fine-tuning conditions
-        // need to reset.
-        spaceController.reset()
+                    lastTouchLocation!.y = lastTouchLocation!.y - delta
 
-    }
+                    didHandleEvent = true
+                }
+                if key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
+                    print("down")
 
-    /*
-     * Delegate method called when the LocationIndicatorImageView receives a moved touch event.
-     */
-    func touchDidMove(to location: CGPoint, in locationView: LocationIndicatorImageView) {
+                    lastTouchLocation!.y = lastTouchLocation!.y + delta
 
-        let fineTunedPoint = spaceController.fineTunedWithLatest(point: location)
+                    didHandleEvent = true
+                }
+            }
 
-        // get the touch location clipped to the bounds of the chart
-        let clippedPoint = clipToChartBoundary(
-            point: fineTunedPoint,
-            width: locationView.bounds.width,
-            height: locationView.bounds.height
-        )
+            // get the touch location clipped to the bounds of the chart
+            let clippedPoint = clipToChartBoundary(
+                point: lastTouchLocation!,
+                width: locationIndicatorImageView.bounds.width,
+                height: locationIndicatorImageView.bounds.height
+            )
 
-        locationView.drawLargeIndicator(at: clippedPoint)
+            // add large indicator at point to locationView
+            locationIndicatorImageView.drawSmallIndicator(at: clippedPoint)
 
-        touchDidRegister(at: clippedPoint, in: locationView)
+            touchDidRegister(at: clippedPoint, in: locationIndicatorImageView)
 
-        lastTouchLocation = clippedPoint
+            lastTouchLocation = clippedPoint
+        }
 
-    }
-
-    /*
-     * Called when the touch within the LocationIndicatorImageView ends. This usually means
-     * the user has stopped dragging the largeIndicator across the chart, and has lifted their
-     * finger from the screen.
-     */
-    func touchDidEnd(at location: CGPoint, in locationView: LocationIndicatorImageView) {
-
-        // Add small indicator to locationView
-        locationView.drawSmallIndicator(at: lastTouchLocation ?? CGPoint(x: -20.0, y: -20.0))
+        if didHandleEvent == false {
+            // Didn't handle this key press, so pass the event to the next responder.
+            super.pressesBegan(presses, with: event)
+        }
 
     }
 
@@ -427,6 +425,76 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
         } else {
             print("Chart not properly initialized!")
         }
+
+    }
+
+}
+
+// MARK: - LocationIndicatorImageViewDelegate
+
+extension MainViewController: LocationIndicatorImageViewDelegate {
+
+    /*
+     * Delegate method called when the LocationIndicatorImageView receives an initial touch event.
+     */
+    func touchDidBegin(at location: CGPoint, in locationView: LocationIndicatorImageView) {
+
+        touchIsActive = true
+
+        // get the touch location clipped to the bounds of the chart
+        let clippedPoint = clipToChartBoundary(
+            point: location,
+            width: locationView.bounds.width,
+            height: locationView.bounds.height
+        )
+
+        // add large indicator at point to locationView
+        locationView.drawLargeIndicator(at: clippedPoint)
+
+        touchDidRegister(at: clippedPoint, in: locationView)
+
+        lastTouchLocation = clippedPoint
+
+        // Reset spaceController, which resets the parameters for fine-tuning. Every time a
+        // new touch BEGINS within the LocationIndicatorImageView, the fine-tuning conditions
+        // need to reset.
+        spaceController.reset()
+
+    }
+
+    /*
+     * Delegate method called when the LocationIndicatorImageView receives a moved touch event.
+     */
+    func touchDidMove(to location: CGPoint, in locationView: LocationIndicatorImageView) {
+
+        let fineTunedPoint = spaceController.fineTunedWithLatest(point: location)
+
+        // get the touch location clipped to the bounds of the chart
+        let clippedPoint = clipToChartBoundary(
+            point: fineTunedPoint,
+            width: locationView.bounds.width,
+            height: locationView.bounds.height
+        )
+
+        locationView.drawLargeIndicator(at: clippedPoint)
+
+        touchDidRegister(at: clippedPoint, in: locationView)
+
+        lastTouchLocation = clippedPoint
+
+    }
+
+    /*
+     * Called when the touch within the LocationIndicatorImageView ends. This usually means
+     * the user has stopped dragging the largeIndicator across the chart, and has lifted their
+     * finger from the screen.
+     */
+    func touchDidEnd(at location: CGPoint, in locationView: LocationIndicatorImageView) {
+
+        // Add small indicator to locationView
+        locationView.drawSmallIndicator(at: lastTouchLocation ?? CGPoint(x: -20.0, y: -20.0))
+
+        touchIsActive = false
 
     }
 
