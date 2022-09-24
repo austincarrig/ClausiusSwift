@@ -225,6 +225,8 @@ class MainViewController: UIViewController {
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
 
+        // Indicates whether the MainViewController is responding to the key press
+        // If this remains false, the press will be passed up the responder chain
         var didHandleEvent = false
 
         // only handle keyboard presses if there is no active touch,
@@ -280,7 +282,7 @@ class MainViewController: UIViewController {
             lastTouchLocation = clippedPoint
         }
 
-        if didHandleEvent == false {
+        if !didHandleEvent {
             // Didn't handle this key press, so pass the event to the next responder.
             super.pressesBegan(presses, with: event)
         }
