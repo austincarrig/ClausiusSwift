@@ -49,6 +49,8 @@ class MainViewController: UIViewController {
     // use for fine tuning, could probably re-name...
     let spaceController = SpaceController()
 
+    var keyboardTimer: Timer?
+
     ///////////
     // Views //
     ///////////
@@ -217,74 +219,6 @@ class MainViewController: UIViewController {
             make.right.equalTo(displayView.snp.left).offset(-FLOATY_SIDE_OFFSET)
             make.lastBaseline.equalTo(displayView.titleLabel)
             make.height.width.equalTo(FLOATY_WIDTH_HEIGHT)
-        }
-
-    }
-
-    // MARK: - Keyboard Responder
-
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-
-        // Indicates whether the MainViewController is responding to the key press
-        // If this remains false, the press will be passed up the responder chain
-        var didHandleEvent = false
-
-        // only handle keyboard presses if there is no active touch,
-        // meaning the mouse button is NOT pressed down, but a touch
-        // has registered at some point since the app opened
-        if !touchIsActive && lastTouchLocation != nil {
-            let delta = 10.0
-
-            for press in presses {
-                guard let key = press.key else { continue }
-                if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow {
-                    print("left")
-
-                    lastTouchLocation!.x = lastTouchLocation!.x - delta
-
-                    didHandleEvent = true
-                }
-                if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
-                    print("right")
-
-                    lastTouchLocation!.x = lastTouchLocation!.x + delta
-
-                    didHandleEvent = true
-                }
-                if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
-                    print("up")
-
-                    lastTouchLocation!.y = lastTouchLocation!.y - delta
-
-                    didHandleEvent = true
-                }
-                if key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
-                    print("down")
-
-                    lastTouchLocation!.y = lastTouchLocation!.y + delta
-
-                    didHandleEvent = true
-                }
-            }
-
-            // get the touch location clipped to the bounds of the chart
-            let clippedPoint = clipToChartBoundary(
-                point: lastTouchLocation!,
-                width: locationIndicatorImageView.bounds.width,
-                height: locationIndicatorImageView.bounds.height
-            )
-
-            // add large indicator at point to locationView
-            locationIndicatorImageView.drawSmallIndicator(at: clippedPoint)
-
-            touchDidRegister(at: clippedPoint, in: locationIndicatorImageView)
-
-            lastTouchLocation = clippedPoint
-        }
-
-        if !didHandleEvent {
-            // Didn't handle this key press, so pass the event to the next responder.
-            super.pressesBegan(presses, with: event)
         }
 
     }
@@ -509,6 +443,129 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
         displayView.updateRowValue(for: .h, with: plotPoint.h)
         displayView.updateRowValue(for: .s, with: plotPoint.s)
         displayView.updateRowValue(for: .x, with: plotPoint.x)
+
+    }
+
+}
+
+// MARK: - Keyboard Responder
+
+extension MainViewController {
+
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+
+        // Indicates whether the MainViewController is responding to the key press
+        // If this remains false, the press will be passed up the responder chain
+        var didHandleEvent = false
+
+        // only handle keyboard presses if there is no active touch,
+        // meaning the mouse button is NOT pressed down, but a touch
+        // has registered at some point since the app opened
+        if !touchIsActive && lastTouchLocation != nil {
+            var delta = 5.0
+
+            var deltaPoint = CGPoint.zero
+
+            for press in presses {
+                guard let key = press.key else { continue }
+
+                // .alternate is the Option key
+                // If the user is pressing the option key, we move the indicator further
+                if key.modifierFlags.contains(.alternate) {
+                    delta = delta * 3.0
+                }
+
+                if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow {
+
+                    deltaPoint.x = -delta
+                    didHandleEvent = true
+
+                } else if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
+
+                    deltaPoint.x = delta
+                    didHandleEvent = true
+
+                } else if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
+
+                    deltaPoint.y = -delta
+                    didHandleEvent = true
+
+                } else if key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow {
+
+                    deltaPoint.y = delta
+                    didHandleEvent = true
+
+                }
+            }
+
+            lastTouchLocation!.x = lastTouchLocation!.x + 2.0 * deltaPoint.x
+            lastTouchLocation!.y = lastTouchLocation!.y + 2.0 * deltaPoint.y
+
+            // get the touch location clipped to the bounds of the chart
+            let clippedPoint = clipToChartBoundary(
+                point: lastTouchLocation!,
+                width: locationIndicatorImageView.bounds.width,
+                height: locationIndicatorImageView.bounds.height
+            )
+
+            // add small indicator at point to locationView
+            locationIndicatorImageView.drawSmallIndicator(at: clippedPoint)
+
+            touchDidRegister(at: clippedPoint, in: locationIndicatorImageView)
+
+            lastTouchLocation = clippedPoint
+
+            keyboardTimer = Timer.init(fire: Date.init(timeIntervalSinceNow: 0.5),
+                                       interval: 0.04,
+                                       repeats: true,
+                                       block: { timer in
+
+                self.lastTouchLocation!.x = self.lastTouchLocation!.x + deltaPoint.x
+                self.lastTouchLocation!.y = self.lastTouchLocation!.y + deltaPoint.y
+
+                let clippedPoint = self.clipToChartBoundary(
+                    point: self.lastTouchLocation!,
+                    width: self.locationIndicatorImageView.bounds.width,
+                    height: self.locationIndicatorImageView.bounds.height
+                )
+
+                // add small indicator at point to locationView
+                self.locationIndicatorImageView.drawSmallIndicator(at: clippedPoint)
+
+                self.touchDidRegister(at: clippedPoint, in: self.locationIndicatorImageView)
+
+                self.lastTouchLocation = clippedPoint
+            })
+
+            RunLoop.current.add(keyboardTimer!, forMode: RunLoop.Mode.common)
+        }
+
+        if !didHandleEvent {
+            // Didn't handle this key press, so pass the event to the next responder.
+            super.pressesBegan(presses, with: event)
+        }
+
+    }
+
+    override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+
+        cancelTimer()
+
+        super.pressesEnded(presses, with: event)
+
+    }
+
+    override func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+
+        cancelTimer()
+
+        super.pressesCancelled(presses, with: event)
+
+    }
+
+    func cancelTimer() {
+
+        keyboardTimer?.invalidate()
 
     }
 
