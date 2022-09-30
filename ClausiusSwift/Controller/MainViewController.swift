@@ -515,6 +515,8 @@ extension MainViewController {
 
             lastTouchLocation = clippedPoint
 
+            keyboardTimer?.invalidate()
+
             keyboardTimer = Timer.init(fire: Date.init(timeIntervalSinceNow: 0.5),
                                        interval: 0.04,
                                        repeats: true,
