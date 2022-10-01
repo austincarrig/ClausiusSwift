@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import ClausiusSwift
+@testable import Clausius
 
 class SuperheatedRegionCalculatorTests: XCTestCase {
 

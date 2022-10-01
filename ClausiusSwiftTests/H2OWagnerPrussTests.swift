@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import ClausiusSwift
+@testable import Clausius
 
 // The compared epsilon in many of these test cases is Float.ulpOfOne, rather than Double.ulpOfOne
 // The reason for this is that these tests were originally written with 32-bit floating point
