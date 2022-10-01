@@ -160,6 +160,9 @@ class MainViewController: UIViewController {
         // but for now it's necessary to remove the indicator to not confuse the user
         locationIndicatorImageView.removeIndicators()
 
+        // This resets all of the values for each row in the table to be blank
+        displayView.clearRowValues()
+
         // This is necessary because we re-draw the locationIndicator if the
         // screen size changes (see viewDidLayoutSubviews()). If the chart is
         // switched using this function, and the widnow is then re-sized, a

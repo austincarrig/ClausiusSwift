@@ -90,4 +90,14 @@ class DisplayView : UIView {
 
     }
 
+    func clearRowValues() {
+
+        for row in rows.values {
+
+            row.setValueLabel(to: nil)
+
+        }
+
+    }
+
 }
