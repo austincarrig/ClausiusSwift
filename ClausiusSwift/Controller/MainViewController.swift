@@ -573,7 +573,7 @@ extension MainViewController {
         // meaning the mouse button is NOT pressed down, but a touch
         // has registered at some point since the app opened
         if !touchIsActive && lastTouchLocation != nil {
-            var delta = 5.0
+            var delta = 10.0
 
             var deltaPoint = CGPoint.zero
 
@@ -609,22 +609,11 @@ extension MainViewController {
                 }
             }
 
-            lastTouchLocation!.x = lastTouchLocation!.x + 2.0 * deltaPoint.x
-            lastTouchLocation!.y = lastTouchLocation!.y + 2.0 * deltaPoint.y
+            shiftLocationIndicatorByDelta(deltaPoint)
 
-            // get the touch location clipped to the bounds of the chart
-            let clippedPoint = clipToChartBoundary(
-                point: lastTouchLocation!,
-                width: locationIndicatorImageView.bounds.width,
-                height: locationIndicatorImageView.bounds.height
-            )
-
-            // add small indicator at point to locationView
-            locationIndicatorImageView.drawSmallIndicator(at: clippedPoint)
-
-            touchDidRegister(at: clippedPoint, in: locationIndicatorImageView)
-
-            lastTouchLocation = clippedPoint
+            // make the delta when running the timer smaller
+            deltaPoint.x = deltaPoint.x / 2.0
+            deltaPoint.y = deltaPoint.y / 2.0
 
             keyboardTimer?.invalidate()
 
@@ -633,21 +622,8 @@ extension MainViewController {
                                        repeats: true,
                                        block: { timer in
 
-                self.lastTouchLocation!.x = self.lastTouchLocation!.x + deltaPoint.x
-                self.lastTouchLocation!.y = self.lastTouchLocation!.y + deltaPoint.y
+                self.shiftLocationIndicatorByDelta(deltaPoint)
 
-                let clippedPoint = self.clipToChartBoundary(
-                    point: self.lastTouchLocation!,
-                    width: self.locationIndicatorImageView.bounds.width,
-                    height: self.locationIndicatorImageView.bounds.height
-                )
-
-                // add small indicator at point to locationView
-                self.locationIndicatorImageView.drawSmallIndicator(at: clippedPoint)
-
-                self.touchDidRegister(at: clippedPoint, in: self.locationIndicatorImageView)
-
-                self.lastTouchLocation = clippedPoint
             })
 
             RunLoop.current.add(keyboardTimer!, forMode: RunLoop.Mode.common)
@@ -657,6 +633,27 @@ extension MainViewController {
             // Didn't handle this key press, so pass the event to the next responder.
             super.pressesBegan(presses, with: event)
         }
+
+    }
+
+    func shiftLocationIndicatorByDelta(_ deltaPoint: CGPoint) {
+
+        lastTouchLocation!.x = lastTouchLocation!.x + deltaPoint.x
+        lastTouchLocation!.y = lastTouchLocation!.y + deltaPoint.y
+
+        // get the touch location clipped to the bounds of the chart
+        let clippedPoint = clipToChartBoundary(
+            point: lastTouchLocation!,
+            width: locationIndicatorImageView.bounds.width,
+            height: locationIndicatorImageView.bounds.height
+        )
+
+        // add small indicator at point to locationView
+        locationIndicatorImageView.drawSmallIndicator(at: clippedPoint)
+
+        touchDidRegister(at: clippedPoint, in: locationIndicatorImageView)
+
+        lastTouchLocation = clippedPoint
 
     }
 
