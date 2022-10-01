@@ -586,6 +586,9 @@ extension MainViewController {
                     delta = delta * 3.0
                 }
 
+                // We only handle arrow keys here for now. If we ever handle other
+                // keyboard keys, we will need to change the following logic of the timer
+                // and shifting the locationIndicator
                 if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow {
 
                     deltaPoint.x = -delta
@@ -609,24 +612,35 @@ extension MainViewController {
                 }
             }
 
-            shiftLocationIndicatorByDelta(deltaPoint)
+            if didHandleEvent {
 
-            // make the delta when running the timer smaller
-            deltaPoint.x = deltaPoint.x / 2.0
-            deltaPoint.y = deltaPoint.y / 2.0
+                // shift the location of the locationIndicator to the new location
+                shiftLocationIndicatorByDelta(deltaPoint)
 
-            keyboardTimer?.invalidate()
+                // make the delta when running the timer smaller
+                deltaPoint.x = deltaPoint.x / 2.0
+                deltaPoint.y = deltaPoint.y / 2.0
 
-            keyboardTimer = Timer.init(fire: Date.init(timeIntervalSinceNow: 0.5),
-                                       interval: 0.04,
-                                       repeats: true,
-                                       block: { timer in
+                // it's critical to invalidate the timer
+                // if we don't call this then we will kick off a second timer
+                // without ending the first, and will lose reference to the first
+                // timer, meaning it can never be cancelled
+                keyboardTimer?.invalidate()
 
-                self.shiftLocationIndicatorByDelta(deltaPoint)
+                // set a timer which will continue to shift the locationIndicator
+                // while the user holds the key down
+                keyboardTimer = Timer.init(fire: Date.init(timeIntervalSinceNow: 0.5),
+                                           interval: 0.04,
+                                           repeats: true,
+                                           block: { timer in
 
-            })
+                    self.shiftLocationIndicatorByDelta(deltaPoint)
 
-            RunLoop.current.add(keyboardTimer!, forMode: RunLoop.Mode.common)
+                })
+
+                RunLoop.current.add(keyboardTimer!, forMode: RunLoop.Mode.common)
+
+            }
         }
 
         if !didHandleEvent {
