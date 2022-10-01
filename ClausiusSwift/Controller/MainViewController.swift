@@ -206,21 +206,28 @@ class MainViewController: UIViewController {
             // This is the point of calculation for all values displayed in the DisplayView
             if let xValue = xValue, let yValue = yValue {
 
-                let point = pointFrom(xValue: xValue, yValue: yValue)
+                let point = chart.pointFrom(xValue: xValue,
+                                            yValue: yValue,
+                                            viewWidth: locationIndicatorImageView.bounds.width,
+                                            viewHeight: locationIndicatorImageView.bounds.height)
 
-                // get the touch location clipped to the bounds of the chart
-                let clippedPoint = clipToChartBoundary(
-                    point: point,
-                    width: locationIndicatorImageView.bounds.width,
-                    height: locationIndicatorImageView.bounds.height
-                )
+                if let point = point {
 
-                // add small indicator at point to locationView
-                locationIndicatorImageView.drawSmallIndicator(at: clippedPoint)
+                    // get the touch location clipped to the bounds of the chart
+                    let clippedPoint = clipToChartBoundary(
+                        point: point,
+                        width: locationIndicatorImageView.bounds.width,
+                        height: locationIndicatorImageView.bounds.height
+                    )
 
-                lastTouchLocation = clippedPoint
+                    // add small indicator at point to locationView
+                    locationIndicatorImageView.drawSmallIndicator(at: clippedPoint)
 
-                didMoveIndicator = true
+                    lastTouchLocation = clippedPoint
+
+                    didMoveIndicator = true
+
+                }
 
             }
 
@@ -395,33 +402,11 @@ class MainViewController: UIViewController {
     func touchDidRegister(at location: CGPoint,
                           in locationView: LocationIndicatorImageView) {
 
-        if let xAxis = chart.xAxis, let yAxis = chart.yAxis {
+        let values = chart.valuesFrom(point: location,
+                                      viewWidth: locationView.bounds.width,
+                                      viewHeight: locationView.bounds.height)
 
-            var xValue = 0.0, yValue = 0.0
-
-            // The following 2 switch statements convert the x and y values from their
-            // pixel values to their property values (on T-s, x because s, y becomes T).
-            // Some values are logarithmic rather than linear, so the values are converted
-            // by scaling logarithmically rather than linearly when appropriate
-            switch xAxis.scaleType {
-                case .linear:
-                    let xScale = (xAxis.max - xAxis.min) / locationView.bounds.width
-                    xValue = xAxis.min + xScale * location.x
-                case .log:
-                    let xScale = (log10(xAxis.max) - log10(xAxis.min)) / locationView.bounds.width
-                    xValue = pow(10.0, log10(xAxis.min) + xScale * location.x)
-            }
-
-            // NOTE: y on iOS screen and y on graph point are in opposite directions, hence height - y
-            //       positive y on iOS is from top to bottom
-            switch yAxis.scaleType {
-                case .linear:
-                    let yScale = (yAxis.max - yAxis.min) / locationView.bounds.height
-                    yValue = yAxis.min + yScale * (locationView.bounds.height - location.y)
-                case .log:
-                    let yScale = (log10(yAxis.max) - log10(yAxis.min)) / locationView.bounds.height
-                    yValue = pow(10.0, log10(yAxis.min) + yScale * (locationView.bounds.height - location.y))
-            }
+        if let xValue = values?.0, let yValue = values?.1 {
 
             // Calculate the plotPoint using the ThermodynamicCalculator
             // This is the point of calculation for all values displayed in the DisplayView
@@ -441,37 +426,6 @@ class MainViewController: UIViewController {
         } else {
             print("Chart not properly initialized!")
         }
-
-    }
-
-    func pointFrom(xValue: Double, yValue: Double) -> CGPoint {
-
-        var xPoint = 0.0, yPoint = 0.0
-
-        if let xAxis = chart.xAxis, let yAxis = chart.yAxis {
-
-            switch xAxis.scaleType {
-                case .linear:
-                    let xScale = (xAxis.max - xAxis.min) / locationIndicatorImageView.bounds.width
-                    xPoint = (xValue - xAxis.min) / xScale
-                case .log:
-                    let xScale = (log10(xAxis.max) - log10(xAxis.min)) / locationIndicatorImageView.bounds.width
-                    xPoint = (log10(xValue) - log10(xAxis.min)) / xScale
-            }
-
-            // y on iOS screen and y on graph point in opposite directions, hence height - y
-            switch yAxis.scaleType {
-                case .linear:
-                    let yScale = (yAxis.max - yAxis.min) / locationIndicatorImageView.bounds.height
-                    yPoint = locationIndicatorImageView.bounds.height - (yValue - yAxis.min) / yScale
-                case .log:
-                    let yScale = (log10(yAxis.max) - log10(yAxis.min)) / locationIndicatorImageView.bounds.height
-                    yPoint = locationIndicatorImageView.bounds.height - (log10(yValue) - log10(yAxis.min)) / yScale
-            }
-
-        }
-
-        return CGPoint(x: xPoint, y: yPoint)
 
     }
 

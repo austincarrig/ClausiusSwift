@@ -114,4 +114,80 @@ class Chart {
 
     }
 
+    func pointFrom(xValue: Double,
+                   yValue: Double,
+                   viewWidth: Double,
+                   viewHeight: Double) -> CGPoint? {
+
+        if let xAxis = xAxis, let yAxis = yAxis {
+
+            var xPoint = 0.0, yPoint = 0.0
+
+            switch xAxis.scaleType {
+                case .linear:
+                    let xScale = (xAxis.max - xAxis.min) / viewWidth
+                    xPoint = (xValue - xAxis.min) / xScale
+                case .log:
+                    let xScale = (log10(xAxis.max) - log10(xAxis.min)) / viewWidth
+                    xPoint = (log10(xValue) - log10(xAxis.min)) / xScale
+            }
+
+            // y on iOS screen and y on graph point in opposite directions, hence height - y
+            switch yAxis.scaleType {
+                case .linear:
+                    let yScale = (yAxis.max - yAxis.min) / viewHeight
+                    yPoint = viewHeight - (yValue - yAxis.min) / yScale
+                case .log:
+                    let yScale = (log10(yAxis.max) - log10(yAxis.min)) / viewHeight
+                    yPoint = viewHeight - (log10(yValue) - log10(yAxis.min)) / yScale
+            }
+
+            return CGPoint(x: xPoint, y: yPoint)
+
+        }
+
+        return nil
+
+    }
+
+    func valuesFrom(point: CGPoint,
+                    viewWidth: Double,
+                    viewHeight: Double) -> (Double, Double)? {
+
+        if let xAxis = xAxis, let yAxis = yAxis {
+
+            var xValue = 0.0, yValue = 0.0
+
+            // The following 2 switch statements convert the x and y values from their
+            // pixel values to their property values (on T-s, x because s, y becomes T).
+            // Some values are logarithmic rather than linear, so the values are converted
+            // by scaling logarithmically rather than linearly when appropriate
+            switch xAxis.scaleType {
+                case .linear:
+                    let xScale = (xAxis.max - xAxis.min) / viewWidth
+                    xValue = xAxis.min + xScale * point.x
+                case .log:
+                    let xScale = (log10(xAxis.max) - log10(xAxis.min)) / viewWidth
+                    xValue = pow(10.0, log10(xAxis.min) + xScale * point.x)
+            }
+
+            // NOTE: y on iOS screen and y on graph point are in opposite directions, hence height - y
+            //       positive y on iOS is from top to bottom
+            switch yAxis.scaleType {
+                case .linear:
+                    let yScale = (yAxis.max - yAxis.min) / viewHeight
+                    yValue = yAxis.min + yScale * (viewHeight - point.y)
+                case .log:
+                    let yScale = (log10(yAxis.max) - log10(yAxis.min)) / viewHeight
+                    yValue = pow(10.0, log10(yAxis.min) + yScale * (viewHeight - point.y))
+            }
+
+            return (xValue, yValue)
+
+        }
+
+        return nil
+
+    }
+
 }
