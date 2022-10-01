@@ -40,6 +40,10 @@ class MainViewController: UIViewController {
     // This field is utitlized to re-draw the location indicator if it is currently on screen
     var previousSize: CGSize = .zero
 
+    var currentPlotPoint: PlotPoint?
+
+    let useIndicatorMovingCapability = false
+
     ///////////////////
     // Model Objects //
     ///////////////////
@@ -154,21 +158,93 @@ class MainViewController: UIViewController {
                 alignViewsRight()
         }
 
-        // This removes the drawn smallIndicator from the locationIndicatorImageView
-        // if one has been drawn. An improvement could be made in the future to
-        // re-draw the indicator at the same thermodynamic state on the new chart,
-        // but for now it's necessary to remove the indicator to not confuse the user
-        locationIndicatorImageView.removeIndicators()
+        var didMoveIndicator = false
 
-        // This resets all of the values for each row in the table to be blank
-        displayView.clearRowValues()
+        if let plotPoint = currentPlotPoint, useIndicatorMovingCapability {
 
-        // This is necessary because we re-draw the locationIndicator if the
-        // screen size changes (see viewDidLayoutSubviews()). If the chart is
-        // switched using this function, and the widnow is then re-sized, a
-        // smallIndicator will be drawn at lastTouchLocation unless
-        // lastTouchLocation is nil
-        lastTouchLocation = nil
+            // Move the location indicator to a new location
+            // based on the new chart that will be displayed
+
+            var xValue: Double?
+            var yValue: Double?
+
+            switch chart.xAxis?.valueType {
+                case .temperature:
+                    xValue = plotPoint.t
+                case .pressure:
+                    xValue = plotPoint.p
+                case .specificVolume:
+                    xValue = plotPoint.v
+                case .internalEnergy:
+                    xValue = plotPoint.u
+                case .enthalpy:
+                    xValue = plotPoint.h
+                case .entropy:
+                    xValue = plotPoint.s
+                case .none:
+                    break
+            }
+
+            switch chart.yAxis?.valueType {
+                case .temperature:
+                    yValue = plotPoint.t
+                case .pressure:
+                    yValue = plotPoint.p
+                case .specificVolume:
+                    yValue = plotPoint.v
+                case .internalEnergy:
+                    yValue = plotPoint.u
+                case .enthalpy:
+                    yValue = plotPoint.h
+                case .entropy:
+                    yValue = plotPoint.s
+                case .none:
+                    break
+            }
+
+            // Calculate the plotPoint using the ThermodynamicCalculator
+            // This is the point of calculation for all values displayed in the DisplayView
+            if let xValue = xValue, let yValue = yValue {
+
+                let point = pointFrom(xValue: xValue, yValue: yValue)
+
+                // get the touch location clipped to the bounds of the chart
+                let clippedPoint = clipToChartBoundary(
+                    point: point,
+                    width: locationIndicatorImageView.bounds.width,
+                    height: locationIndicatorImageView.bounds.height
+                )
+
+                // add small indicator at point to locationView
+                locationIndicatorImageView.drawSmallIndicator(at: clippedPoint)
+
+                lastTouchLocation = clippedPoint
+
+                didMoveIndicator = true
+
+            }
+
+        }
+
+        if !didMoveIndicator {
+
+            // This removes the drawn smallIndicator from the locationIndicatorImageView
+            // if one has been drawn. An improvement could be made in the future to
+            // re-draw the indicator at the same thermodynamic state on the new chart,
+            // but for now it's necessary to remove the indicator to not confuse the user
+            locationIndicatorImageView.removeIndicators()
+
+            // This resets all of the values for each row in the table to be blank
+            displayView.clearRowValues()
+
+            // This is necessary because we re-draw the locationIndicator if the
+            // screen size changes (see viewDidLayoutSubviews()). If the chart is
+            // switched using this function, and the window is then re-sized, a
+            // smallIndicator will be drawn at lastTouchLocation unless
+            // lastTouchLocation is nil
+            lastTouchLocation = nil
+
+        }
 
         do {
             try locationIndicatorImageView.changeImage(to: chartType)
@@ -357,6 +433,7 @@ class MainViewController: UIViewController {
 
             if let plotPoint = plotPoint {
                 updateDisplayView(with: plotPoint)
+                currentPlotPoint = plotPoint
             } else {
                 print("Nil plot point! -- chartType: \(chart.chartType) -- xValue \(xValue) -- yValue \(yValue)")
             }
@@ -364,6 +441,49 @@ class MainViewController: UIViewController {
         } else {
             print("Chart not properly initialized!")
         }
+
+    }
+
+    func pointFrom(xValue: Double, yValue: Double) -> CGPoint {
+
+        var xPoint = 0.0, yPoint = 0.0
+
+        if let xAxis = chart.xAxis, let yAxis = chart.yAxis {
+
+            switch xAxis.scaleType {
+                case .linear:
+                    let xScale = (xAxis.max - xAxis.min) / locationIndicatorImageView.bounds.width
+                    xPoint = (xValue - xAxis.min) / xScale
+                case .log:
+                    let xScale = (log10(xAxis.max) - log10(xAxis.min)) / locationIndicatorImageView.bounds.width
+                    xPoint = (log10(xValue) - log10(xAxis.min)) / xScale
+            }
+
+            // y on iOS screen and y on graph point in opposite directions, hence height - y
+            switch yAxis.scaleType {
+                case .linear:
+                    let yScale = (yAxis.max - yAxis.min) / locationIndicatorImageView.bounds.height
+                    yPoint = locationIndicatorImageView.bounds.height - (yValue - yAxis.min) / yScale
+                case .log:
+                    let yScale = (log10(yAxis.max) - log10(yAxis.min)) / locationIndicatorImageView.bounds.height
+                    yPoint = locationIndicatorImageView.bounds.height - (log10(yValue) - log10(yAxis.min)) / yScale
+            }
+
+        }
+
+        return CGPoint(x: xPoint, y: yPoint)
+
+    }
+
+    func updateDisplayView(with plotPoint: PlotPoint) {
+
+        displayView.updateRowValue(for: .t, with: plotPoint.t)
+        displayView.updateRowValue(for: .p, with: plotPoint.p)
+        displayView.updateRowValue(for: .v, with: plotPoint.v)
+        displayView.updateRowValue(for: .u, with: plotPoint.u)
+        displayView.updateRowValue(for: .h, with: plotPoint.h)
+        displayView.updateRowValue(for: .s, with: plotPoint.s)
+        displayView.updateRowValue(for: .x, with: plotPoint.x)
 
     }
 
@@ -434,18 +554,6 @@ extension MainViewController: LocationIndicatorImageViewDelegate {
         locationView.drawSmallIndicator(at: lastTouchLocation ?? CGPoint(x: -20.0, y: -20.0))
 
         touchIsActive = false
-
-    }
-
-    func updateDisplayView(with plotPoint: PlotPoint) {
-
-        displayView.updateRowValue(for: .t, with: plotPoint.t)
-        displayView.updateRowValue(for: .p, with: plotPoint.p)
-        displayView.updateRowValue(for: .v, with: plotPoint.v)
-        displayView.updateRowValue(for: .u, with: plotPoint.u)
-        displayView.updateRowValue(for: .h, with: plotPoint.h)
-        displayView.updateRowValue(for: .s, with: plotPoint.s)
-        displayView.updateRowValue(for: .x, with: plotPoint.x)
 
     }
 
