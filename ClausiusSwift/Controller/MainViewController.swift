@@ -527,7 +527,7 @@ extension MainViewController {
         // meaning the mouse button is NOT pressed down, but a touch
         // has registered at some point since the app opened
         if !touchIsActive && lastTouchLocation != nil {
-            var delta = 10.0
+            var delta = 5.0
 
             var deltaPoint = CGPoint.zero
 
@@ -537,7 +537,7 @@ extension MainViewController {
                 // .alternate is the Option key
                 // If the user is pressing the option key, we move the indicator further
                 if key.modifierFlags.contains(.alternate) {
-                    delta = delta * 3.0
+                    delta = delta * 6.0
                 }
 
                 // We only handle arrow keys here for now. If we ever handle other
