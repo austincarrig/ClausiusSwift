@@ -58,11 +58,11 @@ class ThermodynamicCalculatorTests: XCTestCase {
     let point3H = 3507.264790490782
     let point3S = 7.26
 
-    let point4T = 314.34
-    let point4P = 10462.659139999996
-    let point4V = 0.017041273
-    let point4H = 1420.0
-    let point4S = 3.25
+    let point4T = 348.97
+    let point4P = 16322.23
+    let point4V = 0.0017278
+    let point4H = 1662.5
+    let point4S = 3.7654
 
     let point5T = 373.9
     let point5P = 21366.04797723749
