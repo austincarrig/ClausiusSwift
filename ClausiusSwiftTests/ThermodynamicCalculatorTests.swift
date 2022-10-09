@@ -42,7 +42,7 @@ class ThermodynamicCalculatorTests: XCTestCase {
 
     let point1T = 200.0
     let point1P = 1554.672
-    let point1V = 0.12723395
+    let point1V = 0.058516
     let point1H = 1736.7981385534822
     let point1S = 4.2
 
