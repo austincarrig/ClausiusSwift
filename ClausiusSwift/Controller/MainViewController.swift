@@ -569,6 +569,8 @@ extension MainViewController {
             // only run this logic if we received an arrow key
             // as of 10/1/22 this isn't technically needed, but it's forward-thinking
             // preventitive code
+            // as of 10/28/22, I don't know if I agree with the above comment. The
+            // "technically" is carrying a lot of weight here
             if didHandleEvent {
 
                 // shift the location of the locationIndicator to the new location
